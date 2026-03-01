@@ -76,7 +76,15 @@
         }
     </style>
 </head>
-<body class="bg-brand-beige text-brand-black font-sans antialiased overflow-x-hidden">
+<body class="bg-brand-beige text-brand-black font-sans antialiased overflow-x-hidden relative">
+
+    <!-- Floating WhatsApp Button -->
+    <a href="https://wa.me/966537614446" target="_blank" class="fixed bottom-6 left-6 z-50 bg-[#25D366] text-white p-4 rounded-full shadow-2xl hover:scale-110 transition-transform duration-300 flex items-center justify-center group border-2 border-white">
+        <!-- WhatsApp SVG Icon -->
+        <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="white" stroke="white" stroke-width="0" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.742-.981zm11.387-5.464c-.074-.124-.272-.198-.57-.347-.297-.149-1.758-.868-2.031-.967-.272-.099-.47-.149-.669.149-.198.297-.768.967-.941 1.165-.173.198-.347.223-.644.074-.297-.149-1.255-.462-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.521.151-.172.2-.296.3-.495.099-.198.05-.372-.025-.521-.075-.148-.669-1.611-.916-2.206-.242-.579-.487-.501-.669-.51l-.57-.01c-.198 0-.52.074-.792.372-.272.297-1.04 1.017-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.095 3.2 5.076 4.487.709.306 1.263.489 1.694.626.712.226 1.36.194 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.695.248-1.29.173-1.414z"/>
+        </svg>
+    </a>
 
     <!-- Navbar -->
     <nav class="fixed w-full z-50 bg-brand-beige/95 backdrop-blur-md border-b border-brand-navy/10 transition-all duration-300" id="navbar">
@@ -148,10 +156,10 @@
                     <i data-lucide="file-text" class="w-5 h-5"></i>
                     اطلب عرض سعر
                 </a>
-                <!-- Contact Us (Scrolls down to form) -->
-                <a href="#contact" class="border border-brand-beige text-brand-beige px-8 py-4 rounded-full font-bold text-lg hover:bg-brand-navy hover:border-brand-navy transition-all duration-300 flex items-center justify-center gap-2">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-5 h-5"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path></svg>
-                    تواصل معنا
+                <!-- Portfolio Link -->
+                <a href="#portfolio" class="border border-brand-beige text-brand-beige px-8 py-4 rounded-full font-bold text-lg hover:bg-brand-navy hover:border-brand-navy transition-all duration-300 flex items-center justify-center gap-2">
+                    <i data-lucide="image" class="w-5 h-5"></i>
+                    معرض الأعمال
                 </a>
             </div>
         </div>
@@ -194,99 +202,164 @@
         </div>
     </section>
 
-    <!-- Services Section -->
-    <section id="services" class="py-24 bg-brand-beige">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <!-- Services Section (Timeline Style) -->
+    <!-- Applied custom gradient background: Smoother 180deg transition -->
+    <section id="services" class="pt-24 pb-24 relative" style="background: linear-gradient(180deg, #F8F5E6 0%, #1A2B4C 40%, #1A2B4C 60%, #F8F5E6 100%);">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="text-center mb-16 fade-in-section">
-                <h2 class="text-3xl md:text-5xl font-bold mb-4 text-brand-navy">خدماتنا</h2>
-                <div class="w-20 h-1 bg-brand-navy mx-auto"></div>
+                <!-- Changed text color to beige for visibility on navy -->
+                <h2 class="text-3xl md:text-5xl font-bold mb-4 text-brand-beige">خدماتنا</h2>
+                <!-- Changed line color to beige -->
+                <div class="w-20 h-1 bg-brand-beige mx-auto"></div>
             </div>
 
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                <!-- Service 1 -->
-                <div class="bg-white p-8 rounded-xl border border-brand-navy/10 hover:border-brand-navy/50 transition-all duration-300 group fade-in-section hover:shadow-lg">
-                    <div class="w-14 h-14 bg-brand-navy rounded-full flex items-center justify-center mb-6 text-white group-hover:bg-brand-black transition-colors">
-                        <i data-lucide="camera" class="w-7 h-7"></i>
+            <!-- Timeline Container -->
+            <div class="relative">
+                <!-- Center Line (visible on desktop) -->
+                <!-- Changed line color to beige/20 for visibility on navy. Adjusted height to not touch edges -->
+                <div class="hidden md:block absolute left-1/2 transform -translate-x-1/2 top-32 bottom-32 w-1 bg-brand-beige/20 rounded-full z-0"></div>
+
+                <!-- Service 1 (Right) -->
+                <div class="flex flex-col md:flex-row justify-between items-center mb-16 fade-in-section w-full relative z-10">
+                    <div class="hidden md:block w-5/12"></div> <!-- Spacer -->
+                    <!-- Dot -->
+                    <!-- Inverted colors: Navy bg, Beige border -->
+                    <div class="absolute left-1/2 transform -translate-x-1/2 w-6 h-6 bg-brand-navy border-4 border-brand-beige rounded-full z-10 hidden md:flex items-center justify-center"></div> 
+                    
+                    <div class="w-full md:w-5/12">
+                        <div class="bg-white p-6 rounded-xl border border-brand-navy/10 hover:border-brand-navy/50 shadow-lg hover:shadow-xl transition-all duration-300 relative group">
+                            <!-- Arrow for Desktop -->
+                            <div class="hidden md:block absolute top-1/2 -translate-y-1/2 -left-2 w-4 h-4 bg-white border-l border-b border-brand-navy/10 transform rotate-45"></div>
+                            
+                            <div class="flex items-center gap-4 mb-4">
+                                <div class="w-12 h-12 bg-brand-navy rounded-full flex items-center justify-center text-white shrink-0 group-hover:bg-brand-black transition-colors">
+                                    <i data-lucide="camera" class="w-6 h-6"></i>
+                                </div>
+                                <h3 class="text-2xl font-bold text-brand-black">تصوير فوتوغرافي</h3>
+                            </div>
+                            <p class="text-gray-600 mb-4 text-sm leading-relaxed">
+                                تصوير منتجات، أطعمة، وبورتريه احترافي بإضاءة سينمائية تبرز جمالية التفاصيل.
+                            </p>
+                            <div class="bg-brand-beige p-2 rounded text-xs text-brand-navy font-bold">
+                                مناسب لـ: المطاعم، المتاجر الإلكترونية، والشركات
+                            </div>
+                        </div>
                     </div>
-                    <h3 class="text-2xl font-bold mb-4 text-brand-black">تصوير فوتوغرافي</h3>
-                    <ul class="space-y-3 text-sm text-gray-600">
-                        <li class="flex items-start gap-2"><i data-lucide="check-circle" class="w-4 h-4 mt-1 text-brand-navy"></i> <span><strong>ماذا نقدم:</strong> تصوير منتجات، أطعمة، وبورتريه احترافي بإضاءة سينمائية.</span></li>
-                        <li class="flex items-start gap-2"><i data-lucide="user" class="w-4 h-4 mt-1 text-brand-navy"></i> <span><strong>لمن تناسب:</strong> المطاعم، المتاجر الإلكترونية، والشركات.</span></li>
-                    </ul>
                 </div>
 
-                <!-- Service 2 -->
-                <div class="bg-white p-8 rounded-xl border border-brand-navy/10 hover:border-brand-navy/50 transition-all duration-300 group fade-in-section hover:shadow-lg">
-                    <div class="w-14 h-14 bg-brand-navy rounded-full flex items-center justify-center mb-6 text-white group-hover:bg-brand-black transition-colors">
-                        <i data-lucide="video" class="w-7 h-7"></i>
+                <!-- Service 2 (Left) -->
+                <div class="flex flex-col md:flex-row justify-between items-center mb-16 fade-in-section w-full relative z-10">
+                    <div class="w-full md:w-5/12 order-1 md:text-right">
+                         <div class="bg-white p-6 rounded-xl border border-brand-navy/10 hover:border-brand-navy/50 shadow-lg hover:shadow-xl transition-all duration-300 relative group">
+                            <!-- Arrow for Desktop -->
+                            <div class="hidden md:block absolute top-1/2 -translate-y-1/2 -right-2 w-4 h-4 bg-white border-r border-t border-brand-navy/10 transform rotate-45"></div>
+                            
+                            <div class="flex items-center gap-4 mb-4 md:flex-row-reverse">
+                                <div class="w-12 h-12 bg-brand-navy rounded-full flex items-center justify-center text-white shrink-0 group-hover:bg-brand-black transition-colors">
+                                    <i data-lucide="video" class="w-6 h-6"></i>
+                                </div>
+                                <h3 class="text-2xl font-bold text-brand-black">إنتاج فيديو</h3>
+                            </div>
+                            <p class="text-gray-600 mb-4 text-sm leading-relaxed">
+                                إعلانات تجارية، تغطيات، وفيديوهات ريلز قصيرة عالية الجودة تجذب الانتباه.
+                            </p>
+                            <div class="bg-brand-beige p-2 rounded text-xs text-brand-navy font-bold">
+                                مناسب لـ: الحملات التسويقية وإطلاق المنتجات
+                            </div>
+                        </div>
                     </div>
-                    <h3 class="text-2xl font-bold mb-4 text-brand-black">إنتاج فيديو</h3>
-                    <ul class="space-y-3 text-sm text-gray-600">
-                        <li class="flex items-start gap-2"><i data-lucide="check-circle" class="w-4 h-4 mt-1 text-brand-navy"></i> <span><strong>ماذا نقدم:</strong> إعلانات تجارية، تغطيات، وفيديوهات ريلز قصيرة عالية الجودة.</span></li>
-                        <li class="flex items-start gap-2"><i data-lucide="user" class="w-4 h-4 mt-1 text-brand-navy"></i> <span><strong>لمن تناسب:</strong> الحملات التسويقية وإطلاق المنتجات.</span></li>
-                    </ul>
+                    <!-- Dot -->
+                    <div class="absolute left-1/2 transform -translate-x-1/2 w-6 h-6 bg-brand-navy border-4 border-brand-beige rounded-full z-10 hidden md:flex items-center justify-center"></div>
+                    <div class="hidden md:block w-5/12 order-2"></div>
                 </div>
 
-                <!-- Service 3 -->
-                <div class="bg-white p-8 rounded-xl border border-brand-navy/10 hover:border-brand-navy/50 transition-all duration-300 group fade-in-section hover:shadow-lg">
-                    <div class="w-14 h-14 bg-brand-navy rounded-full flex items-center justify-center mb-6 text-white group-hover:bg-brand-black transition-colors">
-                        <i data-lucide="plane" class="w-7 h-7"></i>
+                <!-- Service 3 (Right) -->
+                <div class="flex flex-col md:flex-row justify-between items-center mb-16 fade-in-section w-full relative z-10">
+                    <div class="hidden md:block w-5/12"></div>
+                    <div class="absolute left-1/2 transform -translate-x-1/2 w-6 h-6 bg-brand-navy border-4 border-brand-beige rounded-full z-10 hidden md:flex items-center justify-center"></div>
+                    <div class="w-full md:w-5/12">
+                        <div class="bg-white p-6 rounded-xl border border-brand-navy/10 hover:border-brand-navy/50 shadow-lg hover:shadow-xl transition-all duration-300 relative group">
+                            <div class="hidden md:block absolute top-1/2 -translate-y-1/2 -left-2 w-4 h-4 bg-white border-l border-b border-brand-navy/10 transform rotate-45"></div>
+                            <div class="flex items-center gap-4 mb-4">
+                                <div class="w-12 h-12 bg-brand-navy rounded-full flex items-center justify-center text-white shrink-0 group-hover:bg-brand-black transition-colors">
+                                    <i data-lucide="plane" class="w-6 h-6"></i>
+                                </div>
+                                <h3 class="text-2xl font-bold text-brand-black">تصوير درون</h3>
+                            </div>
+                            <p class="text-gray-600 mb-4 text-sm leading-relaxed">
+                                لقطات جوية بانورامية ومتابعة حركية (FPV) تعطي منظوراً مختلفاً لمشروعك.
+                            </p>
+                            <div class="bg-brand-beige p-2 rounded text-xs text-brand-navy font-bold">
+                                مناسب لـ: العقارات، المشاريع الإنشائية، والفعاليات
+                            </div>
+                        </div>
                     </div>
-                    <h3 class="text-2xl font-bold mb-4 text-brand-black">تصوير درون</h3>
-                    <ul class="space-y-3 text-sm text-gray-600">
-                        <li class="flex items-start gap-2"><i data-lucide="check-circle" class="w-4 h-4 mt-1 text-brand-navy"></i> <span><strong>ماذا نقدم:</strong> لقطات جوية بانورامية ومتابعة حركية (FPV).</span></li>
-                        <li class="flex items-start gap-2"><i data-lucide="user" class="w-4 h-4 mt-1 text-brand-navy"></i> <span><strong>لمن تناسب:</strong> العقارات، المشاريع الإنشائية، والفعاليات الكبرى.</span></li>
-                    </ul>
                 </div>
 
-                <!-- Service 4 -->
-                <div class="bg-white p-8 rounded-xl border border-brand-navy/10 hover:border-brand-navy/50 transition-all duration-300 group fade-in-section hover:shadow-lg">
-                    <div class="w-14 h-14 bg-brand-navy rounded-full flex items-center justify-center mb-6 text-white group-hover:bg-brand-black transition-colors">
-                        <i data-lucide="scissors" class="w-7 h-7"></i>
+                <!-- Service 4 (Left) -->
+                <div class="flex flex-col md:flex-row justify-between items-center mb-16 fade-in-section w-full relative z-10">
+                    <div class="w-full md:w-5/12 order-1 md:text-right">
+                         <div class="bg-white p-6 rounded-xl border border-brand-navy/10 hover:border-brand-navy/50 shadow-lg hover:shadow-xl transition-all duration-300 relative group">
+                            <div class="hidden md:block absolute top-1/2 -translate-y-1/2 -right-2 w-4 h-4 bg-white border-r border-t border-brand-navy/10 transform rotate-45"></div>
+                            <div class="flex items-center gap-4 mb-4 md:flex-row-reverse">
+                                <div class="w-12 h-12 bg-brand-navy rounded-full flex items-center justify-center text-white shrink-0 group-hover:bg-brand-black transition-colors">
+                                    <i data-lucide="scissors" class="w-6 h-6"></i>
+                                </div>
+                                <h3 class="text-2xl font-bold text-brand-black">مونتاج احترافي</h3>
+                            </div>
+                            <p class="text-gray-600 mb-4 text-sm leading-relaxed">
+                                تصحيح ألوان (Color Grading)، مؤثرات بصرية، وانتقالات إبداعية تروي قصتك.
+                            </p>
+                            <div class="bg-brand-beige p-2 rounded text-xs text-brand-navy font-bold">
+                                مناسب لـ: صناع المحتوى والشركات
+                            </div>
+                        </div>
                     </div>
-                    <h3 class="text-2xl font-bold mb-4 text-brand-black">مونتاج احترافي</h3>
-                    <ul class="space-y-3 text-sm text-gray-600">
-                        <li class="flex items-start gap-2"><i data-lucide="check-circle" class="w-4 h-4 mt-1 text-brand-navy"></i> <span><strong>ماذا نقدم:</strong> تصحيح ألوان (Color Grading)، مؤثرات بصرية، وانتقالات إبداعية.</span></li>
-                        <li class="flex items-start gap-2"><i data-lucide="user" class="w-4 h-4 mt-1 text-brand-navy"></i> <span><strong>لمن تناسب:</strong> صناع المحتوى والشركات التي تملك مادة خام.</span></li>
-                    </ul>
+                    <div class="absolute left-1/2 transform -translate-x-1/2 w-6 h-6 bg-brand-navy border-4 border-brand-beige rounded-full z-10 hidden md:flex items-center justify-center"></div>
+                    <div class="hidden md:block w-5/12 order-2"></div>
                 </div>
 
-                <!-- Service 5 -->
-                <div class="bg-white p-8 rounded-xl border border-brand-navy/10 hover:border-brand-navy/50 transition-all duration-300 group fade-in-section hover:shadow-lg">
-                    <div class="w-14 h-14 bg-brand-navy rounded-full flex items-center justify-center mb-6 text-white group-hover:bg-brand-black transition-colors">
-                        <i data-lucide="mic" class="w-7 h-7"></i>
+                <!-- Service 5 (Right) -->
+                <div class="flex flex-col md:flex-row justify-between items-center fade-in-section w-full relative z-10">
+                    <div class="hidden md:block w-5/12"></div>
+                    <div class="absolute left-1/2 transform -translate-x-1/2 w-6 h-6 bg-brand-navy border-4 border-brand-beige rounded-full z-10 hidden md:flex items-center justify-center"></div>
+                    <div class="w-full md:w-5/12">
+                        <div class="bg-white p-6 rounded-xl border border-brand-navy/10 hover:border-brand-navy/50 shadow-lg hover:shadow-xl transition-all duration-300 relative group">
+                            <div class="hidden md:block absolute top-1/2 -translate-y-1/2 -left-2 w-4 h-4 bg-white border-l border-b border-brand-navy/10 transform rotate-45"></div>
+                            <div class="flex items-center gap-4 mb-4">
+                                <div class="w-12 h-12 bg-brand-navy rounded-full flex items-center justify-center text-white shrink-0 group-hover:bg-brand-black transition-colors">
+                                    <i data-lucide="mic" class="w-6 h-6"></i>
+                                </div>
+                                <h3 class="text-2xl font-bold text-brand-black">تعليق صوتي</h3>
+                            </div>
+                            <p class="text-gray-600 mb-4 text-sm leading-relaxed">
+                                نصوص إعلانية بأصوات سعودية وفصحى مؤثرة توصل رسالتك بوضوح.
+                            </p>
+                            <div class="bg-brand-beige p-2 rounded text-xs text-brand-navy font-bold">
+                                مناسب لـ: الفيديوهات التعريفية والإعلانات الإذاعية
+                            </div>
+                        </div>
                     </div>
-                    <h3 class="text-2xl font-bold mb-4 text-brand-black">تعليق صوتي</h3>
-                    <ul class="space-y-3 text-sm text-gray-600">
-                        <li class="flex items-start gap-2"><i data-lucide="check-circle" class="w-4 h-4 mt-1 text-brand-navy"></i> <span><strong>ماذا نقدم:</strong> نصوص إعلانية بأصوات سعودية وفصحى مؤثرة.</span></li>
-                        <li class="flex items-start gap-2"><i data-lucide="user" class="w-4 h-4 mt-1 text-brand-navy"></i> <span><strong>لمن تناسب:</strong> الفيديوهات التعريفية والإعلانات الإذاعية.</span></li>
-                    </ul>
                 </div>
+
             </div>
         </div>
     </section>
 
     <!-- Portfolio Section -->
-    <section id="portfolio" class="py-24 bg-brand-beige">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="flex flex-col md:flex-row justify-between items-center mb-12 fade-in-section">
-                <h2 class="text-3xl md:text-5xl font-bold mb-4 md:mb-0 text-brand-navy">معرض الأعمال</h2>
-                
-                <!-- Filters -->
-                <div class="flex flex-wrap gap-2 justify-center">
-                    <button class="filter-btn active px-4 py-2 rounded-full border border-brand-navy bg-brand-navy text-white text-sm font-bold transition-all" onclick="filterPortfolio('all', this)">الكل</button>
-                    <button class="filter-btn px-4 py-2 rounded-full border border-brand-navy/30 text-gray-500 hover:border-brand-navy hover:text-brand-navy text-sm font-bold transition-all" onclick="filterPortfolio('realestate', this)">عقارات</button>
-                    <button class="filter-btn px-4 py-2 rounded-full border border-brand-navy/30 text-gray-500 hover:border-brand-navy hover:text-brand-navy text-sm font-bold transition-all" onclick="filterPortfolio('restaurants', this)">مطاعم</button>
-                    <button class="filter-btn px-4 py-2 rounded-full border border-brand-navy/30 text-gray-500 hover:border-brand-navy hover:text-brand-navy text-sm font-bold transition-all" onclick="filterPortfolio('cars', this)">سيارات</button>
-                    <button class="filter-btn px-4 py-2 rounded-full border border-brand-navy/30 text-gray-500 hover:border-brand-navy hover:text-brand-navy text-sm font-bold transition-all" onclick="filterPortfolio('events', this)">مناسبات</button>
-                </div>
+    <section id="portfolio" class="pt-12 pb-24 bg-brand-beige relative">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
+            
+            <div class="text-center mb-12 fade-in-section">
+                <h2 class="text-3xl md:text-5xl font-bold mb-4 text-brand-navy">معرض الأعمال</h2>
+                <div class="w-20 h-1 bg-brand-navy mx-auto"></div>
             </div>
 
             <!-- Grid -->
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6" id="portfolio-grid">
-                <!-- Project Items (Placeholders) -->
+                <!-- Project Items -->
                 <!-- Cars -->
-                <div class="portfolio-item cars group relative overflow-hidden rounded-xl aspect-video cursor-pointer fade-in-section shadow-lg">
+                <div class="portfolio-item group relative overflow-hidden rounded-xl aspect-video cursor-pointer fade-in-section shadow-lg border border-brand-navy/5">
                     <img src="https://images.unsplash.com/photo-1492144534655-ae79c964c9d7?auto=format&fit=crop&q=80&w=800" alt="Car Project" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
                     <div class="absolute inset-0 bg-brand-navy/80 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-center items-center text-center p-4">
                         <h3 class="text-xl font-bold text-brand-beige">إعلان سيارة فاخرة</h3>
@@ -295,7 +368,7 @@
                 </div>
 
                 <!-- Restaurants -->
-                <div class="portfolio-item restaurants group relative overflow-hidden rounded-xl aspect-video cursor-pointer fade-in-section shadow-lg">
+                <div class="portfolio-item group relative overflow-hidden rounded-xl aspect-video cursor-pointer fade-in-section shadow-lg border border-brand-navy/5">
                     <img src="https://images.unsplash.com/photo-1514362545857-3bc16c4c7d1b?auto=format&fit=crop&q=80&w=800" alt="Restaurant Project" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
                     <div class="absolute inset-0 bg-brand-navy/80 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-center items-center text-center p-4">
                         <h3 class="text-xl font-bold text-brand-beige">مطعم ستيك هاوس</h3>
@@ -304,7 +377,7 @@
                 </div>
 
                 <!-- Real Estate -->
-                <div class="portfolio-item realestate group relative overflow-hidden rounded-xl aspect-video cursor-pointer fade-in-section shadow-lg">
+                <div class="portfolio-item group relative overflow-hidden rounded-xl aspect-video cursor-pointer fade-in-section shadow-lg border border-brand-navy/5">
                     <img src="https://images.unsplash.com/photo-1600596542815-2a4d04774c13?auto=format&fit=crop&q=80&w=800" alt="Real Estate" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
                     <div class="absolute inset-0 bg-brand-navy/80 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-center items-center text-center p-4">
                         <h3 class="text-xl font-bold text-brand-beige">فيلا مودرن - الرياض</h3>
@@ -313,7 +386,7 @@
                 </div>
 
                  <!-- Events -->
-                 <div class="portfolio-item events group relative overflow-hidden rounded-xl aspect-video cursor-pointer fade-in-section shadow-lg">
+                 <div class="portfolio-item group relative overflow-hidden rounded-xl aspect-video cursor-pointer fade-in-section shadow-lg border border-brand-navy/5">
                     <img src="https://images.unsplash.com/photo-1511578314322-379afb476865?auto=format&fit=crop&q=80&w=800" alt="Event" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
                     <div class="absolute inset-0 bg-brand-navy/80 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-center items-center text-center p-4">
                         <h3 class="text-xl font-bold text-brand-beige">مؤتمر التقنية</h3>
@@ -322,7 +395,7 @@
                 </div>
 
                 <!-- More Placeholders mixed -->
-                <div class="portfolio-item restaurants group relative overflow-hidden rounded-xl aspect-video cursor-pointer fade-in-section shadow-lg">
+                <div class="portfolio-item group relative overflow-hidden rounded-xl aspect-video cursor-pointer fade-in-section shadow-lg border border-brand-navy/5">
                     <img src="https://images.unsplash.com/photo-1504674900247-0877df9cc836?auto=format&fit=crop&q=80&w=800" alt="Food" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
                     <div class="absolute inset-0 bg-brand-navy/80 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-center items-center text-center p-4">
                         <h3 class="text-xl font-bold text-brand-beige">كوفي شوب مختص</h3>
@@ -330,7 +403,7 @@
                     </div>
                 </div>
 
-                <div class="portfolio-item cars group relative overflow-hidden rounded-xl aspect-video cursor-pointer fade-in-section shadow-lg">
+                <div class="portfolio-item group relative overflow-hidden rounded-xl aspect-video cursor-pointer fade-in-section shadow-lg border border-brand-navy/5">
                     <img src="https://images.unsplash.com/photo-1503376763036-066120622c74?auto=format&fit=crop&q=80&w=800" alt="Car" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
                     <div class="absolute inset-0 bg-brand-navy/80 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-center items-center text-center p-4">
                         <h3 class="text-xl font-bold text-brand-beige">سباق دريفت</h3>
@@ -428,30 +501,44 @@
                     <p class="text-gray-500">املأ النموذج وسنتواصل معك في أقرب وقت لتحويل فكرتك إلى واقع</p>
                 </div>
 
-                <form class="space-y-6">
+                <!-- Updated Form: Using FormSubmit for background email sending -->
+                <form action="https://formsubmit.co/shootix.sa@gmail.com" method="POST" class="space-y-6">
+                    <!-- Hidden inputs for FormSubmit Configuration -->
+                    <input type="hidden" name="_subject" value="طلب عرض سعر جديد من موقع شوتيكس">
+                    <input type="hidden" name="_captcha" value="false">
+                    <input type="hidden" name="_template" value="table">
+                    
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                         <!-- Name -->
                         <div>
                             <label class="block text-sm font-medium text-gray-700 mb-2">الاسم الكريم</label>
-                            <input type="text" class="w-full bg-gray-50 border border-gray-200 rounded-lg px-4 py-3 text-brand-black focus:outline-none focus:border-brand-navy transition-colors" placeholder="الاسم الكامل">
+                            <input type="text" name="الاسم" required class="w-full bg-gray-50 border border-gray-200 rounded-lg px-4 py-3 text-brand-black focus:outline-none focus:border-brand-navy transition-colors" placeholder="الاسم الكامل">
                         </div>
                         <!-- Phone -->
                         <div>
                             <label class="block text-sm font-medium text-gray-700 mb-2">رقم الجوال</label>
-                            <input type="tel" class="w-full bg-gray-50 border border-gray-200 rounded-lg px-4 py-3 text-brand-black focus:outline-none focus:border-brand-navy transition-colors" placeholder="05xxxxxxxx">
+                            <input type="tel" name="رقم_الجوال" required class="w-full bg-gray-50 border border-gray-200 rounded-lg px-4 py-3 text-brand-black focus:outline-none focus:border-brand-navy transition-colors" placeholder="05xxxxxxxx">
                         </div>
                     </div>
 
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <!-- Email (New Field) -->
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-2">البريد الإلكتروني</label>
+                            <input type="email" name="البريد_الإلكتروني" required class="w-full bg-gray-50 border border-gray-200 rounded-lg px-4 py-3 text-brand-black focus:outline-none focus:border-brand-navy transition-colors" placeholder="example@mail.com">
+                        </div>
                         <!-- City -->
                         <div>
                             <label class="block text-sm font-medium text-gray-700 mb-2">المدينة</label>
-                            <input type="text" class="w-full bg-gray-50 border border-gray-200 rounded-lg px-4 py-3 text-brand-black focus:outline-none focus:border-brand-navy transition-colors" placeholder="مثال: الرياض">
+                            <input type="text" name="المدينة" class="w-full bg-gray-50 border border-gray-200 rounded-lg px-4 py-3 text-brand-black focus:outline-none focus:border-brand-navy transition-colors" placeholder="مثال: الرياض">
                         </div>
+                    </div>
+
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                         <!-- Project Type -->
                         <div>
                             <label class="block text-sm font-medium text-gray-700 mb-2">نوع المشروع</label>
-                            <select class="w-full bg-gray-50 border border-gray-200 rounded-lg px-4 py-3 text-brand-black focus:outline-none focus:border-brand-navy transition-colors">
+                            <select name="نوع_المشروع" class="w-full bg-gray-50 border border-gray-200 rounded-lg px-4 py-3 text-brand-black focus:outline-none focus:border-brand-navy transition-colors">
                                 <option>اختر نوع الخدمة</option>
                                 <option>تغطية مناسبة</option>
                                 <option>إعلان تجاري</option>
@@ -460,34 +547,34 @@
                                 <option>أخرى</option>
                             </select>
                         </div>
-                    </div>
-
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                         <!-- Budget -->
                         <div>
                             <label class="block text-sm font-medium text-gray-700 mb-2">الميزانية التقريبية</label>
-                            <select class="w-full bg-gray-50 border border-gray-200 rounded-lg px-4 py-3 text-brand-black focus:outline-none focus:border-brand-navy transition-colors">
+                            <select name="الميزانية" class="w-full bg-gray-50 border border-gray-200 rounded-lg px-4 py-3 text-brand-black focus:outline-none focus:border-brand-navy transition-colors">
                                 <option>أقل من 5,000 ريال</option>
                                 <option>5,000 - 15,000 ريال</option>
                                 <option>15,000 - 30,000 ريال</option>
                                 <option>أكثر من 30,000 ريال</option>
                             </select>
                         </div>
+                    </div>
+
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                         <!-- Date -->
                         <div>
                             <label class="block text-sm font-medium text-gray-700 mb-2">موعد التنفيذ المتوقع</label>
-                            <input type="date" class="w-full bg-gray-50 border border-gray-200 rounded-lg px-4 py-3 text-brand-black focus:outline-none focus:border-brand-navy transition-colors text-right">
+                            <input type="date" name="موعد_التنفيذ" class="w-full bg-gray-50 border border-gray-200 rounded-lg px-4 py-3 text-brand-black focus:outline-none focus:border-brand-navy transition-colors text-right">
                         </div>
                     </div>
 
                     <!-- Description -->
                     <div>
                         <label class="block text-sm font-medium text-gray-700 mb-2">تفاصيل إضافية</label>
-                        <textarea rows="4" class="w-full bg-gray-50 border border-gray-200 rounded-lg px-4 py-3 text-brand-black focus:outline-none focus:border-brand-navy transition-colors" placeholder="حدثنا أكثر عن مشروعك..."></textarea>
+                        <textarea name="التفاصيل" rows="4" class="w-full bg-gray-50 border border-gray-200 rounded-lg px-4 py-3 text-brand-black focus:outline-none focus:border-brand-navy transition-colors" placeholder="حدثنا أكثر عن مشروعك..."></textarea>
                     </div>
 
                     <!-- Submit Button -->
-                    <button type="button" class="w-full bg-brand-navy text-white font-bold text-lg py-4 rounded-lg hover:bg-brand-black hover:shadow-lg transition-all duration-300">
+                    <button type="submit" class="w-full bg-brand-navy text-white font-bold text-lg py-4 rounded-lg hover:bg-brand-black hover:shadow-lg transition-all duration-300">
                         إرسال الطلب
                     </button>
                 </form>
@@ -588,6 +675,7 @@
         document.querySelectorAll('.fade-in-section').forEach(section => {
             observer.observe(section);
         });
+
     </script>
 </body>
 </html>
