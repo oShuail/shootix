@@ -1,344 +1,232 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ShootiX | شوتيكس للإنتاج البصري</title>
-    
-    <!-- Fonts: Cairo for Arabic, Montserrat for Numbers/English -->
-    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700;900&family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
-    
-    <!-- Tailwind CSS -->
-    <script src="https://cdn.tailwindcss.com"></script>
-    
-    <!-- Icons -->
-    <script src="https://unpkg.com/lucide@latest"></script>
 
-    <!-- Brand Configuration -->
-    <script>
-        tailwind.config = {
-            theme: {
-                extend: {
-                    colors: {
-                        brand: {
-                            black: '#0a0a0a',     // Deep Black
-                            navy: '#1A2B4C',      // Brand Navy
-                            beige: '#F8F5E6',     // Brand Off-White / Beige
-                            gold: '#C5A059',      // Subtle Accent
-                            darkNavy: '#111c30'
-                        }
-                    },
-                    fontFamily: {
-                        sans: ['Cairo', 'sans-serif'],
-                        mont: ['Montserrat', 'sans-serif'],
-                    }
-                }
-            }
-        }
-    </script>
+    <!-- SEO Meta Tags -->
+    <meta name="description"
+        content="شوتيكس.. لا نصور فقط، نصنع التأثير. نحول رؤيتك إلى مشهد سينمائي يخلد في الذاكرة. خبراء في إنتاج المحتوى البصري للعلامات التجارية الرائدة.">
+    <meta name="keywords"
+        content="إنتاج فيديو, تصوير فوتوغرافي, تصوير درون, مونتاج, السعودية, شوتيكس, Shootix, visual production">
+    <meta name="author" content="ShootiX">
 
-    <style>
-        /* Custom Scrollbar */
-        ::-webkit-scrollbar {
-            width: 8px;
-        }
-        ::-webkit-scrollbar-track {
-            background: #F8F5E6; 
-        }
-        ::-webkit-scrollbar-thumb {
-            background: #1A2B4C; 
-            border-radius: 4px;
-        }
-        ::-webkit-scrollbar-thumb:hover {
-            background: #111c30; 
-        }
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700;800&family=Montserrat:wght@400;600;700&display=swap"
+        rel="stylesheet">
 
-        /* Cinematic Fade In Animation */
-        .fade-in-section {
-            opacity: 0;
-            transform: translateY(20px);
-            transition: opacity 0.8s ease-out, transform 0.8s ease-out;
-            will-change: opacity, visibility;
-        }
-        .fade-in-section.is-visible {
-            opacity: 1;
-            transform: none;
-        }
+    <!-- Font Awesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
-        /* Smooth Scroll */
-        html {
-            scroll-behavior: smooth;
-        }
+    <!-- AOS Animation Library -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
 
-        /* Hero Video Overlay */
-        .video-overlay {
-            background: linear-gradient(to bottom, rgba(10,10,10,0.3), rgba(10,10,10,0.6), rgba(26, 43, 76, 0.4));
-        }
-    </style>
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="style.css">
 </head>
-<body class="bg-brand-beige text-brand-black font-sans antialiased overflow-x-hidden relative">
+
+<body>
 
     <!-- Floating WhatsApp Button -->
-    <a href="https://wa.me/966537614446" target="_blank" class="fixed bottom-6 left-6 z-50 bg-[#25D366] text-white p-4 rounded-full shadow-2xl hover:scale-110 transition-transform duration-300 flex items-center justify-center group border-2 border-white">
-        <!-- WhatsApp SVG Icon -->
-        <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="white" stroke="white" stroke-width="0" stroke-linecap="round" stroke-linejoin="round">
-            <path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.742-.981zm11.387-5.464c-.074-.124-.272-.198-.57-.347-.297-.149-1.758-.868-2.031-.967-.272-.099-.47-.149-.669.149-.198.297-.768.967-.941 1.165-.173.198-.347.223-.644.074-.297-.149-1.255-.462-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.521.151-.172.2-.296.3-.495.099-.198.05-.372-.025-.521-.075-.148-.669-1.611-.916-2.206-.242-.579-.487-.501-.669-.51l-.57-.01c-.198 0-.52.074-.792.372-.272.297-1.04 1.017-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.095 3.2 5.076 4.487.709.306 1.263.489 1.694.626.712.226 1.36.194 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.695.248-1.29.173-1.414z"/>
-        </svg>
+    <a href="https://wa.me/966537614446" class="floating-wa" target="_blank" rel="noopener noreferrer"
+        aria-label="تواصل معنا عبر واتساب">
+        <i class="fab fa-whatsapp"></i>
     </a>
 
     <!-- Navbar -->
-    <nav class="fixed w-full z-50 bg-brand-beige/95 backdrop-blur-md border-b border-brand-navy/10 transition-all duration-300" id="navbar">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="flex items-center justify-between h-20">
-                <!-- Logo Area -->
-                <div class="flex-shrink-0 flex items-center gap-2">
-                    <!-- Image Logo -->
-                    <img src="image_206240.png" alt="ShootiX Logo" class="h-10 w-auto object-contain">
-                </div>
-                
-                <!-- Desktop Menu -->
-                <div class="hidden md:block">
-                    <div class="ml-10 flex items-baseline space-x-4 space-x-reverse">
-                        <a href="#home" class="text-brand-navy hover:text-brand-gold px-3 py-2 rounded-md text-sm font-bold transition-colors">الرئيسية</a>
-                        <a href="#about" class="text-brand-navy hover:text-brand-gold px-3 py-2 rounded-md text-sm font-bold transition-colors">من نحن</a>
-                        <a href="#services" class="text-brand-navy hover:text-brand-gold px-3 py-2 rounded-md text-sm font-bold transition-colors">خدماتنا</a>
-                        <a href="#portfolio" class="text-brand-navy hover:text-brand-gold px-3 py-2 rounded-md text-sm font-bold transition-colors">أعمالنا</a>
-                        <a href="#testimonials" class="text-brand-navy hover:text-brand-gold px-3 py-2 rounded-md text-sm font-bold transition-colors">نتائج عملائنا</a>
-                        <a href="#contact" class="bg-brand-navy hover:bg-brand-gold text-white px-5 py-2 rounded-full text-sm font-bold transition-all duration-300 transform hover:scale-105">اطلب عرض سعر</a>
-                    </div>
-                </div>
-
-                <!-- Mobile menu button -->
-                <div class="-mr-2 flex md:hidden">
-                    <button type="button" onclick="toggleMobileMenu()" class="inline-flex items-center justify-center p-2 rounded-md text-brand-navy hover:text-white hover:bg-brand-navy focus:outline-none">
-                        <i data-lucide="menu" class="w-6 h-6"></i>
-                    </button>
-                </div>
+    <nav class="navbar" id="navbar">
+        <div class="nav-container">
+            <div class="logo">
+                <a href="#hero">
+                    <img src="assets/photo-output.PNG" alt="ShootiX Logo" id="nav-logo">
+                </a>
             </div>
-        </div>
-        
-        <!-- Mobile Menu -->
-        <div class="md:hidden hidden bg-brand-beige border-t border-brand-navy/10" id="mobile-menu">
-            <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3 text-center">
-                <a href="#home" class="block px-3 py-2 rounded-md text-base font-medium text-brand-navy hover:bg-brand-navy/10">الرئيسية</a>
-                <a href="#about" class="block px-3 py-2 rounded-md text-base font-medium text-brand-navy hover:bg-brand-navy/10">من نحن</a>
-                <a href="#services" class="block px-3 py-2 rounded-md text-base font-medium text-brand-navy hover:bg-brand-navy/10">خدماتنا</a>
-                <a href="#portfolio" class="block px-3 py-2 rounded-md text-base font-medium text-brand-navy hover:bg-brand-navy/10">أعمالنا</a>
-                <a href="#contact" class="block px-3 py-2 rounded-md text-base font-medium bg-brand-navy text-white mt-4">اطلب عرض سعر</a>
+
+            <div class="nav-links">
+                <a href="#hero" class="active">الرئيسية</a>
+                <a href="#about">من نحن</a>
+                <a href="#services">خدماتنا</a>
+                <a href="#portfolio">أعمالنا</a>
+                <a href="#testimonials">نتائج عملائنا</a>
+                <a href="en.html" class="lang-switch text-gold"><i class="fas fa-globe"></i> EN</a>
+            </div>
+
+            <div class="nav-cta">
+                <a href="#contact" class="btn btn-primary">اطلب عرض سعر</a>
+            </div>
+
+            <div class="mobile-actions">
+                <a href="en.html" class="lang-switch text-navy"><i class="fas fa-globe"></i> EN</a>
+                <div class="mobile-menu-btn">
+                    <i class="fas fa-bars"></i>
+                </div>
             </div>
         </div>
     </nav>
 
-    <!-- Hero Section (Video Background) -->
-    <section id="home" class="relative h-screen flex items-center justify-center overflow-hidden">
-        <!-- Background Video Placeholder -->
-        <video autoplay muted loop playsinline class="absolute w-full h-full object-cover">
-            <!-- Using a high quality cinematic car/lifestyle stock video as placeholder -->
-            <source src="https://videos.pexels.com/video-files/3195394/3195394-uhd_2560_1440_25fps.mp4" type="video/mp4">
-            Your browser does not support the video tag.
-        </video>
-        
-        <!-- Overlay -->
-        <div class="absolute inset-0 video-overlay"></div>
+    <!-- Hero Section -->
+    <section id="hero" class="hero">
+        <div class="video-background">
+            <!-- Using a high quality stock video placeholder -->
+            <video autoplay muted loop playsinline id="hero-video">
+                <source
+                    src="https://cdn.pixabay.com/vimeo/328841441/car-22879.mp4?width=1280&hash=8b5fb9cbabfd2f75a024bfeab3d6fcf4aeea74db"
+                    type="video/mp4">
+            </video>
+            <div class="video-overlay"></div>
+        </div>
 
-        <!-- Content -->
-        <div class="relative z-10 text-center px-4 max-w-5xl mx-auto fade-in-section">
-            <h1 class="text-5xl md:text-7xl font-black mb-6 leading-tight text-white">
-                شوتيكس.. <br/>
-                <span class="text-brand-beige">لا نصور فقط، نصنع التأثير</span>
-            </h1>
-            <p class="text-lg md:text-xl text-gray-200 mb-10 max-w-2xl mx-auto">
-                نحول رؤيتك إلى مشهد سينمائي يخلد في الذاكرة. خبراء في إنتاج المحتوى البصري للعلامات التجارية الرائدة.
-            </p>
-            <div class="flex flex-col md:flex-row gap-4 justify-center">
-                <!-- Main CTA -->
-                <a href="#contact" class="bg-brand-beige text-brand-navy px-8 py-4 rounded-full font-bold text-lg hover:bg-white hover:scale-105 transition-all duration-300 flex items-center justify-center gap-2">
-                    <i data-lucide="file-text" class="w-5 h-5"></i>
-                    اطلب عرض سعر
-                </a>
-                <!-- Portfolio Link -->
-                <a href="#portfolio" class="border border-brand-beige text-brand-beige px-8 py-4 rounded-full font-bold text-lg hover:bg-brand-navy hover:border-brand-navy transition-all duration-300 flex items-center justify-center gap-2">
-                    <i data-lucide="image" class="w-5 h-5"></i>
-                    معرض الأعمال
+        <div class="hero-content" data-aos="fade-up" data-aos-duration="1000">
+            <h1 class="hero-title">شوتيكس..<br><span class="highlight">لا نصور فقط، نصنع التأثير</span></h1>
+            <p class="hero-subtitle">نحول رؤيتك إلى مشهد سينمائي يخلد في الذاكرة. خبراء في إنتاج المحتوى البصري للعلامات
+                التجارية الرائدة.</p>
+            <div class="hero-buttons">
+                <a href="#contact" class="btn btn-primary-light">اطلب عرض سعر</a>
+                <a href="#portfolio" class="btn btn-outline-light">
+                    <i class="fas fa-play-circle btn-icon"></i> معرض الأعمال
                 </a>
             </div>
         </div>
-        
-        <!-- Scroll Down Indicator -->
-        <div class="absolute bottom-10 left-1/2 transform -translate-x-1/2 animate-bounce">
-            <i data-lucide="chevron-down" class="w-8 h-8 text-brand-beige"></i>
+
+        <div class="scroll-indicator">
+            <div class="mouse">
+                <div class="wheel"></div>
+            </div>
         </div>
     </section>
 
     <!-- About Us Section -->
-    <section id="about" class="py-24 bg-brand-beige relative">
-        <div class="absolute top-0 right-0 w-1/3 h-full bg-brand-navy/5 blur-3xl rounded-full pointer-events-none"></div>
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-16 items-center">
-                <div class="fade-in-section order-2 md:order-1">
-                    <h2 class="text-brand-navy text-lg font-bold mb-2 uppercase tracking-widest">من نحن</h2>
-                    <h3 class="text-4xl font-bold mb-6 text-brand-black">نصنع مشاهد تُعبّر عن الهوية، وتخلق تأثيراً يدوم.</h3>
-                    <div class="space-y-4 text-gray-700 leading-relaxed text-justify pl-4">
-                        <p>
-                            في شوتيكس لا نلتقط الصور فقط... نحن شوتيكس إنتاج بصري متخصصة في التصوير الفوتوغرافي، إنتاج الفيديو، تصوير الدرون، والمونتاج الاحترافي.
-                        </p>
-                        <p>
-                            نعمل مع العلامات التجارية، المطاعم، العقارات، ورواد الأعمال لصناعة محتوى بصري يعكس قوة مشاريعهم ويرفع من حضورهم في السوق. نؤمن أن الصورة ليست مجرد لقطة، بل رسالة وهوية ونتيجة.
-                        </p>
-                        <p class="border-r-4 border-brand-navy pr-4 italic font-medium text-brand-navy">
-                            كل أعمال شوتيكس تُدار وتُنفّذ بأيدٍ سعودية 100%، بفريق شغوف يفهم السوق المحلي، ويعرف كيف يحوّل الفكرة إلى مشهد مؤثر يخدم أهداف العميل التجارية.
-                        </p>
-                        <p>
-                            رؤيتنا أن نكون من الرواد في صناعة المحتوى البصري في المملكة، وأن نبني علامة سعودية بأعلى معايير الجودة والاحتراف.
-                        </p>
+    <section id="about" class="about overlay-section">
+        <div class="container layout-2-col">
+            <div class="about-text" data-aos="fade-left" data-aos-duration="1000">
+                <h2 class="section-title">نصنع مشاهد تُعبّر عن الهوية، وتخلق تأثيراً يدوم.</h2>
+                <div class="title-underline"></div>
+                <p>في <strong>شوتيكس</strong>، نحن لا نلتقط الصور فقط، بل نروي قصتك البصرية بحب وشغف. فريقنا السعودي
+                    100% يجمع بين الإبداع الفني والخبرة التقنية لتقديم أعمال استثنائية.</p>
+                <p>سواء كنت تدير علامة تجارية رائدة، مشروعاً عقارياً فخماً، أو مطعماً يبحث عن التميز، نحن نقدم خدمات
+                    التصوير الفوتوغرافي، إنتاج الفيديو، تصوير الدرون، والمونتاج الاحترافي التي ترتقي بعلامتك إلى آفاق
+                    جديدة.</p>
+
+                <div class="stats-container">
+                    <div class="stat-item">
+                        <span class="stat-number">100%</span>
+                        <span class="stat-label">فريق سعودي</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-number">+50</span>
+                        <span class="stat-label">عميل سعيد</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-number">+200</span>
+                        <span class="stat-label">مشروع منجز</span>
                     </div>
                 </div>
-                <div class="fade-in-section order-1 md:order-2 relative group">
-                    <div class="absolute -inset-2 bg-gradient-to-r from-brand-navy to-brand-gold rounded-2xl blur opacity-25 group-hover:opacity-50 transition duration-1000 group-hover:duration-200"></div>
-                    <!-- Image Placeholder for Team/Action Shot -->
-                    <img src="https://images.unsplash.com/photo-1601506521937-2462031260eb?auto=format&fit=crop&q=80&w=800" alt="ShootiX Team Filming" class="relative rounded-2xl shadow-xl grayscale hover:grayscale-0 transition-all duration-500 transform group-hover:scale-[1.01]">
-                </div>
+            </div>
+
+            <div class="about-image" data-aos="fade-right" data-aos-duration="1000">
+                <div class="image-glow"></div>
+                <!-- Using a high quality placeholder for behind the scenes -->
+                <img src="https://images.pexels.com/photos/2510428/pexels-photo-2510428.jpeg?auto=compress&cs=tinysrgb&w=800"
+                    alt="كواليس التصوير في شوتيكس" class="rounded-image">
             </div>
         </div>
     </section>
 
-    <!-- Services Section (Timeline Style) -->
-    <!-- Applied custom gradient background: Smoother 180deg transition -->
-    <section id="services" class="pt-24 pb-24 relative" style="background: linear-gradient(180deg, #F8F5E6 0%, #1A2B4C 40%, #1A2B4C 60%, #F8F5E6 100%);">
-        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="text-center mb-16 fade-in-section">
-                <!-- Changed text color to beige for visibility on navy -->
-                <h2 class="text-3xl md:text-5xl font-bold mb-4 text-brand-beige">خدماتنا</h2>
-                <!-- Changed line color to beige -->
-                <div class="w-20 h-1 bg-brand-beige mx-auto"></div>
-            </div>
+    <!-- Services Section (Timeline Layout) -->
+    <section id="services" class="services">
+        <div class="container">
+            <h2 class="section-title text-center text-beige" data-aos="fade-up">خدماتنا</h2>
+            <div class="title-underline text-center-underline bg-beige" data-aos="fade-up"></div>
 
-            <!-- Timeline Container -->
-            <div class="relative">
-                <!-- Center Line (visible on desktop) -->
-                <!-- Changed line color to beige/20 for visibility on navy. Adjusted height to not touch edges -->
-                <div class="hidden md:block absolute left-1/2 transform -translate-x-1/2 top-32 bottom-32 w-1 bg-brand-beige/20 rounded-full z-0"></div>
+            <div class="timeline">
+                <div class="timeline-line"></div>
 
-                <!-- Service 1 (Right) -->
-                <div class="flex flex-col md:flex-row justify-between items-center mb-16 fade-in-section w-full relative z-10">
-                    <div class="hidden md:block w-5/12"></div> <!-- Spacer -->
-                    <!-- Dot -->
-                    <!-- Inverted colors: Navy bg, Beige border -->
-                    <div class="absolute left-1/2 transform -translate-x-1/2 w-6 h-6 bg-brand-navy border-4 border-brand-beige rounded-full z-10 hidden md:flex items-center justify-center"></div> 
-                    
-                    <div class="w-full md:w-5/12">
-                        <div class="bg-white p-6 rounded-xl border border-brand-navy/10 hover:border-brand-navy/50 shadow-lg hover:shadow-xl transition-all duration-300 relative group">
-                            <!-- Arrow for Desktop -->
-                            <div class="hidden md:block absolute top-1/2 -translate-y-1/2 -left-2 w-4 h-4 bg-white border-l border-b border-brand-navy/10 transform rotate-45"></div>
-                            
-                            <div class="flex items-center gap-4 mb-4">
-                                <div class="w-12 h-12 bg-brand-navy rounded-full flex items-center justify-center text-white shrink-0 group-hover:bg-brand-black transition-colors">
-                                    <i data-lucide="camera" class="w-6 h-6"></i>
-                                </div>
-                                <h3 class="text-2xl font-bold text-brand-black">تصوير فوتوغرافي</h3>
-                            </div>
-                            <p class="text-gray-600 mb-4 text-sm leading-relaxed">
-                                تصوير منتجات، أطعمة، وبورتريه احترافي بإضاءة سينمائية تبرز جمالية التفاصيل.
-                            </p>
-                            <div class="bg-brand-beige p-2 rounded text-xs text-brand-navy font-bold">
-                                مناسب لـ: المطاعم، المتاجر الإلكترونية، والشركات
-                            </div>
+                <!-- Service 1 -->
+                <div class="timeline-item left" data-aos="fade-left" data-aos-duration="800">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-content">
+                        <div class="service-icon">
+                            <i class="fas fa-camera"></i>
                         </div>
+                        <h3 class="service-title">تصوير فوتوغرافي</h3>
+                        <p class="service-desc">لقطات احترافية تبرز أدق التفاصيل وتظهر جمال منتجاتك وأعمالك بأفضل صورة.
+                        </p>
+                        <span class="service-badge">مناسب لـ: المنتجات، المطاعم، العقارات</span>
                     </div>
                 </div>
 
-                <!-- Service 2 (Left) -->
-                <div class="flex flex-col md:flex-row justify-between items-center mb-16 fade-in-section w-full relative z-10">
-                    <div class="w-full md:w-5/12 order-1 md:text-right">
-                         <div class="bg-white p-6 rounded-xl border border-brand-navy/10 hover:border-brand-navy/50 shadow-lg hover:shadow-xl transition-all duration-300 relative group">
-                            <!-- Arrow for Desktop -->
-                            <div class="hidden md:block absolute top-1/2 -translate-y-1/2 -right-2 w-4 h-4 bg-white border-r border-t border-brand-navy/10 transform rotate-45"></div>
-                            
-                            <div class="flex items-center gap-4 mb-4 md:flex-row-reverse">
-                                <div class="w-12 h-12 bg-brand-navy rounded-full flex items-center justify-center text-white shrink-0 group-hover:bg-brand-black transition-colors">
-                                    <i data-lucide="video" class="w-6 h-6"></i>
-                                </div>
-                                <h3 class="text-2xl font-bold text-brand-black">إنتاج فيديو</h3>
-                            </div>
-                            <p class="text-gray-600 mb-4 text-sm leading-relaxed">
-                                إعلانات تجارية، تغطيات، وفيديوهات ريلز قصيرة عالية الجودة تجذب الانتباه.
-                            </p>
-                            <div class="bg-brand-beige p-2 rounded text-xs text-brand-navy font-bold">
-                                مناسب لـ: الحملات التسويقية وإطلاق المنتجات
-                            </div>
+                <!-- Service 2 -->
+                <div class="timeline-item right" data-aos="fade-right" data-aos-duration="800">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-content">
+                        <div class="service-icon">
+                            <i class="fas fa-video"></i>
                         </div>
-                    </div>
-                    <!-- Dot -->
-                    <div class="absolute left-1/2 transform -translate-x-1/2 w-6 h-6 bg-brand-navy border-4 border-brand-beige rounded-full z-10 hidden md:flex items-center justify-center"></div>
-                    <div class="hidden md:block w-5/12 order-2"></div>
-                </div>
-
-                <!-- Service 3 (Right) -->
-                <div class="flex flex-col md:flex-row justify-between items-center mb-16 fade-in-section w-full relative z-10">
-                    <div class="hidden md:block w-5/12"></div>
-                    <div class="absolute left-1/2 transform -translate-x-1/2 w-6 h-6 bg-brand-navy border-4 border-brand-beige rounded-full z-10 hidden md:flex items-center justify-center"></div>
-                    <div class="w-full md:w-5/12">
-                        <div class="bg-white p-6 rounded-xl border border-brand-navy/10 hover:border-brand-navy/50 shadow-lg hover:shadow-xl transition-all duration-300 relative group">
-                            <div class="hidden md:block absolute top-1/2 -translate-y-1/2 -left-2 w-4 h-4 bg-white border-l border-b border-brand-navy/10 transform rotate-45"></div>
-                            <div class="flex items-center gap-4 mb-4">
-                                <div class="w-12 h-12 bg-brand-navy rounded-full flex items-center justify-center text-white shrink-0 group-hover:bg-brand-black transition-colors">
-                                    <i data-lucide="plane" class="w-6 h-6"></i>
-                                </div>
-                                <h3 class="text-2xl font-bold text-brand-black">تصوير درون</h3>
-                            </div>
-                            <p class="text-gray-600 mb-4 text-sm leading-relaxed">
-                                لقطات جوية بانورامية ومتابعة حركية (FPV) تعطي منظوراً مختلفاً لمشروعك.
-                            </p>
-                            <div class="bg-brand-beige p-2 rounded text-xs text-brand-navy font-bold">
-                                مناسب لـ: العقارات، المشاريع الإنشائية، والفعاليات
-                            </div>
-                        </div>
+                        <h3 class="service-title">إنتاج فيديو</h3>
+                        <p class="service-desc">صناعة أفلام ومقاطع ترويجية سينمائية تخطف الأنظار وتحكي قصة علامتك
+                            التجارية بقوة.</p>
+                        <span class="service-badge">مناسب لـ: الإعلانات، التغطيات، الهوية</span>
                     </div>
                 </div>
 
-                <!-- Service 4 (Left) -->
-                <div class="flex flex-col md:flex-row justify-between items-center mb-16 fade-in-section w-full relative z-10">
-                    <div class="w-full md:w-5/12 order-1 md:text-right">
-                         <div class="bg-white p-6 rounded-xl border border-brand-navy/10 hover:border-brand-navy/50 shadow-lg hover:shadow-xl transition-all duration-300 relative group">
-                            <div class="hidden md:block absolute top-1/2 -translate-y-1/2 -right-2 w-4 h-4 bg-white border-r border-t border-brand-navy/10 transform rotate-45"></div>
-                            <div class="flex items-center gap-4 mb-4 md:flex-row-reverse">
-                                <div class="w-12 h-12 bg-brand-navy rounded-full flex items-center justify-center text-white shrink-0 group-hover:bg-brand-black transition-colors">
-                                    <i data-lucide="scissors" class="w-6 h-6"></i>
-                                </div>
-                                <h3 class="text-2xl font-bold text-brand-black">مونتاج احترافي</h3>
-                            </div>
-                            <p class="text-gray-600 mb-4 text-sm leading-relaxed">
-                                تصحيح ألوان (Color Grading)، مؤثرات بصرية، وانتقالات إبداعية تروي قصتك.
-                            </p>
-                            <div class="bg-brand-beige p-2 rounded text-xs text-brand-navy font-bold">
-                                مناسب لـ: صناع المحتوى والشركات
-                            </div>
+                <!-- Service 3 -->
+                <div class="timeline-item left" data-aos="fade-left" data-aos-duration="800">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-content">
+                        <div class="service-icon">
+                            <i class="fas fa-helicopter"></i>
                         </div>
+                        <h3 class="service-title">تصوير درون</h3>
+                        <p class="service-desc">زوايا جوية مبهرة تعطي بعداً جديداً لمشاريعك، باستخدام أحدث طائرات
+                            الدرون.</p>
+                        <span class="service-badge">مناسب لـ: العقارات، الفعاليات الكبرى</span>
                     </div>
-                    <div class="absolute left-1/2 transform -translate-x-1/2 w-6 h-6 bg-brand-navy border-4 border-brand-beige rounded-full z-10 hidden md:flex items-center justify-center"></div>
-                    <div class="hidden md:block w-5/12 order-2"></div>
                 </div>
 
-                <!-- Service 5 (Right) -->
-                <div class="flex flex-col md:flex-row justify-between items-center fade-in-section w-full relative z-10">
-                    <div class="hidden md:block w-5/12"></div>
-                    <div class="absolute left-1/2 transform -translate-x-1/2 w-6 h-6 bg-brand-navy border-4 border-brand-beige rounded-full z-10 hidden md:flex items-center justify-center"></div>
-                    <div class="w-full md:w-5/12">
-                        <div class="bg-white p-6 rounded-xl border border-brand-navy/10 hover:border-brand-navy/50 shadow-lg hover:shadow-xl transition-all duration-300 relative group">
-                            <div class="hidden md:block absolute top-1/2 -translate-y-1/2 -left-2 w-4 h-4 bg-white border-l border-b border-brand-navy/10 transform rotate-45"></div>
-                            <div class="flex items-center gap-4 mb-4">
-                                <div class="w-12 h-12 bg-brand-navy rounded-full flex items-center justify-center text-white shrink-0 group-hover:bg-brand-black transition-colors">
-                                    <i data-lucide="mic" class="w-6 h-6"></i>
-                                </div>
-                                <h3 class="text-2xl font-bold text-brand-black">تعليق صوتي</h3>
-                            </div>
-                            <p class="text-gray-600 mb-4 text-sm leading-relaxed">
-                                نصوص إعلانية بأصوات سعودية وفصحى مؤثرة توصل رسالتك بوضوح.
-                            </p>
-                            <div class="bg-brand-beige p-2 rounded text-xs text-brand-navy font-bold">
-                                مناسب لـ: الفيديوهات التعريفية والإعلانات الإذاعية
-                            </div>
+                <!-- Service 4 -->
+                <div class="timeline-item right" data-aos="fade-right" data-aos-duration="800">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-content">
+                        <div class="service-icon">
+                            <i class="fas fa-film"></i>
                         </div>
+                        <h3 class="service-title">مونتاج احترافي</h3>
+                        <p class="service-desc">تعديل وتلوين ودمج المشاهد لإنتاج مادة بصرية نهائية عالية الجودة
+                            والتأثير.</p>
+                        <span class="service-badge">مناسب لـ: صناع المحتوى، الشركات</span>
+                    </div>
+                </div>
+
+                <!-- Service 5 -->
+                <div class="timeline-item left" data-aos="fade-left" data-aos-duration="800">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-content">
+                        <div class="service-icon">
+                            <i class="fas fa-microphone-alt"></i>
+                        </div>
+                        <h3 class="service-title">تعليق صوتي</h3>
+                        <p class="service-desc">أصوات احترافية ومؤثرات صوتية تضفي الحيوية وتكتمل بها الصورة السينمائية.
+                        </p>
+                        <span class="service-badge">مناسب لـ: الإعلانات، الوثائقيات</span>
+                    </div>
+                </div>
+
+                <!-- Service 6 -->
+                <div class="timeline-item right" data-aos="fade-right" data-aos-duration="800">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-content">
+                        <div class="service-icon">
+                            <i class="fas fa-laptop-code"></i>
+                        </div>
+                        <h3 class="service-title">تصميم وتطوير المواقع</h3>
+                        <p class="service-desc">بناء مواقع إلكترونية عصرية وجذابة تعكس هوية علامتك التجارية وتزيد من
+                            تفاعل العملاء.</p>
+                        <span class="service-badge">مناسب لـ: العلامات التجارية، الشركات، المتاجر</span>
                     </div>
                 </div>
 
@@ -347,144 +235,133 @@
     </section>
 
     <!-- Portfolio Section -->
-    <section id="portfolio" class="pt-12 pb-24 bg-brand-beige relative">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
-            
-            <div class="text-center mb-12 fade-in-section">
-                <h2 class="text-3xl md:text-5xl font-bold mb-4 text-brand-navy">معرض الأعمال</h2>
-                <div class="w-20 h-1 bg-brand-navy mx-auto"></div>
-            </div>
+    <section id="portfolio" class="portfolio">
+        <div class="container">
+            <h2 class="section-title text-center text-navy" data-aos="fade-up">معرض الأعمال</h2>
+            <div class="title-underline text-center-underline" data-aos="fade-up"></div>
 
-            <!-- Grid -->
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6" id="portfolio-grid">
-                <!-- Project Items -->
-                <!-- Cars -->
-                <div class="portfolio-item group relative overflow-hidden rounded-xl aspect-video cursor-pointer fade-in-section shadow-lg border border-brand-navy/5">
-                    <img src="https://images.unsplash.com/photo-1492144534655-ae79c964c9d7?auto=format&fit=crop&q=80&w=800" alt="Car Project" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
-                    <div class="absolute inset-0 bg-brand-navy/80 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-center items-center text-center p-4">
-                        <h3 class="text-xl font-bold text-brand-beige">إعلان سيارة فاخرة</h3>
-                        <p class="text-sm text-gray-300 mt-2">تصوير ومونتاج سينمائي</p>
+            <div class="portfolio-grid">
+                <!-- Portfolio Item -->
+                <a href="project-cars.html" class="portfolio-item" data-aos="zoom-in" data-aos-delay="100"
+                    style="display:block;">
+                    <img src="https://images.unsplash.com/photo-1492144534655-ae79c964c9d7?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
+                        alt="تصوير سيارات">
+                    <div class="portfolio-overlay">
+                        <h3 class="portfolio-title">حملة السيارات الرياضية</h3>
+                        <p class="portfolio-desc">تصوير ديناميكي عالي السرعة لإبراز الأداء.</p>
                     </div>
-                </div>
+                </a>
 
-                <!-- Restaurants -->
-                <div class="portfolio-item group relative overflow-hidden rounded-xl aspect-video cursor-pointer fade-in-section shadow-lg border border-brand-navy/5">
-                    <img src="https://images.unsplash.com/photo-1514362545857-3bc16c4c7d1b?auto=format&fit=crop&q=80&w=800" alt="Restaurant Project" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
-                    <div class="absolute inset-0 bg-brand-navy/80 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-center items-center text-center p-4">
-                        <h3 class="text-xl font-bold text-brand-beige">مطعم ستيك هاوس</h3>
-                        <p class="text-sm text-gray-300 mt-2">تصوير أطعمة وريلز</p>
+                <!-- Portfolio Item -->
+                <a href="project-restaurant.html" class="portfolio-item" data-aos="zoom-in" data-aos-delay="200"
+                    style="display:block;">
+                    <img src="https://images.unsplash.com/photo-1504674900247-0877df9cc836?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
+                        alt="تصوير مطاعم">
+                    <div class="portfolio-overlay">
+                        <h3 class="portfolio-title">مطعم الذواقة</h3>
+                        <p class="portfolio-desc">إبراز تفاصيل الأطباق الفاخرة بجودة تفوق الوصف.</p>
                     </div>
-                </div>
+                </a>
 
-                <!-- Real Estate -->
-                <div class="portfolio-item group relative overflow-hidden rounded-xl aspect-video cursor-pointer fade-in-section shadow-lg border border-brand-navy/5">
-                    <img src="https://images.unsplash.com/photo-1600596542815-2a4d04774c13?auto=format&fit=crop&q=80&w=800" alt="Real Estate" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
-                    <div class="absolute inset-0 bg-brand-navy/80 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-center items-center text-center p-4">
-                        <h3 class="text-xl font-bold text-brand-beige">فيلا مودرن - الرياض</h3>
-                        <p class="text-sm text-gray-300 mt-2">تغطية درون وجولة داخلية</p>
+                <!-- Portfolio Item -->
+                <a href="project-residential.html" class="portfolio-item" data-aos="zoom-in" data-aos-delay="300"
+                    style="display:block;">
+                    <img src="https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
+                        alt="تصوير عقاري">
+                    <div class="portfolio-overlay">
+                        <h3 class="portfolio-title">مشروع الواحة السكني</h3>
+                        <p class="portfolio-desc">تغطية درون وتصوير داخلي للفلل الفاخرة.</p>
                     </div>
-                </div>
+                </a>
 
-                 <!-- Events -->
-                 <div class="portfolio-item group relative overflow-hidden rounded-xl aspect-video cursor-pointer fade-in-section shadow-lg border border-brand-navy/5">
-                    <img src="https://images.unsplash.com/photo-1511578314322-379afb476865?auto=format&fit=crop&q=80&w=800" alt="Event" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
-                    <div class="absolute inset-0 bg-brand-navy/80 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-center items-center text-center p-4">
-                        <h3 class="text-xl font-bold text-brand-beige">مؤتمر التقنية</h3>
-                        <p class="text-sm text-gray-300 mt-2">تغطية شاملة للفعالية</p>
+                <!-- Portfolio Item -->
+                <a href="project-tech.html" class="portfolio-item" data-aos="zoom-in" data-aos-delay="400"
+                    style="display:block;">
+                    <img src="https://images.unsplash.com/photo-1540575467063-178a50c2df87?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
+                        alt="تغطية فعاليات">
+                    <div class="portfolio-overlay">
+                        <h3 class="portfolio-title">مؤتمر التقنية السنوي</h3>
+                        <p class="portfolio-desc">تغطية حية وإنتاج ملخص الحدث باحترافية.</p>
                     </div>
-                </div>
+                </a>
 
-                <!-- More Placeholders mixed -->
-                <div class="portfolio-item group relative overflow-hidden rounded-xl aspect-video cursor-pointer fade-in-section shadow-lg border border-brand-navy/5">
-                    <img src="https://images.unsplash.com/photo-1504674900247-0877df9cc836?auto=format&fit=crop&q=80&w=800" alt="Food" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
-                    <div class="absolute inset-0 bg-brand-navy/80 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-center items-center text-center p-4">
-                        <h3 class="text-xl font-bold text-brand-beige">كوفي شوب مختص</h3>
-                        <p class="text-sm text-gray-300 mt-2">فيديو ترويجي</p>
+                <!-- Portfolio Item -->
+                <a href="project-perfume.html" class="portfolio-item" data-aos="zoom-in" data-aos-delay="500"
+                    style="display:block;">
+                    <img src="https://images.unsplash.com/photo-1583394838336-acd977736f90?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
+                        alt="تصوير منتجات">
+                    <div class="portfolio-overlay">
+                        <h3 class="portfolio-title">إطلاق عطر فاخر</h3>
+                        <p class="portfolio-desc">جلسة تصوير سينمائية تبرز فخامة المنتج وهويته.</p>
                     </div>
-                </div>
+                </a>
 
-                <div class="portfolio-item group relative overflow-hidden rounded-xl aspect-video cursor-pointer fade-in-section shadow-lg border border-brand-navy/5">
-                    <img src="https://images.unsplash.com/photo-1503376763036-066120622c74?auto=format&fit=crop&q=80&w=800" alt="Car" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
-                    <div class="absolute inset-0 bg-brand-navy/80 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-center items-center text-center p-4">
-                        <h3 class="text-xl font-bold text-brand-beige">سباق دريفت</h3>
-                        <p class="text-sm text-gray-300 mt-2">تصوير أكشن</p>
+                <!-- Portfolio Item -->
+                <a href="project-fashion.html" class="portfolio-item" data-aos="zoom-in" data-aos-delay="600"
+                    style="display:block;">
+                    <img src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
+                        alt="تصوير نمط الحياة">
+                    <div class="portfolio-overlay">
+                        <h3 class="portfolio-title">إعلان أزياء</h3>
+                        <p class="portfolio-desc">إخراج فني وفيديو إعلاني للعلامات التجارية للأزياء.</p>
                     </div>
-                </div>
-            </div>
-            
-            <div class="text-center mt-12">
-                 <button class="text-brand-navy hover:text-brand-gold font-bold border-b border-brand-navy hover:border-brand-gold transition-colors pb-1">عرض المزيد من الأعمال</button>
+                </a>
             </div>
         </div>
     </section>
 
-    <!-- Testimonials (Client Results) -->
-    <section id="testimonials" class="py-24 bg-brand-navy relative overflow-hidden">
-        <div class="absolute top-0 left-0 w-full h-full opacity-10 pointer-events-none">
-            <!-- Pattern Placeholder -->
-            <div class="w-full h-full bg-[url('https://www.transparenttextures.com/patterns/cubes.png')]"></div>
-        </div>
-        
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-            <div class="text-center mb-16 fade-in-section">
-                <h2 class="text-3xl md:text-5xl font-bold mb-4 text-brand-beige">نتائج عملائنا</h2>
-                <p class="text-gray-300">شركاء النجاح الذين وثقوا في شوتيكس</p>
-            </div>
+    <!-- Testimonials Section -->
+    <section id="testimonials" class="testimonials">
+        <div class="testimonials-pattern"></div>
+        <div class="container relative-z">
+            <h2 class="section-title text-center text-beige" data-aos="fade-up">نتائج عملائنا</h2>
+            <div class="title-underline text-center-underline bg-beige" data-aos="fade-up"></div>
 
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-                <!-- Client 1 -->
-                <div class="bg-brand-black/20 backdrop-blur p-8 rounded-xl border border-white/10 fade-in-section text-white">
-                    <div class="flex items-center gap-1 text-brand-gold mb-4">
-                        <i data-lucide="star" class="w-4 h-4 fill-current"></i>
-                        <i data-lucide="star" class="w-4 h-4 fill-current"></i>
-                        <i data-lucide="star" class="w-4 h-4 fill-current"></i>
-                        <i data-lucide="star" class="w-4 h-4 fill-current"></i>
-                        <i data-lucide="star" class="w-4 h-4 fill-current"></i>
+            <div class="testimonials-grid">
+                <!-- Testimonial 1 -->
+                <div class="testimonial-card" data-aos="fade-up" data-aos-delay="100">
+                    <div class="stars">
+                        <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i
+                            class="fas fa-star"></i><i class="fas fa-star"></i>
                     </div>
-                    <p class="text-gray-200 mb-6 leading-relaxed">"الفيديو الذي أنتجته شوتيكس لمطعمنا زاد المبيعات بنسبة 40% في أول أسبوع. احترافية عالية وفهم عميق للهوية."</p>
-                    <div class="flex items-center gap-4">
-                        <div class="w-10 h-10 rounded-full bg-gray-500"></div>
-                        <div>
-                            <h4 class="font-bold text-sm">عبدالله السالم</h4>
-                            <span class="text-xs text-gray-300">مالك سلسلة مطاعم</span>
+                    <p class="quote">"فريق شوتيكس نقل هويتنا لمستوى آخر. جودة تصوير الأطباق والفيديو الإعلاني ساهمت في
+                        زيادة المبيعات بشكل ملحوظ. احترافية عالية وتسليم في الوقت المحدد."</p>
+                    <div class="client-info">
+                        <div class="client-details">
+                            <h4 class="client-name">أحمد خالد</h4>
+                            <span class="client-role">مالك سلسلة مطاعم</span>
                         </div>
                     </div>
                 </div>
 
-                <!-- Client 2 -->
-                <div class="bg-brand-black/20 backdrop-blur p-8 rounded-xl border border-white/10 fade-in-section text-white">
-                    <div class="flex items-center gap-1 text-brand-gold mb-4">
-                        <i data-lucide="star" class="w-4 h-4 fill-current"></i>
-                        <i data-lucide="star" class="w-4 h-4 fill-current"></i>
-                        <i data-lucide="star" class="w-4 h-4 fill-current"></i>
-                        <i data-lucide="star" class="w-4 h-4 fill-current"></i>
-                        <i data-lucide="star" class="w-4 h-4 fill-current"></i>
+                <!-- Testimonial 2 -->
+                <div class="testimonial-card" data-aos="fade-up" data-aos-delay="200">
+                    <div class="stars">
+                        <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i
+                            class="fas fa-star"></i><i class="fas fa-star"></i>
                     </div>
-                    <p class="text-gray-200 mb-6 leading-relaxed">"تغطية العقار كانت سينمائية بامتياز. ساعدتني الصور والدرون في بيع الفيلا في وقت قياسي. شكراً لكم."</p>
-                    <div class="flex items-center gap-4">
-                        <div class="w-10 h-10 rounded-full bg-gray-500"></div>
-                        <div>
-                            <h4 class="font-bold text-sm">محمد القحطاني</h4>
-                            <span class="text-xs text-gray-300">مطور عقاري</span>
+                    <p class="quote">"التغطية بدرون لمشاريعنا العقارية كانت مبهرة. اللقطات السينمائية أظهرت الفخامة التي
+                        كنا نبحث عنها. شوتيكس هم شركاء النجاح بالنسبة لنا."</p>
+                    <div class="client-info">
+                        <div class="client-details">
+                            <h4 class="client-name">م. فهد عبدالله</h4>
+                            <span class="client-role">مطور عقاري</span>
                         </div>
                     </div>
                 </div>
 
-                <!-- Client 3 -->
-                <div class="bg-brand-black/20 backdrop-blur p-8 rounded-xl border border-white/10 fade-in-section text-white">
-                    <div class="flex items-center gap-1 text-brand-gold mb-4">
-                        <i data-lucide="star" class="w-4 h-4 fill-current"></i>
-                        <i data-lucide="star" class="w-4 h-4 fill-current"></i>
-                        <i data-lucide="star" class="w-4 h-4 fill-current"></i>
-                        <i data-lucide="star" class="w-4 h-4 fill-current"></i>
-                        <i data-lucide="star" class="w-4 h-4 fill-current"></i>
+                <!-- Testimonial 3 -->
+                <div class="testimonial-card" data-aos="fade-up" data-aos-delay="300">
+                    <div class="stars">
+                        <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i
+                            class="fas fa-star"></i><i class="fas fa-star"></i>
                     </div>
-                    <p class="text-gray-200 mb-6 leading-relaxed">"فريق سعودي مبدع، التزام بالوقت وجودة لا يعلى عليها. الفيديو التعريفي للشركة كان واجهتنا في المعرض."</p>
-                    <div class="flex items-center gap-4">
-                        <div class="w-10 h-10 rounded-full bg-gray-500"></div>
-                        <div>
-                            <h4 class="font-bold text-sm">سارة العتيبي</h4>
-                            <span class="text-xs text-gray-300">مديرة تسويق</span>
+                    <p class="quote">"مرونة في التعامل، فهم سريع للمتطلبات، وإخراج فني يفوق التوقعات. تعاملنا معهم في
+                        حملة إطلاق المنتج وكانت النتائج مذهلة على منصات التواصل."</p>
+                    <div class="client-info">
+                        <div class="client-details">
+                            <h4 class="client-name">سارة محمد</h4>
+                            <span class="client-role">مديرة تسويق</span>
                         </div>
                     </div>
                 </div>
@@ -492,190 +369,110 @@
         </div>
     </section>
 
-    <!-- Request Quote Form -->
-    <section id="contact" class="py-24 bg-brand-beige">
-        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="bg-white p-8 md:p-12 rounded-2xl border border-brand-navy/10 shadow-xl fade-in-section">
-                <div class="text-center mb-10">
-                    <h2 class="text-3xl font-bold mb-2 text-brand-navy">اطلب عرض سعر</h2>
-                    <p class="text-gray-500">املأ النموذج وسنتواصل معك في أقرب وقت لتحويل فكرتك إلى واقع</p>
+    <!-- Contact Section -->
+    <section id="contact" class="contact">
+        <div class="container">
+            <div class="contact-wrapper" data-aos="zoom-in" data-aos-duration="1000">
+                <div class="contact-header text-center">
+                    <h2 class="section-title text-navy">اطلب عرض سعر</h2>
+                    <p class="contact-subtitle">خطوتك الأولى نحو إنتاج بصري يليق بعلامتك التجارية</p>
                 </div>
 
-                <!-- Updated Form: Using FormSubmit for background email sending -->
-                <form action="https://formsubmit.co/shootix.sa@gmail.com" method="POST" class="space-y-6">
-                    <!-- Hidden inputs for FormSubmit Configuration -->
+                <form action="https://formsubmit.co/shootix.sa@gmail.com" method="POST" class="contact-form"
+                    id="contactForm">
+                    <!-- FormSubmit Configuration -->
                     <input type="hidden" name="_subject" value="طلب عرض سعر جديد من موقع شوتيكس">
                     <input type="hidden" name="_captcha" value="false">
                     <input type="hidden" name="_template" value="table">
-                    
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                        <!-- Name -->
-                        <div>
-                            <label class="block text-sm font-medium text-gray-700 mb-2">الاسم الكريم</label>
-                            <input type="text" name="الاسم" required class="w-full bg-gray-50 border border-gray-200 rounded-lg px-4 py-3 text-brand-black focus:outline-none focus:border-brand-navy transition-colors" placeholder="الاسم الكامل">
+                    <!-- You can set your success page here, if not it goes to default -->
+                    <!-- <input type="hidden" name="_next" value="https://yourwebsite.com/thanks.html"> -->
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="name">الاسم الكريم *</label>
+                            <input type="text" id="name" name="name" required placeholder="أدخل اسمك">
                         </div>
-                        <!-- Phone -->
-                        <div>
-                            <label class="block text-sm font-medium text-gray-700 mb-2">رقم الجوال</label>
-                            <input type="tel" name="رقم_الجوال" required class="w-full bg-gray-50 border border-gray-200 rounded-lg px-4 py-3 text-brand-black focus:outline-none focus:border-brand-navy transition-colors" placeholder="05xxxxxxxx">
+                        <div class="form-group">
+                            <label for="phone">رقم الجوال *</label>
+                            <input type="tel" id="phone" name="phone" required placeholder="05xxxxxxxx">
                         </div>
                     </div>
 
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                        <!-- Email (New Field) -->
-                        <div>
-                            <label class="block text-sm font-medium text-gray-700 mb-2">البريد الإلكتروني</label>
-                            <input type="email" name="البريد_الإلكتروني" required class="w-full bg-gray-50 border border-gray-200 rounded-lg px-4 py-3 text-brand-black focus:outline-none focus:border-brand-navy transition-colors" placeholder="example@mail.com">
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="email">البريد الإلكتروني</label>
+                            <input type="email" id="email" name="email" placeholder="example@domain.com">
                         </div>
-                        <!-- City -->
-                        <div>
-                            <label class="block text-sm font-medium text-gray-700 mb-2">المدينة</label>
-                            <input type="text" name="المدينة" class="w-full bg-gray-50 border border-gray-200 rounded-lg px-4 py-3 text-brand-black focus:outline-none focus:border-brand-navy transition-colors" placeholder="مثال: الرياض">
+                        <div class="form-group">
+                            <label for="city">المدينة</label>
+                            <input type="text" id="city" name="city" placeholder="الرياض، جدة، الخ">
                         </div>
                     </div>
 
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                        <!-- Project Type -->
-                        <div>
-                            <label class="block text-sm font-medium text-gray-700 mb-2">نوع المشروع</label>
-                            <select name="نوع_المشروع" class="w-full bg-gray-50 border border-gray-200 rounded-lg px-4 py-3 text-brand-black focus:outline-none focus:border-brand-navy transition-colors">
-                                <option>اختر نوع الخدمة</option>
-                                <option>تغطية مناسبة</option>
-                                <option>إعلان تجاري</option>
-                                <option>تصوير عقاري</option>
-                                <option>تصوير منتجات/أطعمة</option>
-                                <option>أخرى</option>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="project-type">نوع المشروع *</label>
+                            <select id="project-type" name="project_type" required>
+                                <option value="" disabled selected>اختر النوع...</option>
+                                <option value="photography">تصوير فوتوغرافي</option>
+                                <option value="video">إنتاج فيديو</option>
+                                <option value="drone">تصوير درون</option>
+                                <option value="editing">مونتاج مستمر</option>
+                                <option value="full_package">باقة متكاملة</option>
                             </select>
                         </div>
-                        <!-- Budget -->
-                        <div>
-                            <label class="block text-sm font-medium text-gray-700 mb-2">الميزانية التقريبية</label>
-                            <select name="الميزانية" class="w-full bg-gray-50 border border-gray-200 rounded-lg px-4 py-3 text-brand-black focus:outline-none focus:border-brand-navy transition-colors">
-                                <option>أقل من 5,000 ريال</option>
-                                <option>5,000 - 15,000 ريال</option>
-                                <option>15,000 - 30,000 ريال</option>
-                                <option>أكثر من 30,000 ريال</option>
+                        <div class="form-group">
+                            <label for="budget">الميزانية التقريبية</label>
+                            <select id="budget" name="budget">
+                                <option value="" disabled selected>اختر الميزانية...</option>
+                                <option value="under_5000">أقل من 5,000 ريال</option>
+                                <option value="5000_15000">5,000 - 15,000 ريال</option>
+                                <option value="15000_50000">15,000 - 50,000 ريال</option>
+                                <option value="above_50000">+ 50,000 ريال</option>
                             </select>
                         </div>
                     </div>
 
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                        <!-- Date -->
-                        <div>
-                            <label class="block text-sm font-medium text-gray-700 mb-2">موعد التنفيذ المتوقع</label>
-                            <input type="date" name="موعد_التنفيذ" class="w-full bg-gray-50 border border-gray-200 rounded-lg px-4 py-3 text-brand-black focus:outline-none focus:border-brand-navy transition-colors text-right">
-                        </div>
+                    <div class="form-group">
+                        <label for="target-date">التاريخ المقترح للتنفيذ</label>
+                        <input type="date" id="target-date" name="target_date">
                     </div>
 
-                    <!-- Description -->
-                    <div>
-                        <label class="block text-sm font-medium text-gray-700 mb-2">تفاصيل إضافية</label>
-                        <textarea name="التفاصيل" rows="4" class="w-full bg-gray-50 border border-gray-200 rounded-lg px-4 py-3 text-brand-black focus:outline-none focus:border-brand-navy transition-colors" placeholder="حدثنا أكثر عن مشروعك..."></textarea>
+                    <div class="form-group">
+                        <label for="details">تفاصيل إضافية عن المشروع</label>
+                        <textarea id="details" name="details" rows="5"
+                            placeholder="أخبرنا المزيد عن رؤيتك والمخرجات المطلوبة..."></textarea>
                     </div>
 
-                    <!-- Submit Button -->
-                    <button type="submit" class="w-full bg-brand-navy text-white font-bold text-lg py-4 rounded-lg hover:bg-brand-black hover:shadow-lg transition-all duration-300">
-                        إرسال الطلب
-                    </button>
+                    <button type="submit" class="btn btn-primary submit-btn">إرسال الطلب <i
+                            class="fas fa-paper-plane"></i></button>
                 </form>
             </div>
         </div>
     </section>
 
     <!-- Footer -->
-    <footer class="bg-brand-navy border-t border-white/10 py-12">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="flex flex-col md:flex-row justify-between items-center gap-6">
-                <!-- Logo -->
-                <div class="text-2xl font-black font-mont text-brand-beige flex items-center gap-2">
-                     <!-- Image Logo in Footer as well -->
-                     <img src="image_206240.png" alt="ShootiX Logo" class="h-8 w-auto object-contain">
-                </div>
-                
-                <!-- Copyright -->
-                <div class="text-gray-400 text-sm">
-                    &copy; 2024 شوتيكس للإنتاج البصري. جميع الحقوق محفوظة.
-                </div>
-
-                <!-- Socials -->
-                <div class="flex gap-4">
-                    <a href="#" class="text-gray-300 hover:text-brand-beige transition-colors"><i data-lucide="instagram" class="w-6 h-6"></i></a>
-                    <!-- TikTok (SVG) -->
-                    <a href="#" class="text-gray-300 hover:text-brand-beige transition-colors">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-6 h-6"><path d="M9 12a4 4 0 1 0 4 4V4a5 5 0 0 0 5 5"/></svg>
-                    </a>
-                    <!-- WhatsApp (SVG) -->
-                    <a href="https://wa.me/966537614446" class="text-gray-300 hover:text-brand-beige transition-colors">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-6 h-6"><path d="M3 21l1.65-3.8a9 9 0 1 1 3.4 2.9L3 21"/></svg>
-                    </a>
-                </div>
+    <footer class="footer">
+        <div class="container footer-content">
+            <div class="footer-logo">
+                <img src="assets/photo-output.PNG" alt="ShootiX Logo">
             </div>
+
+            <div class="footer-social">
+                <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                <a href="#" aria-label="TikTok"><i class="fab fa-tiktok"></i></a>
+                <a href="https://wa.me/966537614446" aria-label="WhatsApp"><i class="fab fa-whatsapp"></i></a>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2024 شوتيكس للإنتاج البصري. جميع الحقوق محفوظة.</p>
         </div>
     </footer>
 
-    <!-- Scripts -->
-    <script>
-        // Initialize Icons
-        lucide.createIcons();
-
-        // Navbar Scroll Effect
-        const navbar = document.getElementById('navbar');
-        window.addEventListener('scroll', () => {
-            if (window.scrollY > 50) {
-                navbar.classList.add('py-0', 'shadow-lg');
-            } else {
-                navbar.classList.remove('py-0', 'shadow-lg');
-            }
-        });
-
-        // Mobile Menu Toggle
-        function toggleMobileMenu() {
-            const menu = document.getElementById('mobile-menu');
-            menu.classList.toggle('hidden');
-        }
-
-        // Portfolio Filtering
-        function filterPortfolio(category, btn) {
-            // Button Styling
-            document.querySelectorAll('.filter-btn').forEach(b => {
-                b.classList.remove('bg-brand-navy', 'text-white', 'active');
-                b.classList.add('text-gray-500');
-                b.classList.add('border-brand-navy/30');
-            });
-            btn.classList.remove('text-gray-500');
-            btn.classList.remove('border-brand-navy/30');
-            btn.classList.add('bg-brand-navy', 'text-white', 'active');
-
-            // Filtering Logic
-            const items = document.querySelectorAll('.portfolio-item');
-            items.forEach(item => {
-                if (category === 'all' || item.classList.contains(category)) {
-                    item.style.display = 'block';
-                    setTimeout(() => item.style.opacity = '1', 50); // Small fade in
-                } else {
-                    item.style.display = 'none';
-                    item.style.opacity = '0';
-                }
-            });
-        }
-
-        // Intersection Observer for Fade-in Animations
-        const observerOptions = {
-            threshold: 0.1
-        };
-
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('is-visible');
-                }
-            });
-        }, observerOptions);
-
-        document.querySelectorAll('.fade-in-section').forEach(section => {
-            observer.observe(section);
-        });
-
-    </script>
+    <!-- AOS Script -->
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <!-- Custom Script -->
+    <script src="script.js"></script>
 </body>
+
 </html>
