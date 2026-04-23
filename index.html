@@ -1,52 +1,26 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ShootiX | شوتيكس للإنتاج البصري</title>
-
-    <!-- SEO Meta Tags -->
-    <meta name="description"
-        content="شوتيكس.. لا نصور فقط، نصنع التأثير. نحول رؤيتك إلى مشهد سينمائي يخلد في الذاكرة. خبراء في إنتاج المحتوى البصري للعلامات التجارية الرائدة.">
-    <meta name="keywords"
-        content="إنتاج فيديو, تصوير فوتوغرافي, تصوير درون, مونتاج, السعودية, شوتيكس, Shootix, visual production">
+    <meta name="description" content="شوتيكس.. لا نصور فقط، نصنع التأثير. نحول رؤيتك إلى مشهد سينمائي يخلد في الذاكرة.">
     <meta name="author" content="ShootiX">
-
-    <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link
-        href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700;800&family=Montserrat:wght@400;600;700&display=swap"
-        rel="stylesheet">
-
-    <!-- Font Awesome for Icons -->
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700;800&family=Montserrat:wght@300;400;500;600;700&family=Lora:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-
-    <!-- AOS Animation Library -->
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
-
-    <!-- Custom CSS -->
     <link rel="stylesheet" href="style.css">
+    
 </head>
-
 <body>
 
-    <!-- Floating WhatsApp Button -->
-    <a href="https://wa.me/966537614446" class="floating-wa" target="_blank" rel="noopener noreferrer"
-        aria-label="تواصل معنا عبر واتساب">
-        <i class="fab fa-whatsapp"></i>
-    </a>
+    <a href="https://wa.me/966537614446" class="floating-wa" target="_blank" rel="noopener noreferrer"><i class="fab fa-whatsapp"></i></a>
 
-    <!-- Navbar -->
     <nav class="navbar" id="navbar">
         <div class="nav-container">
-            <div class="logo">
-                <a href="#hero">
-                    <img src="assets/photo-output.PNG" alt="ShootiX Logo" id="nav-logo">
-                </a>
-            </div>
-
+            <div class="logo"><a href="#hero"><img src="assets/photo-output.PNG" alt="ShootiX Logo" id="nav-logo"></a></div>
             <div class="nav-links">
                 <a href="#hero" class="active">الرئيسية</a>
                 <a href="#about">من نحن</a>
@@ -55,424 +29,436 @@
                 <a href="#testimonials">نتائج عملائنا</a>
                 <a href="en.html" class="lang-switch text-gold"><i class="fas fa-globe"></i> EN</a>
             </div>
-
-            <div class="nav-cta">
-                <a href="#contact" class="btn btn-primary">اطلب عرض سعر</a>
-            </div>
-
+            <div class="nav-cta"><a href="#contact" class="btn btn-primary">اطلب عرض سعر</a></div>
             <div class="mobile-actions">
-                <a href="en.html" class="lang-switch text-navy"><i class="fas fa-globe"></i> EN</a>
-                <div class="mobile-menu-btn">
-                    <i class="fas fa-bars"></i>
-                </div>
+                <a href="en.html" class="lang-switch"><i class="fas fa-globe"></i> EN</a>
+                <div class="mobile-menu-btn"><i class="fas fa-bars"></i></div>
             </div>
         </div>
     </nav>
 
-    <!-- Hero Section -->
     <section id="hero" class="hero">
         <div class="video-background">
-            <!-- Using a high quality stock video placeholder -->
             <video autoplay muted loop playsinline id="hero-video">
-                <source
-                    src="https://cdn.pixabay.com/vimeo/328841441/car-22879.mp4?width=1280&hash=8b5fb9cbabfd2f75a024bfeab3d6fcf4aeea74db"
-                    type="video/mp4">
+                <source src="https://cdn.pixabay.com/vimeo/328841441/car-22879.mp4?width=1280&hash=8b5fb9cbabfd2f75a024bfeab3d6fcf4aeea74db" type="video/mp4">
             </video>
             <div class="video-overlay"></div>
         </div>
-
         <div class="hero-content" data-aos="fade-up" data-aos-duration="1000">
-            <h1 class="hero-title">شوتيكس..<br><span class="highlight">لا نصور فقط، نصنع التأثير</span></h1>
-            <p class="hero-subtitle">نحول رؤيتك إلى مشهد سينمائي يخلد في الذاكرة. خبراء في إنتاج المحتوى البصري للعلامات
-                التجارية الرائدة.</p>
+            <span class="hero-kicker">استوديو إنتاج بصري — السعودية</span>
+            <h1 class="hero-title">شوتيكس.<br><span class="highlight">لا نصور فقط،<br>بل نصنع التأثير.</span></h1>
+            <p class="hero-subtitle">نحول رؤيتك إلى مشهد سينمائي يخلد في الذاكرة. خبراء في إنتاج المحتوى البصري للعلامات التجارية الرائدة.</p>
             <div class="hero-buttons">
                 <a href="#contact" class="btn btn-primary-light">اطلب عرض سعر</a>
-                <a href="#portfolio" class="btn btn-outline-light">
-                    <i class="fas fa-play-circle btn-icon"></i> معرض الأعمال
-                </a>
+                <a href="#portfolio" class="btn btn-outline-light"><i class="fas fa-play-circle btn-icon"></i> معرض الأعمال</a>
             </div>
         </div>
-
-        <div class="scroll-indicator">
-            <div class="mouse">
-                <div class="wheel"></div>
-            </div>
-        </div>
+        <div class="scroll-indicator"><div class="mouse"><div class="wheel"></div></div></div>
     </section>
 
-    <!-- About Us Section -->
     <section id="about" class="about overlay-section">
-        <div class="container layout-2-col">
-            <div class="about-text" data-aos="fade-left" data-aos-duration="1000">
-                <h2 class="section-title">نصنع مشاهد تُعبّر عن الهوية، وتخلق تأثيراً يدوم.</h2>
-                <div class="title-underline"></div>
-                <p>في <strong>شوتيكس</strong>، نحن لا نلتقط الصور فقط، بل نروي قصتك البصرية بحب وشغف. فريقنا السعودي
-                    100% يجمع بين الإبداع الفني والخبرة التقنية لتقديم أعمال استثنائية.</p>
-                <p>سواء كنت تدير علامة تجارية رائدة، مشروعاً عقارياً فخماً، أو مطعماً يبحث عن التميز، نحن نقدم خدمات
-                    التصوير الفوتوغرافي، إنتاج الفيديو، تصوير الدرون، والمونتاج الاحترافي التي ترتقي بعلامتك إلى آفاق
-                    جديدة.</p>
-
-                <div class="stats-container">
-                    <div class="stat-item">
-                        <span class="stat-number">100%</span>
-                        <span class="stat-label">فريق سعودي</span>
-                    </div>
-                    <div class="stat-item">
-                        <span class="stat-number">+50</span>
-                        <span class="stat-label">عميل سعيد</span>
-                    </div>
-                    <div class="stat-item">
-                        <span class="stat-number">+200</span>
-                        <span class="stat-label">مشروع منجز</span>
+        <div class="container">
+            <div class="section-eyebrow" data-aos="fade-up">
+                <span class="num">01</span><span class="bar"></span><span>عن الاستوديو</span>
+            </div>
+            <div class="layout-2-col">
+                <div class="about-text" data-aos="fade-up" data-aos-duration="1000">
+                    <h2 class="section-title">نصنع مشاهد تُعبّر عن هويتك <em>وتترك أثراً لا يُنسى.</em></h2>
+                    <div class="title-underline"></div>
+                    <p>في <strong>شوتيكس</strong>، نحن لا نلتقط الصور فقط، بل نحكي قصتك البصرية بشغف. فريقنا السعودي 100% يجمع بين الإبداع الفني والخبرة التقنية لتقديم أعمال استثنائية.</p>
+                    <p>سواء كنت تدير علامة تجارية رائدة، مشروعاً عقارياً فخماً، أو مطعماً يبحث عن التميز، نحن نقدم خدمات التصوير الفوتوغرافي، إنتاج الفيديو، تصوير الدرون، والمونتاج الاحترافي التي ترتقي بعلامتك إلى آفاق جديدة.</p>
+                    <div class="stats-container">
+                        <div class="stat-item"><span class="stat-number">100%</span><span class="stat-label">فريق سعودي</span></div>
+                        <div class="stat-item"><span class="stat-number">+50</span><span class="stat-label">عميل سعيد</span></div>
+                        <div class="stat-item"><span class="stat-number">+200</span><span class="stat-label">مشروع منجز</span></div>
                     </div>
                 </div>
-            </div>
-
-            <div class="about-image" data-aos="fade-right" data-aos-duration="1000">
-                <div class="image-glow"></div>
-                <!-- Using a high quality placeholder for behind the scenes -->
-                <img src="https://images.pexels.com/photos/2510428/pexels-photo-2510428.jpeg?auto=compress&cs=tinysrgb&w=800"
-                    alt="كواليس التصوير في شوتيكس" class="rounded-image">
+                <div class="about-image" data-aos="fade-up" data-aos-delay="200" data-aos-duration="1000">
+                    <div class="image-glow"></div>
+                    <img src="https://images.pexels.com/photos/2510428/pexels-photo-2510428.jpeg?auto=compress&cs=tinysrgb&w=800" alt="ShootiX Behind the Scenes" class="rounded-image">
+                </div>
             </div>
         </div>
     </section>
 
-    <!-- Services Section (Timeline Layout) -->
     <section id="services" class="services">
         <div class="container">
-            <h2 class="section-title text-center text-beige" data-aos="fade-up">خدماتنا</h2>
-            <div class="title-underline text-center-underline bg-beige" data-aos="fade-up"></div>
-
+            <div class="section-eyebrow" data-aos="fade-up">
+                <span class="num">02</span><span class="bar"></span><span>ما نقدمه</span>
+            </div>
+            <h2 class="section-title text-center" data-aos="fade-up">خدماتنا</h2>
+            <div class="title-underline text-center-underline" data-aos="fade-up"></div>
             <div class="timeline">
                 <div class="timeline-line"></div>
 
-                <!-- Service 1 -->
                 <div class="timeline-item left" data-aos="fade-left" data-aos-duration="800">
                     <div class="timeline-dot"></div>
                     <div class="timeline-content">
-                        <div class="service-icon">
-                            <i class="fas fa-camera"></i>
-                        </div>
+                        <div class="service-icon"><i class="fas fa-camera"></i></div>
                         <h3 class="service-title">تصوير فوتوغرافي</h3>
-                        <p class="service-desc">لقطات احترافية تبرز أدق التفاصيل وتظهر جمال منتجاتك وأعمالك بأفضل صورة.
-                        </p>
+                        <p class="service-desc">لقطات احترافية تبرز أدق التفاصيل وتظهر جمال منتجاتك وأعمالك بأفضل صورة.</p>
                         <span class="service-badge">مناسب لـ: المنتجات، المطاعم، العقارات</span>
                     </div>
                 </div>
 
-                <!-- Service 2 -->
                 <div class="timeline-item right" data-aos="fade-right" data-aos-duration="800">
                     <div class="timeline-dot"></div>
                     <div class="timeline-content">
-                        <div class="service-icon">
-                            <i class="fas fa-video"></i>
-                        </div>
-                        <h3 class="service-title">إنتاج فيديو</h3>
-                        <p class="service-desc">صناعة أفلام ومقاطع ترويجية سينمائية تخطف الأنظار وتحكي قصة علامتك
-                            التجارية بقوة.</p>
+                        <div class="service-icon"><i class="fas fa-video"></i></div>
+                        <h3 class="service-title">إنتاج الفيديو</h3>
+                        <p class="service-desc">محتوى بصري سينمائي لحكاية قصتك والتواصل مع جمهورك — من الفكرة إلى التسليم.</p>
                         <span class="service-badge">مناسب لـ: الإعلانات، التغطيات، الهوية</span>
                     </div>
                 </div>
 
-                <!-- Service 3 -->
                 <div class="timeline-item left" data-aos="fade-left" data-aos-duration="800">
                     <div class="timeline-dot"></div>
                     <div class="timeline-content">
-                        <div class="service-icon">
-                            <i class="fas fa-helicopter"></i>
-                        </div>
-                        <h3 class="service-title">تصوير درون</h3>
-                        <p class="service-desc">زوايا جوية مبهرة تعطي بعداً جديداً لمشاريعك، باستخدام أحدث طائرات
-                            الدرون.</p>
-                        <span class="service-badge">مناسب لـ: العقارات، الفعاليات الكبرى</span>
+                        <div class="service-icon"><i class="fas fa-helicopter"></i></div>
+                        <h3 class="service-title">تصوير الدرون</h3>
+                        <p class="service-desc">لقطات جوية مذهلة تكشف حجم مشروعك الكامل بصورة سينمائية فخمة.</p>
+                        <span class="service-badge">مناسب لـ: العقارات، الفعاليات، السياحة</span>
                     </div>
                 </div>
 
-                <!-- Service 4 -->
                 <div class="timeline-item right" data-aos="fade-right" data-aos-duration="800">
                     <div class="timeline-dot"></div>
                     <div class="timeline-content">
-                        <div class="service-icon">
-                            <i class="fas fa-film"></i>
-                        </div>
-                        <h3 class="service-title">مونتاج احترافي</h3>
-                        <p class="service-desc">تعديل وتلوين ودمج المشاهد لإنتاج مادة بصرية نهائية عالية الجودة
-                            والتأثير.</p>
-                        <span class="service-badge">مناسب لـ: صناع المحتوى، الشركات</span>
-                    </div>
-                </div>
-
-                <!-- Service 5 -->
-                <div class="timeline-item left" data-aos="fade-left" data-aos-duration="800">
-                    <div class="timeline-dot"></div>
-                    <div class="timeline-content">
-                        <div class="service-icon">
-                            <i class="fas fa-microphone-alt"></i>
-                        </div>
-                        <h3 class="service-title">تعليق صوتي</h3>
-                        <p class="service-desc">أصوات احترافية ومؤثرات صوتية تضفي الحيوية وتكتمل بها الصورة السينمائية.
-                        </p>
+                        <div class="service-icon"><i class="fas fa-film"></i></div>
+                        <h3 class="service-title">المونتاج والإخراج</h3>
+                        <p class="service-desc">مونتاج دقيق وتدريج ألوان وتصميم صوتي يحول اللقطات الخام إلى عمل نهائي متكامل.</p>
                         <span class="service-badge">مناسب لـ: الإعلانات، الوثائقيات</span>
                     </div>
                 </div>
 
-                <!-- Service 6 -->
+                <div class="timeline-item left" data-aos="fade-left" data-aos-duration="800">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-content">
+                        <div class="service-icon"><i class="fas fa-pen-nib"></i></div>
+                        <h3 class="service-title">صناعة المحتوى</h3>
+                        <p class="service-desc">استراتيجية محتوى متكاملة — من الفكرة إلى التنفيذ — مصممة لتناسب هوية علامتك وجمهورك.</p>
+                        <span class="service-badge">مناسب لـ: السوشيال ميديا، الحملات</span>
+                    </div>
+                </div>
+
                 <div class="timeline-item right" data-aos="fade-right" data-aos-duration="800">
                     <div class="timeline-dot"></div>
                     <div class="timeline-content">
-                        <div class="service-icon">
-                            <i class="fas fa-laptop-code"></i>
-                        </div>
+                        <div class="service-icon"><i class="fas fa-laptop-code"></i></div>
                         <h3 class="service-title">تصميم وتطوير المواقع</h3>
-                        <p class="service-desc">بناء مواقع إلكترونية عصرية وجذابة تعكس هوية علامتك التجارية وتزيد من
-                            تفاعل العملاء.</p>
+                        <p class="service-desc">بناء مواقع إلكترونية عصرية وجذابة تعكس هوية علامتك التجارية وتزيد من تفاعل العملاء.</p>
                         <span class="service-badge">مناسب لـ: العلامات التجارية، الشركات، المتاجر</span>
                     </div>
                 </div>
-
             </div>
         </div>
     </section>
 
-    <!-- Portfolio Section -->
+    <!-- Journey / Process -->
+    <section id="journey" class="process-section">
+        <div class="container">
+            <div class="section-eyebrow" data-aos="fade-up">
+                <span class="num">03</span><span class="bar"></span><span>كيف نعمل</span>
+            </div>
+            <h2 class="section-title text-center" data-aos="fade-up">رحلتك معنا</h2>
+            <div class="title-underline text-center-underline" data-aos="fade-up"></div>
+            <div class="process-grid">
+                <div class="process-step" data-aos="fade-up" data-aos-delay="100"><span class="process-num">01</span><h3 class="process-step-title">تشرفنا بالتواصل</h3></div>
+                <div class="process-step" data-aos="fade-up" data-aos-delay="180"><span class="process-num">02</span><h3 class="process-step-title">تسلمنا فكرة مشروعك</h3></div>
+                <div class="process-step" data-aos="fade-up" data-aos-delay="260"><span class="process-num">03</span><h3 class="process-step-title">الاستشارة</h3></div>
+                <div class="process-step" data-aos="fade-up" data-aos-delay="340"><span class="process-num">04</span><h3 class="process-step-title">السيناريو المصور</h3></div>
+                <div class="process-step" data-aos="fade-up" data-aos-delay="420"><span class="process-num">05</span><h3 class="process-step-title">التنفيذ</h3></div>
+                <div class="process-step" data-aos="fade-up" data-aos-delay="500"><span class="process-num">06</span><h3 class="process-step-title">التسليم النهائي</h3></div>
+            </div>
+        </div>
+    </section>
+
     <section id="portfolio" class="portfolio">
         <div class="container">
-            <h2 class="section-title text-center text-navy" data-aos="fade-up">معرض الأعمال</h2>
-            <div class="title-underline text-center-underline" data-aos="fade-up"></div>
+            <div class="section-eyebrow" data-aos="fade-up">
+                <span class="num">04</span><span class="bar"></span><span>أعمال مختارة</span>
+            </div>
+            <h2 class="section-title" data-aos="fade-up">أعمالنا</h2>
+            <div class="title-underline" data-aos="fade-up"></div>
 
-            <div class="portfolio-grid">
-                <!-- Portfolio Item -->
-                <a href="project-cars.html" class="portfolio-item" data-aos="zoom-in" data-aos-delay="100"
-                    style="display:block;">
-                    <img src="https://images.unsplash.com/photo-1492144534655-ae79c964c9d7?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
-                        alt="تصوير سيارات">
-                    <div class="portfolio-overlay">
-                        <h3 class="portfolio-title">حملة السيارات الرياضية</h3>
-                        <p class="portfolio-desc">تصوير ديناميكي عالي السرعة لإبراز الأداء.</p>
-                    </div>
-                </a>
+            <div class="portfolio-category">
+                <div class="portfolio-cat-header" data-aos="fade-up">
+                    <h3 class="portfolio-cat-title">تصوير سيارات</h3>
+                    <p class="portfolio-cat-desc">تصوير ديناميكي عالي السرعة يلتقط الأداء والشكل ودقة الهندسة. من التصوير السينمائي على المضمار إلى لقطات الاستوديو.</p>
+                </div>
+                <div class="portfolio-row">
+                <div class="portfolio-card" data-aos="fade-up" data-aos-delay="100">
+                    <img class="portfolio-card-img" src="https://images.unsplash.com/photo-1492144534655-ae79c964c9d7?w=800&q=80" alt="حملة سيارة رياضية">
+                    <div class="portfolio-card-play"><i class="fas fa-play"></i></div>
+                    <h4 class="portfolio-card-title">حملة سيارة رياضية</h4>
+                </div>
+                <div class="portfolio-card" data-aos="fade-up" data-aos-delay="180">
+                    <img class="portfolio-card-img" src="https://images.unsplash.com/photo-1553440569-bcc63803a83d?w=800&q=80" alt="يوم المضمار">
+                    <div class="portfolio-card-play"><i class="fas fa-play"></i></div>
+                    <h4 class="portfolio-card-title">يوم المضمار</h4>
+                </div>
+                <div class="portfolio-card" data-aos="fade-up" data-aos-delay="260">
+                    <img class="portfolio-card-img" src="https://images.unsplash.com/photo-1544636331-e26879cd4d9b?w=800&q=80" alt="سيدان فاخرة">
+                    <div class="portfolio-card-play"><i class="fas fa-play"></i></div>
+                    <h4 class="portfolio-card-title">سيدان فاخرة</h4>
+                </div>
+                <div class="portfolio-card" data-aos="fade-up" data-aos-delay="340">
+                    <img class="portfolio-card-img" src="https://images.unsplash.com/photo-1503376780353-7e6692767b70?w=800&q=80" alt="تفاصيل استوديو">
+                    <div class="portfolio-card-play"><i class="fas fa-play"></i></div>
+                    <h4 class="portfolio-card-title">تفاصيل استوديو</h4>
+                </div>
+                </div>
+                <div class="portfolio-cat-more">
+                    <a href="project-cars.html" class="btn btn-show-more">عرض المزيد</a>
+                </div>
+            </div>
 
-                <!-- Portfolio Item -->
-                <a href="project-restaurant.html" class="portfolio-item" data-aos="zoom-in" data-aos-delay="200"
-                    style="display:block;">
-                    <img src="https://images.unsplash.com/photo-1504674900247-0877df9cc836?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
-                        alt="تصوير مطاعم">
-                    <div class="portfolio-overlay">
-                        <h3 class="portfolio-title">مطعم الذواقة</h3>
-                        <p class="portfolio-desc">إبراز تفاصيل الأطباق الفاخرة بجودة تفوق الوصف.</p>
-                    </div>
-                </a>
+            <div class="portfolio-category">
+                <div class="portfolio-cat-header" data-aos="fade-up">
+                    <h3 class="portfolio-cat-title">طعام وضيافة</h3>
+                    <p class="portfolio-cat-desc">تصوير قوائم الطعام وأفلام أجواء المطاعم وقصص العلامات الغذائية. إضاءة دافئة وخافتة تجعل كل طبق بطلاً.</p>
+                </div>
+                <div class="portfolio-row">
+                <div class="portfolio-card" data-aos="fade-up" data-aos-delay="100">
+                    <img class="portfolio-card-img" src="https://images.unsplash.com/photo-1504674900247-0877df9cc836?w=800&q=80" alt="تقديم قورميه">
+                    <div class="portfolio-card-play"><i class="fas fa-play"></i></div>
+                    <h4 class="portfolio-card-title">تقديم قورميه</h4>
+                </div>
+                <div class="portfolio-card" data-aos="fade-up" data-aos-delay="180">
+                    <img class="portfolio-card-img" src="https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=800&q=80" alt="عشاء راقي">
+                    <div class="portfolio-card-play"><i class="fas fa-play"></i></div>
+                    <h4 class="portfolio-card-title">عشاء راقي</h4>
+                </div>
+                <div class="portfolio-card" data-aos="fade-up" data-aos-delay="260">
+                    <img class="portfolio-card-img" src="https://images.unsplash.com/photo-1498654896293-37aacf113fd9?w=800&q=80" alt="فطور فاخر">
+                    <div class="portfolio-card-play"><i class="fas fa-play"></i></div>
+                    <h4 class="portfolio-card-title">فطور فاخر</h4>
+                </div>
+                <div class="portfolio-card" data-aos="fade-up" data-aos-delay="340">
+                    <img class="portfolio-card-img" src="https://images.unsplash.com/photo-1559339352-11d035aa65de?w=800&q=80" alt="ثقافة القهوة">
+                    <div class="portfolio-card-play"><i class="fas fa-play"></i></div>
+                    <h4 class="portfolio-card-title">ثقافة القهوة</h4>
+                </div>
+                </div>
+                <div class="portfolio-cat-more">
+                    <a href="project-restaurant.html" class="btn btn-show-more">عرض المزيد</a>
+                </div>
+            </div>
 
-                <!-- Portfolio Item -->
-                <a href="project-residential.html" class="portfolio-item" data-aos="zoom-in" data-aos-delay="300"
-                    style="display:block;">
-                    <img src="https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
-                        alt="تصوير عقاري">
-                    <div class="portfolio-overlay">
-                        <h3 class="portfolio-title">مشروع الواحة السكني</h3>
-                        <p class="portfolio-desc">تغطية درون وتصوير داخلي للفلل الفاخرة.</p>
-                    </div>
-                </a>
+            <div class="portfolio-category">
+                <div class="portfolio-cat-header" data-aos="fade-up">
+                    <h3 class="portfolio-cat-title">عقاري</h3>
+                    <p class="portfolio-cat-desc">لقطات جوية بالدرون، جولات داخلية، وصور معمارية ثابتة للمشاريع الفاخرة والفلل والعقارات التجارية.</p>
+                </div>
+                <div class="portfolio-row">
+                <div class="portfolio-card" data-aos="fade-up" data-aos-delay="100">
+                    <img class="portfolio-card-img" src="https://images.unsplash.com/photo-1564013799919-ab600027ffc6?w=800&q=80" alt="فلل الواحة">
+                    <div class="portfolio-card-play"><i class="fas fa-play"></i></div>
+                    <h4 class="portfolio-card-title">فلل الواحة</h4>
+                </div>
+                <div class="portfolio-card" data-aos="fade-up" data-aos-delay="180">
+                    <img class="portfolio-card-img" src="https://images.unsplash.com/photo-1512917774080-9991f1c4c750?w=800&q=80" alt="واجهة فاخرة">
+                    <div class="portfolio-card-play"><i class="fas fa-play"></i></div>
+                    <h4 class="portfolio-card-title">واجهة فاخرة</h4>
+                </div>
+                <div class="portfolio-card" data-aos="fade-up" data-aos-delay="260">
+                    <img class="portfolio-card-img" src="https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?w=800&q=80" alt="معيشة داخلية">
+                    <div class="portfolio-card-play"><i class="fas fa-play"></i></div>
+                    <h4 class="portfolio-card-title">معيشة داخلية</h4>
+                </div>
+                <div class="portfolio-card" data-aos="fade-up" data-aos-delay="340">
+                    <img class="portfolio-card-img" src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=800&q=80" alt="مخطط جوي">
+                    <div class="portfolio-card-play"><i class="fas fa-play"></i></div>
+                    <h4 class="portfolio-card-title">مخطط جوي</h4>
+                </div>
+                </div>
+                <div class="portfolio-cat-more">
+                    <a href="project-residential.html" class="btn btn-show-more">عرض المزيد</a>
+                </div>
+            </div>
 
-                <!-- Portfolio Item -->
-                <a href="project-tech.html" class="portfolio-item" data-aos="zoom-in" data-aos-delay="400"
-                    style="display:block;">
-                    <img src="https://images.unsplash.com/photo-1540575467063-178a50c2df87?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
-                        alt="تغطية فعاليات">
-                    <div class="portfolio-overlay">
-                        <h3 class="portfolio-title">مؤتمر التقنية السنوي</h3>
-                        <p class="portfolio-desc">تغطية حية وإنتاج ملخص الحدث باحترافية.</p>
-                    </div>
-                </a>
+            <div class="portfolio-category">
+                <div class="portfolio-cat-header" data-aos="fade-up">
+                    <h3 class="portfolio-cat-title">فعاليات ومؤتمرات</h3>
+                    <p class="portfolio-cat-desc">تغطية حية بكاميرات متعددة، تغطية المتحدثين، لقاءات خلف الكواليس، وأفلام ملخصة في نفس اليوم للفعاليات المؤسسية والعامة.</p>
+                </div>
+                <div class="portfolio-row">
+                <div class="portfolio-card" data-aos="fade-up" data-aos-delay="100">
+                    <img class="portfolio-card-img" src="https://images.unsplash.com/photo-1540575467063-178a50c2df87?w=800&q=80" alt="قمة التقنية">
+                    <div class="portfolio-card-play"><i class="fas fa-play"></i></div>
+                    <h4 class="portfolio-card-title">قمة التقنية</h4>
+                </div>
+                <div class="portfolio-card" data-aos="fade-up" data-aos-delay="180">
+                    <img class="portfolio-card-img" src="https://images.unsplash.com/photo-1475721027785-f74dea327912?w=800&q=80" alt="المسرح الرئيسي">
+                    <div class="portfolio-card-play"><i class="fas fa-play"></i></div>
+                    <h4 class="portfolio-card-title">المسرح الرئيسي</h4>
+                </div>
+                <div class="portfolio-card" data-aos="fade-up" data-aos-delay="260">
+                    <img class="portfolio-card-img" src="https://images.unsplash.com/photo-1505373676645-3183501a30f3?w=800&q=80" alt="منطقة المعرض">
+                    <div class="portfolio-card-play"><i class="fas fa-play"></i></div>
+                    <h4 class="portfolio-card-title">منطقة المعرض</h4>
+                </div>
+                <div class="portfolio-card" data-aos="fade-up" data-aos-delay="340">
+                    <img class="portfolio-card-img" src="https://images.unsplash.com/photo-1531058020387-3be344556be6?w=800&q=80" alt="حفل المساء">
+                    <div class="portfolio-card-play"><i class="fas fa-play"></i></div>
+                    <h4 class="portfolio-card-title">حفل المساء</h4>
+                </div>
+                </div>
+                <div class="portfolio-cat-more">
+                    <a href="project-tech.html" class="btn btn-show-more">عرض المزيد</a>
+                </div>
+            </div>
 
-                <!-- Portfolio Item -->
-                <a href="project-perfume.html" class="portfolio-item" data-aos="zoom-in" data-aos-delay="500"
-                    style="display:block;">
-                    <img src="https://images.unsplash.com/photo-1583394838336-acd977736f90?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
-                        alt="تصوير منتجات">
-                    <div class="portfolio-overlay">
-                        <h3 class="portfolio-title">إطلاق عطر فاخر</h3>
-                        <p class="portfolio-desc">جلسة تصوير سينمائية تبرز فخامة المنتج وهويته.</p>
-                    </div>
-                </a>
+            <div class="portfolio-category">
+                <div class="portfolio-cat-header" data-aos="fade-up">
+                    <h3 class="portfolio-cat-title">تصوير منتجات</h3>
+                    <p class="portfolio-cat-desc">إطلاقات المنتجات الفاخرة، تركيبات الحياة الثابتة، وصور الحملات المصممة للطباعة والويب والسوشيال.</p>
+                </div>
+                <div class="portfolio-row">
+                <div class="portfolio-card" data-aos="fade-up" data-aos-delay="100">
+                    <img class="portfolio-card-img" src="https://images.unsplash.com/photo-1541643600914-78b084683601?w=800&q=80" alt="إطلاق عطر">
+                    <div class="portfolio-card-play"><i class="fas fa-play"></i></div>
+                    <h4 class="portfolio-card-title">إطلاق عطر</h4>
+                </div>
+                <div class="portfolio-card" data-aos="fade-up" data-aos-delay="180">
+                    <img class="portfolio-card-img" src="https://images.unsplash.com/photo-1523293182086-7651a899d37f?w=800&q=80" alt="تفاصيل العطر">
+                    <div class="portfolio-card-play"><i class="fas fa-play"></i></div>
+                    <h4 class="portfolio-card-title">تفاصيل العطر</h4>
+                </div>
+                <div class="portfolio-card" data-aos="fade-up" data-aos-delay="260">
+                    <img class="portfolio-card-img" src="https://images.unsplash.com/photo-1588405748880-12d1d2a59d75?w=800&q=80" alt="دراسة الزجاجة">
+                    <div class="portfolio-card-play"><i class="fas fa-play"></i></div>
+                    <h4 class="portfolio-card-title">دراسة الزجاجة</h4>
+                </div>
+                <div class="portfolio-card" data-aos="fade-up" data-aos-delay="340">
+                    <img class="portfolio-card-img" src="https://images.unsplash.com/photo-1592945403244-b3fbafd7f539?w=800&q=80" alt="التغليف">
+                    <div class="portfolio-card-play"><i class="fas fa-play"></i></div>
+                    <h4 class="portfolio-card-title">التغليف</h4>
+                </div>
+                </div>
+                <div class="portfolio-cat-more">
+                    <a href="project-perfume.html" class="btn btn-show-more">عرض المزيد</a>
+                </div>
+            </div>
 
-                <!-- Portfolio Item -->
-                <a href="project-fashion.html" class="portfolio-item" data-aos="zoom-in" data-aos-delay="600"
-                    style="display:block;">
-                    <img src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
-                        alt="تصوير نمط الحياة">
-                    <div class="portfolio-overlay">
-                        <h3 class="portfolio-title">إعلان أزياء</h3>
-                        <p class="portfolio-desc">إخراج فني وفيديو إعلاني للعلامات التجارية للأزياء.</p>
-                    </div>
-                </a>
+            <div class="portfolio-category">
+                <div class="portfolio-cat-header" data-aos="fade-up">
+                    <h3 class="portfolio-cat-title">أزياء وأسلوب حياة</h3>
+                    <p class="portfolio-cat-desc">حملات موسمية، إنتاج لوك بوك، وأفلام علامات تجارية للموضة. إخراج فني متكامل من الكاستنج حتى التدريج النهائي.</p>
+                </div>
+                <div class="portfolio-row">
+                <div class="portfolio-card" data-aos="fade-up" data-aos-delay="100">
+                    <img class="portfolio-card-img" src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?w=800&q=80" alt="فيلم الحملة">
+                    <div class="portfolio-card-play"><i class="fas fa-play"></i></div>
+                    <h4 class="portfolio-card-title">فيلم الحملة</h4>
+                </div>
+                <div class="portfolio-card" data-aos="fade-up" data-aos-delay="180">
+                    <img class="portfolio-card-img" src="https://images.unsplash.com/photo-1483985988355-763728e1935b?w=800&q=80" alt="ستايل الشارع">
+                    <div class="portfolio-card-play"><i class="fas fa-play"></i></div>
+                    <h4 class="portfolio-card-title">ستايل الشارع</h4>
+                </div>
+                <div class="portfolio-card" data-aos="fade-up" data-aos-delay="260">
+                    <img class="portfolio-card-img" src="https://images.unsplash.com/photo-1490481651871-ab68de25d43d?w=800&q=80" alt="إطلالة تحريرية">
+                    <div class="portfolio-card-play"><i class="fas fa-play"></i></div>
+                    <h4 class="portfolio-card-title">إطلالة تحريرية</h4>
+                </div>
+                <div class="portfolio-card" data-aos="fade-up" data-aos-delay="340">
+                    <img class="portfolio-card-img" src="https://images.unsplash.com/photo-1490481651871-ab68de25d43d?w=800&q=80" alt="خلف العدسة">
+                    <div class="portfolio-card-play"><i class="fas fa-play"></i></div>
+                    <h4 class="portfolio-card-title">خلف العدسة</h4>
+                </div>
+                </div>
+                <div class="portfolio-cat-more">
+                    <a href="project-fashion.html" class="btn btn-show-more">عرض المزيد</a>
+                </div>
             </div>
         </div>
     </section>
 
-    <!-- Testimonials Section -->
     <section id="testimonials" class="testimonials">
         <div class="testimonials-pattern"></div>
         <div class="container relative-z">
-            <h2 class="section-title text-center text-beige" data-aos="fade-up">نتائج عملائنا</h2>
-            <div class="title-underline text-center-underline bg-beige" data-aos="fade-up"></div>
-
+            <div class="section-eyebrow" data-aos="fade-up">
+                <span class="num">05</span><span class="bar"></span><span>نتائج عملائنا</span>
+            </div>
+            <h2 class="section-title" data-aos="fade-up">ماذا قالوا عنا</h2>
+            <div class="title-underline" data-aos="fade-up"></div>
             <div class="testimonials-grid">
-                <!-- Testimonial 1 -->
                 <div class="testimonial-card" data-aos="fade-up" data-aos-delay="100">
-                    <div class="stars">
-                        <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i
-                            class="fas fa-star"></i><i class="fas fa-star"></i>
-                    </div>
-                    <p class="quote">"فريق شوتيكس نقل هويتنا لمستوى آخر. جودة تصوير الأطباق والفيديو الإعلاني ساهمت في
-                        زيادة المبيعات بشكل ملحوظ. احترافية عالية وتسليم في الوقت المحدد."</p>
-                    <div class="client-info">
-                        <div class="client-details">
-                            <h4 class="client-name">أحمد خالد</h4>
-                            <span class="client-role">مالك سلسلة مطاعم</span>
-                        </div>
-                    </div>
+                    <div class="stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
+                    <p class="quote">فريق شوتيكس نقل هويتنا إلى مستوى آخر. جودة تصوير الأطباق والفيديو الترويجي زادت من مبيعاتنا بشكل ملحوظ. احترافية عالية والتسليم في الوقت المحدد.</p>
+                    <div class="client-info"><div class="client-details"><h4 class="client-name">أحمد خالد</h4><span class="client-role">صاحب مطعم</span></div></div>
                 </div>
-
-                <!-- Testimonial 2 -->
                 <div class="testimonial-card" data-aos="fade-up" data-aos-delay="200">
-                    <div class="stars">
-                        <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i
-                            class="fas fa-star"></i><i class="fas fa-star"></i>
-                    </div>
-                    <p class="quote">"التغطية بدرون لمشاريعنا العقارية كانت مبهرة. اللقطات السينمائية أظهرت الفخامة التي
-                        كنا نبحث عنها. شوتيكس هم شركاء النجاح بالنسبة لنا."</p>
-                    <div class="client-info">
-                        <div class="client-details">
-                            <h4 class="client-name">م. فهد عبدالله</h4>
-                            <span class="client-role">مطور عقاري</span>
-                        </div>
-                    </div>
+                    <div class="stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
+                    <p class="quote">لقطات الدرون واللقطات السينمائية أظهرت الفخامة التي كنا نبحث عنها. شوتيكس هم شركاء النجاح بالنسبة لنا.</p>
+                    <div class="client-info"><div class="client-details"><h4 class="client-name">م. فهد عبدالله</h4><span class="client-role">مطور عقاري</span></div></div>
                 </div>
-
-                <!-- Testimonial 3 -->
                 <div class="testimonial-card" data-aos="fade-up" data-aos-delay="300">
-                    <div class="stars">
-                        <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i
-                            class="fas fa-star"></i><i class="fas fa-star"></i>
-                    </div>
-                    <p class="quote">"مرونة في التعامل، فهم سريع للمتطلبات، وإخراج فني يفوق التوقعات. تعاملنا معهم في
-                        حملة إطلاق المنتج وكانت النتائج مذهلة على منصات التواصل."</p>
-                    <div class="client-info">
-                        <div class="client-details">
-                            <h4 class="client-name">سارة محمد</h4>
-                            <span class="client-role">مديرة تسويق</span>
-                        </div>
-                    </div>
+                    <div class="stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
+                    <p class="quote">مرونة في التعامل، فهم سريع للمتطلبات، وإخراج فني يفوق التوقعات. تعاملنا معهم في حملة إطلاق المنتج وكانت النتائج مذهلة على منصات التواصل.</p>
+                    <div class="client-info"><div class="client-details"><h4 class="client-name">سارة محمد</h4><span class="client-role">مديرة تسويق</span></div></div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Contact Section -->
     <section id="contact" class="contact">
         <div class="container">
-            <div class="contact-wrapper" data-aos="zoom-in" data-aos-duration="1000">
+            <div class="section-eyebrow" data-aos="fade-up">
+                <span class="num">06</span><span class="bar"></span><span>تواصل معنا</span>
+            </div>
+            <div class="contact-wrapper" data-aos="fade-up" data-aos-duration="1000">
                 <div class="contact-header text-center">
-                    <h2 class="section-title text-navy">اطلب عرض سعر</h2>
-                    <p class="contact-subtitle">خطوتك الأولى نحو إنتاج بصري يليق بعلامتك التجارية</p>
+                    <h2 class="section-title">اطلب عرض سعر</h2>
+                    <p class="contact-subtitle">خطوتك الأولى نحو إنتاج بصري يليق بعلامتك التجارية.</p>
                 </div>
-
-                <form action="https://formsubmit.co/shootix.sa@gmail.com" method="POST" class="contact-form"
-                    id="contactForm">
-                    <!-- FormSubmit Configuration -->
+                <form action="https://formsubmit.co/shootix.sa@gmail.com" method="POST" class="contact-form" id="contactForm">
                     <input type="hidden" name="_subject" value="طلب عرض سعر جديد من موقع شوتيكس">
                     <input type="hidden" name="_captcha" value="false">
                     <input type="hidden" name="_template" value="table">
-                    <!-- You can set your success page here, if not it goes to default -->
-                    <!-- <input type="hidden" name="_next" value="https://yourwebsite.com/thanks.html"> -->
-
                     <div class="form-row">
-                        <div class="form-group">
-                            <label for="name">الاسم الكريم *</label>
-                            <input type="text" id="name" name="name" required placeholder="أدخل اسمك">
-                        </div>
-                        <div class="form-group">
-                            <label for="phone">رقم الجوال *</label>
-                            <input type="tel" id="phone" name="phone" required placeholder="05xxxxxxxx">
-                        </div>
+                        <div class="form-group"><label for="name">الاسم الكريم *</label><input type="text" id="name" name="name" required placeholder="أدخل اسمك"></div>
+                        <div class="form-group"><label for="phone">رقم الجوال *</label><input type="tel" id="phone" name="phone" required placeholder="رقم الجوال"></div>
                     </div>
-
                     <div class="form-row">
-                        <div class="form-group">
-                            <label for="email">البريد الإلكتروني</label>
-                            <input type="email" id="email" name="email" placeholder="example@domain.com">
-                        </div>
-                        <div class="form-group">
-                            <label for="city">المدينة</label>
-                            <input type="text" id="city" name="city" placeholder="الرياض، جدة، الخ">
-                        </div>
+                        <div class="form-group"><label for="email">البريد الإلكتروني</label><input type="email" id="email" name="email" placeholder="example@domain.com"></div>
+                        <div class="form-group"><label for="city">المدينة</label><input type="text" id="city" name="city" placeholder="الرياض، جدة، إلخ"></div>
                     </div>
-
                     <div class="form-row">
-                        <div class="form-group">
-                            <label for="project-type">نوع المشروع *</label>
-                            <select id="project-type" name="project_type" required>
-                                <option value="" disabled selected>اختر النوع...</option>
-                                <option value="photography">تصوير فوتوغرافي</option>
-                                <option value="video">إنتاج فيديو</option>
-                                <option value="drone">تصوير درون</option>
-                                <option value="editing">مونتاج مستمر</option>
-                                <option value="full_package">باقة متكاملة</option>
-                            </select>
-                        </div>
-                        <div class="form-group">
-                            <label for="budget">الميزانية التقريبية</label>
-                            <select id="budget" name="budget">
-                                <option value="" disabled selected>اختر الميزانية...</option>
-                                <option value="under_5000">أقل من 5,000 ريال</option>
-                                <option value="5000_15000">5,000 - 15,000 ريال</option>
-                                <option value="15000_50000">15,000 - 50,000 ريال</option>
-                                <option value="above_50000">+ 50,000 ريال</option>
-                            </select>
-                        </div>
+                        <div class="form-group"><label for="service">نوع الخدمة</label><select id="service" name="service"><option value="">-- اختر الخدمة --</option>
+<option value="photography">تصوير فوتوغرافي</option>
+<option value="video">إنتاج فيديو</option>
+<option value="drone">تصوير درون</option>
+<option value="editing">مونتاج</option>
+<option value="content">صناعة محتوى</option>
+<option value="website">تصميم موقع</option></select></div>
+                        <div class="form-group"><label for="budget">الميزانية التقديرية</label><select id="budget" name="budget"><option value="">-- اختر الميزانية --</option>
+<option value="<10k">أقل من 10,000 ريال</option>
+<option value="10-30k">10,000 – 30,000 ريال</option>
+<option value="30-70k">30,000 – 70,000 ريال</option>
+<option value="70k+">أكثر من 70,000 ريال</option></select></div>
                     </div>
-
-                    <div class="form-group">
-                        <label for="target-date">التاريخ المقترح للتنفيذ</label>
-                        <input type="date" id="target-date" name="target_date">
-                    </div>
-
-                    <div class="form-group">
-                        <label for="details">تفاصيل إضافية عن المشروع</label>
-                        <textarea id="details" name="details" rows="5"
-                            placeholder="أخبرنا المزيد عن رؤيتك والمخرجات المطلوبة..."></textarea>
-                    </div>
-
-                    <button type="submit" class="btn btn-primary submit-btn">إرسال الطلب <i
-                            class="fas fa-paper-plane"></i></button>
+                    <div class="form-group"><label for="message">أخبرنا عن مشروعك</label><textarea id="message" name="message" rows="4" placeholder="وصف مختصر لرؤيتك وأهدافك..."></textarea></div>
+                    <button type="submit" class="btn btn-primary"><i class="fas fa-paper-plane btn-icon"></i> إرسال الطلب</button>
                 </form>
             </div>
         </div>
     </section>
 
-    <!-- Footer -->
     <footer class="footer">
         <div class="container footer-content">
-            <div class="footer-logo">
-                <img src="assets/photo-output.PNG" alt="ShootiX Logo">
-            </div>
-
+            <div class="footer-logo"><img src="assets/photo-output.PNG" alt="ShootiX Logo"></div>
             <div class="footer-social">
                 <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
                 <a href="#" aria-label="TikTok"><i class="fab fa-tiktok"></i></a>
                 <a href="https://wa.me/966537614446" aria-label="WhatsApp"><i class="fab fa-whatsapp"></i></a>
             </div>
         </div>
-        <div class="footer-bottom">
-            <p>&copy; 2024 شوتيكس للإنتاج البصري. جميع الحقوق محفوظة.</p>
-        </div>
+        <div class="footer-bottom"><p>&copy; 2024 شوتيكس للإنتاج البصري. جميع الحقوق محفوظة.</p></div>
     </footer>
 
-    <!-- AOS Script -->
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
-    <!-- Custom Script -->
     <script src="script.js"></script>
 </body>
-
 </html>

@@ -1,59 +1,26 @@
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ShootiX | Visual Production</title>
-
-    <!-- SEO Meta Tags -->
-    <meta name="description"
-        content="ShootiX.. We don't just shoot, we create impact. We turn your vision into a cinematic scene that lasts in memory. Experts in visual content production for leading brands.">
-    <meta name="keywords"
-        content="video production, photography, drone shooting, editing, Saudi Arabia, ShootiX, visual production">
+    <meta name="description" content="ShootiX.. We don't just shoot, we create impact. We turn your vision into a cinematic scene that lasts in memory.">
     <meta name="author" content="ShootiX">
-
-    <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link
-        href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700;800&family=Montserrat:wght@400;600;700&display=swap"
-        rel="stylesheet">
-
-    <!-- Font Awesome for Icons -->
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700;800&family=Montserrat:wght@300;400;500;600;700&family=Lora:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-
-    <!-- AOS Animation Library -->
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
-
-    <!-- Custom CSS -->
     <link rel="stylesheet" href="style.css">
-
-    <!-- English overrides specific to en.html -->
-    <style>
-        body {
-            font-family: 'Montserrat', 'Cairo', sans-serif;
-        }
-    </style>
+    <style>body{font-family:'Montserrat','Cairo',sans-serif}</style>
 </head>
-
 <body>
 
-    <!-- Floating WhatsApp Button -->
-    <a href="https://wa.me/966537614446" class="floating-wa" target="_blank" rel="noopener noreferrer"
-        aria-label="Contact us via WhatsApp">
-        <i class="fab fa-whatsapp"></i>
-    </a>
+    <a href="https://wa.me/966537614446" class="floating-wa" target="_blank" rel="noopener noreferrer"><i class="fab fa-whatsapp"></i></a>
 
-    <!-- Navbar -->
     <nav class="navbar" id="navbar">
         <div class="nav-container">
-            <div class="logo">
-                <a href="#hero">
-                    <img src="assets/photo-output.PNG" alt="ShootiX Logo" id="nav-logo">
-                </a>
-            </div>
-
+            <div class="logo"><a href="#hero"><img src="assets/photo-output.PNG" alt="ShootiX Logo" id="nav-logo"></a></div>
             <div class="nav-links">
                 <a href="#hero" class="active">Home</a>
                 <a href="#about">About</a>
@@ -62,427 +29,436 @@
                 <a href="#testimonials">Clients</a>
                 <a href="index.html" class="lang-switch text-gold"><i class="fas fa-globe"></i> AR</a>
             </div>
-
-            <div class="nav-cta">
-                <a href="#contact" class="btn btn-primary">Get a Quote</a>
-            </div>
-
+            <div class="nav-cta"><a href="#contact" class="btn btn-primary">Get a Quote</a></div>
             <div class="mobile-actions">
-                <a href="index.html" class="lang-switch text-navy"><i class="fas fa-globe"></i> AR</a>
-                <div class="mobile-menu-btn">
-                    <i class="fas fa-bars"></i>
-                </div>
+                <a href="index.html" class="lang-switch"><i class="fas fa-globe"></i> AR</a>
+                <div class="mobile-menu-btn"><i class="fas fa-bars"></i></div>
             </div>
         </div>
     </nav>
 
-    <!-- Hero Section -->
     <section id="hero" class="hero">
         <div class="video-background">
-            <!-- Using a high quality stock video placeholder -->
             <video autoplay muted loop playsinline id="hero-video">
-                <source
-                    src="https://cdn.pixabay.com/vimeo/328841441/car-22879.mp4?width=1280&hash=8b5fb9cbabfd2f75a024bfeab3d6fcf4aeea74db"
-                    type="video/mp4">
+                <source src="https://cdn.pixabay.com/vimeo/328841441/car-22879.mp4?width=1280&hash=8b5fb9cbabfd2f75a024bfeab3d6fcf4aeea74db" type="video/mp4">
             </video>
             <div class="video-overlay"></div>
         </div>
-
         <div class="hero-content" data-aos="fade-up" data-aos-duration="1000">
-            <h1 class="hero-title">ShootiX..<br><span class="highlight">We Don't Just Shoot, We Create Impact</span>
-            </h1>
-            <p class="hero-subtitle">We turn your vision into a cinematic scene that lasts in memory. Experts in visual
-                content production for leading brands.</p>
+            <span class="hero-kicker">Visual Production Studio — Saudi Arabia</span>
+            <h1 class="hero-title">ShootiX.<br><span class="highlight">We don't just shoot,<br>we create impact.</span></h1>
+            <p class="hero-subtitle">We turn your vision into a cinematic scene that lasts in memory. Experts in visual content production for leading brands.</p>
             <div class="hero-buttons">
                 <a href="#contact" class="btn btn-primary-light">Get a Quote</a>
-                <a href="#portfolio" class="btn btn-outline-light">
-                    <i class="fas fa-play-circle btn-icon"></i> Portfolio
-                </a>
+                <a href="#portfolio" class="btn btn-outline-light"><i class="fas fa-play-circle btn-icon"></i> Portfolio</a>
             </div>
         </div>
-
-        <div class="scroll-indicator">
-            <div class="mouse">
-                <div class="wheel"></div>
-            </div>
-        </div>
+        <div class="scroll-indicator"><div class="mouse"><div class="wheel"></div></div></div>
     </section>
 
-    <!-- About Us Section -->
     <section id="about" class="about overlay-section">
-        <div class="container layout-2-col">
-            <div class="about-text" data-aos="fade-right" data-aos-duration="1000">
-                <h2 class="section-title">We craft scenes that express your identity and leave a lasting impact.</h2>
-                <div class="title-underline"></div>
-                <p>At <strong>ShootiX</strong>, we don't just capture photos; we tell your visual story with passion.
-                    Our 100% Saudi team combines artistic creativity with technical expertise to deliver exceptional
-                    results.</p>
-                <p>Whether you manage a leading brand, a luxury real estate project, or a restaurant looking to stand
-                    out, we offer photography, video production, drone operations, and professional editing services
-                    that elevate your brand to new horizons.</p>
-
-                <div class="stats-container">
-                    <div class="stat-item">
-                        <span class="stat-number">100%</span>
-                        <span class="stat-label">Saudi Team</span>
-                    </div>
-                    <div class="stat-item">
-                        <span class="stat-number">+50</span>
-                        <span class="stat-label">Happy Clients</span>
-                    </div>
-                    <div class="stat-item">
-                        <span class="stat-number">+200</span>
-                        <span class="stat-label">Projects Done</span>
+        <div class="container">
+            <div class="section-eyebrow" data-aos="fade-up">
+                <span class="num">01</span><span class="bar"></span><span>About the Studio</span>
+            </div>
+            <div class="layout-2-col">
+                <div class="about-text" data-aos="fade-up" data-aos-duration="1000">
+                    <h2 class="section-title">We craft scenes that express your identity and leave a <em>lasting impact.</em></h2>
+                    <div class="title-underline"></div>
+                    <p>At <strong>ShootiX</strong>, we don't just capture photos; we tell your visual story with passion. Our 100% Saudi team combines artistic creativity with technical expertise to deliver exceptional results.</p>
+                    <p>Whether you manage a leading brand, a luxury real estate project, or a restaurant looking to stand out, we offer photography, video production, drone operations, and professional editing services that elevate your brand to new horizons.</p>
+                    <div class="stats-container">
+                        <div class="stat-item"><span class="stat-number">100%</span><span class="stat-label">Saudi Team</span></div>
+                        <div class="stat-item"><span class="stat-number">+50</span><span class="stat-label">Happy Clients</span></div>
+                        <div class="stat-item"><span class="stat-number">+200</span><span class="stat-label">Projects Done</span></div>
                     </div>
                 </div>
-            </div>
-
-            <div class="about-image" data-aos="fade-left" data-aos-duration="1000">
-                <div class="image-glow"></div>
-                <!-- Using a high quality placeholder for behind the scenes -->
-                <img src="https://images.pexels.com/photos/2510428/pexels-photo-2510428.jpeg?auto=compress&cs=tinysrgb&w=800"
-                    alt="ShootiX Behind the Scenes" class="rounded-image">
+                <div class="about-image" data-aos="fade-up" data-aos-delay="200" data-aos-duration="1000">
+                    <div class="image-glow"></div>
+                    <img src="https://images.pexels.com/photos/2510428/pexels-photo-2510428.jpeg?auto=compress&cs=tinysrgb&w=800" alt="ShootiX Behind the Scenes" class="rounded-image">
+                </div>
             </div>
         </div>
     </section>
 
-    <!-- Services Section (Timeline Layout) -->
     <section id="services" class="services">
         <div class="container">
-            <h2 class="section-title text-center text-beige" data-aos="fade-up">Our Services</h2>
-            <div class="title-underline text-center-underline bg-beige" data-aos="fade-up"></div>
-
+            <div class="section-eyebrow" data-aos="fade-up">
+                <span class="num">02</span><span class="bar"></span><span>What We Offer</span>
+            </div>
+            <h2 class="section-title text-center" data-aos="fade-up">Our Services</h2>
+            <div class="title-underline text-center-underline" data-aos="fade-up"></div>
             <div class="timeline">
                 <div class="timeline-line"></div>
 
-                <!-- Service 1 -->
-                <div class="timeline-item left" data-aos="fade-right" data-aos-duration="800">
+                <div class="timeline-item left" data-aos="fade-left" data-aos-duration="800">
                     <div class="timeline-dot"></div>
                     <div class="timeline-content">
-                        <div class="service-icon">
-                            <i class="fas fa-camera"></i>
-                        </div>
+                        <div class="service-icon"><i class="fas fa-camera"></i></div>
                         <h3 class="service-title">Photography</h3>
-                        <p class="service-desc">Professional shots highlighting the finest details and showcasing the
-                            beauty of your products.</p>
-                        <span class="service-badge">Ideal for: Products, Restaurants, Real Estate</span>
+                        <p class="service-desc">Professional shots that highlight the finest details and present your products and work in the best light.</p>
+                        <span class="service-badge">Ideal for: Products, Events, Portraits</span>
                     </div>
                 </div>
 
-                <!-- Service 2 -->
-                <div class="timeline-item right" data-aos="fade-left" data-aos-duration="800">
+                <div class="timeline-item right" data-aos="fade-right" data-aos-duration="800">
                     <div class="timeline-dot"></div>
                     <div class="timeline-content">
-                        <div class="service-icon">
-                            <i class="fas fa-video"></i>
-                        </div>
+                        <div class="service-icon"><i class="fas fa-video"></i></div>
                         <h3 class="service-title">Video Production</h3>
-                        <p class="service-desc">Creating cinematic ad films that catch the eye and powerfully tell your
-                            brand's story.</p>
-                        <span class="service-badge">Ideal for: Ads, Coverage, Identity</span>
+                        <p class="service-desc">Cinematic visual content to tell your story and connect with your audience — from concept to delivery.</p>
+                        <span class="service-badge">Ideal for: Ads, Brand Films, Documentaries</span>
                     </div>
                 </div>
 
-                <!-- Service 3 -->
-                <div class="timeline-item left" data-aos="fade-right" data-aos-duration="800">
+                <div class="timeline-item left" data-aos="fade-left" data-aos-duration="800">
                     <div class="timeline-dot"></div>
                     <div class="timeline-content">
-                        <div class="service-icon">
-                            <i class="fas fa-helicopter"></i>
-                        </div>
-                        <h3 class="service-title">Drone Operations</h3>
-                        <p class="service-desc">Stunning aerial angles offering a new dimension to your projects using
-                            the latest drones.</p>
-                        <span class="service-badge">Ideal for: Real Estate, Major Events</span>
+                        <div class="service-icon"><i class="fas fa-helicopter"></i></div>
+                        <h3 class="service-title">Drone Shooting</h3>
+                        <p class="service-desc">Breathtaking aerial perspectives that reveal the full scale of your project with cinematic grandeur.</p>
+                        <span class="service-badge">Ideal for: Real Estate, Events, Tourism</span>
                     </div>
                 </div>
 
-                <!-- Service 4 -->
-                <div class="timeline-item right" data-aos="fade-left" data-aos-duration="800">
+                <div class="timeline-item right" data-aos="fade-right" data-aos-duration="800">
                     <div class="timeline-dot"></div>
                     <div class="timeline-content">
-                        <div class="service-icon">
-                            <i class="fas fa-film"></i>
-                        </div>
-                        <h3 class="service-title">Professional Editing</h3>
-                        <p class="service-desc">Editing, coloring, and merging scenes to produce a highly impactful
-                            final visual product.</p>
-                        <span class="service-badge">Ideal for: Content Creators, Corporations</span>
+                        <div class="service-icon"><i class="fas fa-film"></i></div>
+                        <h3 class="service-title">Editing & Montage</h3>
+                        <p class="service-desc">Precise editing, color grading, and sound design that turn raw footage into a polished final piece.</p>
+                        <span class="service-badge">Ideal for: Ads, Documentaries</span>
                     </div>
                 </div>
 
-                <!-- Service 5 -->
-                <div class="timeline-item left" data-aos="fade-right" data-aos-duration="800">
+                <div class="timeline-item left" data-aos="fade-left" data-aos-duration="800">
                     <div class="timeline-dot"></div>
                     <div class="timeline-content">
-                        <div class="service-icon">
-                            <i class="fas fa-microphone-alt"></i>
-                        </div>
-                        <h3 class="service-title">Voiceover</h3>
-                        <p class="service-desc">Professional voices and sound effects that breathe life into the final
-                            cinematic picture.</p>
-                        <span class="service-badge">Ideal for: Commercials, Documentaries</span>
+                        <div class="service-icon"><i class="fas fa-pen-nib"></i></div>
+                        <h3 class="service-title">Content Creation</h3>
+                        <p class="service-desc">A full content strategy — from ideation to execution — crafted to match your brand's tone and audience.</p>
+                        <span class="service-badge">Ideal for: Social Media, Campaigns</span>
                     </div>
                 </div>
 
-                <!-- Service 6 -->
-                <div class="timeline-item right" data-aos="fade-left" data-aos-duration="800">
+                <div class="timeline-item right" data-aos="fade-right" data-aos-duration="800">
                     <div class="timeline-dot"></div>
                     <div class="timeline-content">
-                        <div class="service-icon">
-                            <i class="fas fa-laptop-code"></i>
-                        </div>
+                        <div class="service-icon"><i class="fas fa-laptop-code"></i></div>
                         <h3 class="service-title">Website Creation</h3>
-                        <p class="service-desc">Building modern and attractive websites that reflect your brand identity
-                            and increase customer engagement.</p>
+                        <p class="service-desc">Modern, attractive websites that reflect your brand identity and increase customer engagement.</p>
                         <span class="service-badge">Ideal for: Brands, Corporations, E-commerce</span>
                     </div>
                 </div>
-
             </div>
         </div>
     </section>
 
-    <!-- Portfolio Section -->
+    <!-- Journey / Process -->
+    <section id="journey" class="process-section">
+        <div class="container">
+            <div class="section-eyebrow" data-aos="fade-up">
+                <span class="num">03</span><span class="bar"></span><span>How We Work</span>
+            </div>
+            <h2 class="section-title text-center" data-aos="fade-up">Your Journey With Us</h2>
+            <div class="title-underline text-center-underline" data-aos="fade-up"></div>
+            <div class="process-grid">
+                <div class="process-step" data-aos="fade-up" data-aos-delay="100"><span class="process-num">01</span><h3 class="process-step-title">Initial Contact</h3></div>
+                <div class="process-step" data-aos="fade-up" data-aos-delay="180"><span class="process-num">02</span><h3 class="process-step-title">Concept Delivery</h3></div>
+                <div class="process-step" data-aos="fade-up" data-aos-delay="260"><span class="process-num">03</span><h3 class="process-step-title">Consultation</h3></div>
+                <div class="process-step" data-aos="fade-up" data-aos-delay="340"><span class="process-num">04</span><h3 class="process-step-title">Storyboarding</h3></div>
+                <div class="process-step" data-aos="fade-up" data-aos-delay="420"><span class="process-num">05</span><h3 class="process-step-title">Execution</h3></div>
+                <div class="process-step" data-aos="fade-up" data-aos-delay="500"><span class="process-num">06</span><h3 class="process-step-title">Final Delivery</h3></div>
+            </div>
+        </div>
+    </section>
+
     <section id="portfolio" class="portfolio">
         <div class="container">
-            <h2 class="section-title text-center text-navy" data-aos="fade-up">Portfolio</h2>
-            <div class="title-underline text-center-underline" data-aos="fade-up"></div>
+            <div class="section-eyebrow" data-aos="fade-up">
+                <span class="num">04</span><span class="bar"></span><span>Selected Work</span>
+            </div>
+            <h2 class="section-title" data-aos="fade-up">Portfolio</h2>
+            <div class="title-underline" data-aos="fade-up"></div>
 
-            <div class="portfolio-grid">
-                <!-- Portfolio Item 1: Cars -->
-                <a href="project-cars-en.html" class="portfolio-item" data-aos="zoom-in" data-aos-delay="100"
-                    style="display:block;">
-                    <img src="https://images.unsplash.com/photo-1492144534655-ae79c964c9d7?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
-                        alt="Cars Photography">
-                    <div class="portfolio-overlay">
-                        <h3 class="portfolio-title">Sports Car Campaign</h3>
-                        <p class="portfolio-desc">High-speed dynamic shooting to showcase performance.</p>
-                    </div>
-                </a>
+            <div class="portfolio-category">
+                <div class="portfolio-cat-header" data-aos="fade-up">
+                    <h3 class="portfolio-cat-title">Automotive</h3>
+                    <p class="portfolio-cat-desc">High-speed dynamic shooting that captures performance, form, and engineering precision. From track-side cinematography to studio product shots.</p>
+                </div>
+                <div class="portfolio-row">
+                <div class="portfolio-card" data-aos="fade-up" data-aos-delay="100">
+                    <img class="portfolio-card-img" src="https://images.unsplash.com/photo-1492144534655-ae79c964c9d7?w=800&q=80" alt="Sports Car Campaign">
+                    <div class="portfolio-card-play"><i class="fas fa-play"></i></div>
+                    <h4 class="portfolio-card-title">Sports Car Campaign</h4>
+                </div>
+                <div class="portfolio-card" data-aos="fade-up" data-aos-delay="180">
+                    <img class="portfolio-card-img" src="https://images.unsplash.com/photo-1553440569-bcc63803a83d?w=800&q=80" alt="Track Day Shoot">
+                    <div class="portfolio-card-play"><i class="fas fa-play"></i></div>
+                    <h4 class="portfolio-card-title">Track Day Shoot</h4>
+                </div>
+                <div class="portfolio-card" data-aos="fade-up" data-aos-delay="260">
+                    <img class="portfolio-card-img" src="https://images.unsplash.com/photo-1544636331-e26879cd4d9b?w=800&q=80" alt="Luxury Sedan">
+                    <div class="portfolio-card-play"><i class="fas fa-play"></i></div>
+                    <h4 class="portfolio-card-title">Luxury Sedan</h4>
+                </div>
+                <div class="portfolio-card" data-aos="fade-up" data-aos-delay="340">
+                    <img class="portfolio-card-img" src="https://images.unsplash.com/photo-1503376780353-7e6692767b70?w=800&q=80" alt="Studio Detail">
+                    <div class="portfolio-card-play"><i class="fas fa-play"></i></div>
+                    <h4 class="portfolio-card-title">Studio Detail</h4>
+                </div>
+                </div>
+                <div class="portfolio-cat-more">
+                    <a href="project-cars-en.html" class="btn btn-show-more">Show More</a>
+                </div>
+            </div>
 
-                <!-- Portfolio Item 2: Restaurants -->
-                <a href="project-restaurant-en.html" class="portfolio-item" data-aos="zoom-in" data-aos-delay="200"
-                    style="display:block;">
-                    <img src="https://images.unsplash.com/photo-1504674900247-0877df9cc836?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
-                        alt="Restaurant Photography">
-                    <div class="portfolio-overlay">
-                        <h3 class="portfolio-title">Gourmet Restaurant</h3>
-                        <p class="portfolio-desc">Highlighting fine dining dishes with incredible quality.</p>
-                    </div>
-                </a>
+            <div class="portfolio-category">
+                <div class="portfolio-cat-header" data-aos="fade-up">
+                    <h3 class="portfolio-cat-title">Food & Hospitality</h3>
+                    <p class="portfolio-cat-desc">Menu photography, restaurant ambiance films, and culinary brand stories. Warm, low-key lighting that makes every dish the hero.</p>
+                </div>
+                <div class="portfolio-row">
+                <div class="portfolio-card" data-aos="fade-up" data-aos-delay="100">
+                    <img class="portfolio-card-img" src="https://images.unsplash.com/photo-1504674900247-0877df9cc836?w=800&q=80" alt="Gourmet Plating">
+                    <div class="portfolio-card-play"><i class="fas fa-play"></i></div>
+                    <h4 class="portfolio-card-title">Gourmet Plating</h4>
+                </div>
+                <div class="portfolio-card" data-aos="fade-up" data-aos-delay="180">
+                    <img class="portfolio-card-img" src="https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=800&q=80" alt="Fine Dining">
+                    <div class="portfolio-card-play"><i class="fas fa-play"></i></div>
+                    <h4 class="portfolio-card-title">Fine Dining</h4>
+                </div>
+                <div class="portfolio-card" data-aos="fade-up" data-aos-delay="260">
+                    <img class="portfolio-card-img" src="https://images.unsplash.com/photo-1498654896293-37aacf113fd9?w=800&q=80" alt="Brunch Spread">
+                    <div class="portfolio-card-play"><i class="fas fa-play"></i></div>
+                    <h4 class="portfolio-card-title">Brunch Spread</h4>
+                </div>
+                <div class="portfolio-card" data-aos="fade-up" data-aos-delay="340">
+                    <img class="portfolio-card-img" src="https://images.unsplash.com/photo-1559339352-11d035aa65de?w=800&q=80" alt="Coffee Culture">
+                    <div class="portfolio-card-play"><i class="fas fa-play"></i></div>
+                    <h4 class="portfolio-card-title">Coffee Culture</h4>
+                </div>
+                </div>
+                <div class="portfolio-cat-more">
+                    <a href="project-restaurant-en.html" class="btn btn-show-more">Show More</a>
+                </div>
+            </div>
 
-                <!-- Portfolio Item 3: Real Estate -->
-                <a href="project-residential-en.html" class="portfolio-item" data-aos="zoom-in" data-aos-delay="300"
-                    style="display:block;">
-                    <img src="https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
-                        alt="Real Estate Photography">
-                    <div class="portfolio-overlay">
-                        <h3 class="portfolio-title">Al Waha Residential</h3>
-                        <p class="portfolio-desc">Drone coverage and interior photography for luxury villas.</p>
-                    </div>
-                </a>
+            <div class="portfolio-category">
+                <div class="portfolio-cat-header" data-aos="fade-up">
+                    <h3 class="portfolio-cat-title">Real Estate</h3>
+                    <p class="portfolio-cat-desc">Aerial drone footage, interior walk-throughs, and architectural stills for luxury developments, villas, and commercial properties.</p>
+                </div>
+                <div class="portfolio-row">
+                <div class="portfolio-card" data-aos="fade-up" data-aos-delay="100">
+                    <img class="portfolio-card-img" src="https://images.unsplash.com/photo-1564013799919-ab600027ffc6?w=800&q=80" alt="Al-Waha Villas">
+                    <div class="portfolio-card-play"><i class="fas fa-play"></i></div>
+                    <h4 class="portfolio-card-title">Al-Waha Villas</h4>
+                </div>
+                <div class="portfolio-card" data-aos="fade-up" data-aos-delay="180">
+                    <img class="portfolio-card-img" src="https://images.unsplash.com/photo-1512917774080-9991f1c4c750?w=800&q=80" alt="Luxury Facade">
+                    <div class="portfolio-card-play"><i class="fas fa-play"></i></div>
+                    <h4 class="portfolio-card-title">Luxury Facade</h4>
+                </div>
+                <div class="portfolio-card" data-aos="fade-up" data-aos-delay="260">
+                    <img class="portfolio-card-img" src="https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?w=800&q=80" alt="Interior Living">
+                    <div class="portfolio-card-play"><i class="fas fa-play"></i></div>
+                    <h4 class="portfolio-card-title">Interior Living</h4>
+                </div>
+                <div class="portfolio-card" data-aos="fade-up" data-aos-delay="340">
+                    <img class="portfolio-card-img" src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=800&q=80" alt="Aerial Masterplan">
+                    <div class="portfolio-card-play"><i class="fas fa-play"></i></div>
+                    <h4 class="portfolio-card-title">Aerial Masterplan</h4>
+                </div>
+                </div>
+                <div class="portfolio-cat-more">
+                    <a href="project-residential-en.html" class="btn btn-show-more">Show More</a>
+                </div>
+            </div>
 
-                <!-- Portfolio Item 4: Events -->
-                <a href="project-tech-en.html" class="portfolio-item" data-aos="zoom-in" data-aos-delay="400"
-                    style="display:block;">
-                    <img src="https://images.unsplash.com/photo-1540575467063-178a50c2df87?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
-                        alt="Event Coverage">
-                    <div class="portfolio-overlay">
-                        <h3 class="portfolio-title">Annual Tech Conference</h3>
-                        <p class="portfolio-desc">Live coverage and professional event summary production.</p>
-                    </div>
-                </a>
+            <div class="portfolio-category">
+                <div class="portfolio-cat-header" data-aos="fade-up">
+                    <h3 class="portfolio-cat-title">Events & Conferences</h3>
+                    <p class="portfolio-cat-desc">Multi-camera live capture, speaker coverage, backstage interviews, and same-day recap films for corporate and public events.</p>
+                </div>
+                <div class="portfolio-row">
+                <div class="portfolio-card" data-aos="fade-up" data-aos-delay="100">
+                    <img class="portfolio-card-img" src="https://images.unsplash.com/photo-1540575467063-178a50c2df87?w=800&q=80" alt="Tech Summit">
+                    <div class="portfolio-card-play"><i class="fas fa-play"></i></div>
+                    <h4 class="portfolio-card-title">Tech Summit</h4>
+                </div>
+                <div class="portfolio-card" data-aos="fade-up" data-aos-delay="180">
+                    <img class="portfolio-card-img" src="https://images.unsplash.com/photo-1475721027785-f74dea327912?w=800&q=80" alt="Keynote Stage">
+                    <div class="portfolio-card-play"><i class="fas fa-play"></i></div>
+                    <h4 class="portfolio-card-title">Keynote Stage</h4>
+                </div>
+                <div class="portfolio-card" data-aos="fade-up" data-aos-delay="260">
+                    <img class="portfolio-card-img" src="https://images.unsplash.com/photo-1505373676645-3183501a30f3?w=800&q=80" alt="Exhibition Floor">
+                    <div class="portfolio-card-play"><i class="fas fa-play"></i></div>
+                    <h4 class="portfolio-card-title">Exhibition Floor</h4>
+                </div>
+                <div class="portfolio-card" data-aos="fade-up" data-aos-delay="340">
+                    <img class="portfolio-card-img" src="https://images.unsplash.com/photo-1531058020387-3be344556be6?w=800&q=80" alt="Gala Evening">
+                    <div class="portfolio-card-play"><i class="fas fa-play"></i></div>
+                    <h4 class="portfolio-card-title">Gala Evening</h4>
+                </div>
+                </div>
+                <div class="portfolio-cat-more">
+                    <a href="project-tech-en.html" class="btn btn-show-more">Show More</a>
+                </div>
+            </div>
 
-                <!-- Portfolio Item 5: Product -->
-                <a href="project-perfume-en.html" class="portfolio-item" data-aos="zoom-in" data-aos-delay="500"
-                    style="display:block;">
-                    <img src="https://images.unsplash.com/photo-1583394838336-acd977736f90?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
-                        alt="Product Photography">
-                    <div class="portfolio-overlay">
-                        <h3 class="portfolio-title">Luxury Perfume Launch</h3>
-                        <p class="portfolio-desc">Cinematic photo session reflecting luxury and identity.</p>
-                    </div>
-                </a>
+            <div class="portfolio-category">
+                <div class="portfolio-cat-header" data-aos="fade-up">
+                    <h3 class="portfolio-cat-title">Product Photography</h3>
+                    <p class="portfolio-cat-desc">Luxury product launches, still-life compositions, and campaign imagery engineered for print, web, and social deployment.</p>
+                </div>
+                <div class="portfolio-row">
+                <div class="portfolio-card" data-aos="fade-up" data-aos-delay="100">
+                    <img class="portfolio-card-img" src="https://images.unsplash.com/photo-1541643600914-78b084683601?w=800&q=80" alt="Perfume Launch">
+                    <div class="portfolio-card-play"><i class="fas fa-play"></i></div>
+                    <h4 class="portfolio-card-title">Perfume Launch</h4>
+                </div>
+                <div class="portfolio-card" data-aos="fade-up" data-aos-delay="180">
+                    <img class="portfolio-card-img" src="https://images.unsplash.com/photo-1523293182086-7651a899d37f?w=800&q=80" alt="Fragrance Detail">
+                    <div class="portfolio-card-play"><i class="fas fa-play"></i></div>
+                    <h4 class="portfolio-card-title">Fragrance Detail</h4>
+                </div>
+                <div class="portfolio-card" data-aos="fade-up" data-aos-delay="260">
+                    <img class="portfolio-card-img" src="https://images.unsplash.com/photo-1588405748880-12d1d2a59d75?w=800&q=80" alt="Bottle Study">
+                    <div class="portfolio-card-play"><i class="fas fa-play"></i></div>
+                    <h4 class="portfolio-card-title">Bottle Study</h4>
+                </div>
+                <div class="portfolio-card" data-aos="fade-up" data-aos-delay="340">
+                    <img class="portfolio-card-img" src="https://images.unsplash.com/photo-1592945403244-b3fbafd7f539?w=800&q=80" alt="Packaging">
+                    <div class="portfolio-card-play"><i class="fas fa-play"></i></div>
+                    <h4 class="portfolio-card-title">Packaging</h4>
+                </div>
+                </div>
+                <div class="portfolio-cat-more">
+                    <a href="project-perfume-en.html" class="btn btn-show-more">Show More</a>
+                </div>
+            </div>
 
-                <!-- Portfolio Item 6: Lifestyle -->
-                <a href="project-fashion-en.html" class="portfolio-item" data-aos="zoom-in" data-aos-delay="600"
-                    style="display:block;">
-                    <img src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
-                        alt="Lifestyle Photography">
-                    <div class="portfolio-overlay">
-                        <h3 class="portfolio-title">Fashion Ad</h3>
-                        <p class="portfolio-desc">Art direction and commercial video for fashion brands.</p>
-                    </div>
-                </a>
+            <div class="portfolio-category">
+                <div class="portfolio-cat-header" data-aos="fade-up">
+                    <h3 class="portfolio-cat-title">Fashion & Lifestyle</h3>
+                    <p class="portfolio-cat-desc">Seasonal campaigns, lookbook production, and brand films for fashion labels. Full art direction from casting to final grade.</p>
+                </div>
+                <div class="portfolio-row">
+                <div class="portfolio-card" data-aos="fade-up" data-aos-delay="100">
+                    <img class="portfolio-card-img" src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?w=800&q=80" alt="Campaign Film">
+                    <div class="portfolio-card-play"><i class="fas fa-play"></i></div>
+                    <h4 class="portfolio-card-title">Campaign Film</h4>
+                </div>
+                <div class="portfolio-card" data-aos="fade-up" data-aos-delay="180">
+                    <img class="portfolio-card-img" src="https://images.unsplash.com/photo-1483985988355-763728e1935b?w=800&q=80" alt="Street Style">
+                    <div class="portfolio-card-play"><i class="fas fa-play"></i></div>
+                    <h4 class="portfolio-card-title">Street Style</h4>
+                </div>
+                <div class="portfolio-card" data-aos="fade-up" data-aos-delay="260">
+                    <img class="portfolio-card-img" src="https://images.unsplash.com/photo-1490481651871-ab68de25d43d?w=800&q=80" alt="Editorial Look">
+                    <div class="portfolio-card-play"><i class="fas fa-play"></i></div>
+                    <h4 class="portfolio-card-title">Editorial Look</h4>
+                </div>
+                <div class="portfolio-card" data-aos="fade-up" data-aos-delay="340">
+                    <img class="portfolio-card-img" src="https://images.unsplash.com/photo-1469334031218-e382a71b716b?w=800&q=80" alt="Behind the Lens">
+                    <div class="portfolio-card-play"><i class="fas fa-play"></i></div>
+                    <h4 class="portfolio-card-title">Behind the Lens</h4>
+                </div>
+                </div>
+                <div class="portfolio-cat-more">
+                    <a href="project-fashion-en.html" class="btn btn-show-more">Show More</a>
+                </div>
             </div>
         </div>
     </section>
 
-    <!-- Testimonials Section -->
     <section id="testimonials" class="testimonials">
         <div class="testimonials-pattern"></div>
         <div class="container relative-z">
-            <h2 class="section-title text-center text-beige" data-aos="fade-up">Client Results</h2>
-            <div class="title-underline text-center-underline bg-beige" data-aos="fade-up"></div>
-
+            <div class="section-eyebrow" data-aos="fade-up">
+                <span class="num">05</span><span class="bar"></span><span>Client Results</span>
+            </div>
+            <h2 class="section-title" data-aos="fade-up">What they say about us</h2>
+            <div class="title-underline" data-aos="fade-up"></div>
             <div class="testimonials-grid">
-                <!-- Testimonial 1 -->
                 <div class="testimonial-card" data-aos="fade-up" data-aos-delay="100">
-                    <div class="stars">
-                        <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i
-                            class="fas fa-star"></i><i class="fas fa-star"></i>
-                    </div>
-                    <p class="quote">"The ShootiX team took our identity to another level. The quality of dish
-                        photography and the promo video significantly boosted our sales. High professionalism and
-                        on-time delivery."</p>
-                    <div class="client-info">
-                        <div class="client-details">
-                            <h4 class="client-name">Ahmed Khalid</h4>
-                            <span class="client-role">Restaurant Chain Owner</span>
-                        </div>
-                    </div>
+                    <div class="stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
+                    <p class="quote">The ShootiX team took our identity to another level. The quality of dish photography and the promo video significantly boosted our sales. High professionalism and on-time delivery.</p>
+                    <div class="client-info"><div class="client-details"><h4 class="client-name">Ahmed Khalid</h4><span class="client-role">Restaurant Owner</span></div></div>
                 </div>
-
-                <!-- Testimonial 2 -->
                 <div class="testimonial-card" data-aos="fade-up" data-aos-delay="200">
-                    <div class="stars">
-                        <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i
-                            class="fas fa-star"></i><i class="fas fa-star"></i>
-                    </div>
-                    <p class="quote">"The drone coverage for our real estate projects was stunning. The cinematic shots
-                        showed the exact luxury we were looking for. ShootiX are truly our partners in success."</p>
-                    <div class="client-info">
-                        <div class="client-details">
-                            <h4 class="client-name">Eng. Fahad Abdullah</h4>
-                            <span class="client-role">Real Estate Developer</span>
-                        </div>
-                    </div>
+                    <div class="stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
+                    <p class="quote">The drone shots and cinematic footage delivered the level of luxury we were seeking. ShootiX are true partners in success for us.</p>
+                    <div class="client-info"><div class="client-details"><h4 class="client-name">Eng. Fahad Abdullah</h4><span class="client-role">Real Estate Developer</span></div></div>
                 </div>
-
-                <!-- Testimonial 3 -->
                 <div class="testimonial-card" data-aos="fade-up" data-aos-delay="300">
-                    <div class="stars">
-                        <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i
-                            class="fas fa-star"></i><i class="fas fa-star"></i>
-                    </div>
-                    <p class="quote">"Flexible teamwork, quick requirement understanding, and art direction that exceeds
-                        expectations. We worked with them on a product launch and the results were amazing."</p>
-                    <div class="client-info">
-                        <div class="client-details">
-                            <h4 class="client-name">Sarah Mohammed</h4>
-                            <span class="client-role">Marketing Manager</span>
-                        </div>
-                    </div>
+                    <div class="stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
+                    <p class="quote">Flexibility, fast understanding of our requirements, and artistic output that exceeds expectations. We worked with them on a product launch and the results were amazing.</p>
+                    <div class="client-info"><div class="client-details"><h4 class="client-name">Sarah Mohammed</h4><span class="client-role">Marketing Manager</span></div></div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Contact Section -->
     <section id="contact" class="contact">
         <div class="container">
-            <div class="contact-wrapper" data-aos="zoom-in" data-aos-duration="1000">
+            <div class="section-eyebrow" data-aos="fade-up">
+                <span class="num">06</span><span class="bar"></span><span>Let's Talk</span>
+            </div>
+            <div class="contact-wrapper" data-aos="fade-up" data-aos-duration="1000">
                 <div class="contact-header text-center">
-                    <h2 class="section-title text-navy">Get a Quote</h2>
+                    <h2 class="section-title">Get a Quote</h2>
                     <p class="contact-subtitle">Your first step towards visual production worthy of your brand.</p>
                 </div>
-
-                <form action="https://formsubmit.co/shootix.sa@gmail.com" method="POST" class="contact-form"
-                    id="contactForm">
-                    <!-- FormSubmit Configuration -->
+                <form action="https://formsubmit.co/shootix.sa@gmail.com" method="POST" class="contact-form" id="contactForm">
                     <input type="hidden" name="_subject" value="New Quote Request from ShootiX EN Website">
                     <input type="hidden" name="_captcha" value="false">
                     <input type="hidden" name="_template" value="table">
-                    <!-- You can set your success page here, if not it goes to default -->
-                    <!-- <input type="hidden" name="_next" value="https://yourwebsite.com/thanks.html"> -->
-
                     <div class="form-row">
-                        <div class="form-group">
-                            <label for="name">Full Name *</label>
-                            <input type="text" id="name" name="name" required placeholder="Enter your name">
-                        </div>
-                        <div class="form-group">
-                            <label for="phone">Phone Number *</label>
-                            <input type="tel" id="phone" name="phone" required placeholder="Phone Number">
-                        </div>
+                        <div class="form-group"><label for="name">Full Name *</label><input type="text" id="name" name="name" required placeholder="Enter your name"></div>
+                        <div class="form-group"><label for="phone">Phone Number *</label><input type="tel" id="phone" name="phone" required placeholder="Phone Number"></div>
                     </div>
-
                     <div class="form-row">
-                        <div class="form-group">
-                            <label for="email">Email Address</label>
-                            <input type="email" id="email" name="email" placeholder="example@domain.com">
-                        </div>
-                        <div class="form-group">
-                            <label for="city">City</label>
-                            <input type="text" id="city" name="city" placeholder="Riyadh, Jeddah, etc.">
-                        </div>
+                        <div class="form-group"><label for="email">Email Address</label><input type="email" id="email" name="email" placeholder="example@domain.com"></div>
+                        <div class="form-group"><label for="city">City</label><input type="text" id="city" name="city" placeholder="Riyadh, Jeddah, etc."></div>
                     </div>
-
                     <div class="form-row">
-                        <div class="form-group">
-                            <label for="project-type">Project Type *</label>
-                            <select id="project-type" name="project_type" required>
-                                <option value="" disabled selected>Select Type...</option>
-                                <option value="photography">Photography</option>
-                                <option value="video">Video Production</option>
-                                <option value="drone">Drone Operations</option>
-                                <option value="editing">Editing</option>
-                                <option value="full_package">Full Package</option>
-                            </select>
-                        </div>
-                        <div class="form-group">
-                            <label for="budget">Approximate Budget</label>
-                            <select id="budget" name="budget">
-                                <option value="" disabled selected>Select Budget...</option>
-                                <option value="under_5000">Under 5,000 SAR</option>
-                                <option value="5000_15000">5,000 - 15,000 SAR</option>
-                                <option value="15000_50000">15,000 - 50,000 SAR</option>
-                                <option value="above_50000">+ 50,000 SAR</option>
-                            </select>
-                        </div>
+                        <div class="form-group"><label for="service">Service Type</label><select id="service" name="service"><option value="">-- Select a service --</option>
+<option value="photography">Photography</option>
+<option value="video">Video Production</option>
+<option value="drone">Drone Shooting</option>
+<option value="editing">Editing & Montage</option>
+<option value="content">Content Creation</option>
+<option value="website">Website Creation</option></select></div>
+                        <div class="form-group"><label for="budget">Estimated Budget</label><select id="budget" name="budget"><option value="">-- Select budget --</option>
+<option value="<10k">Less than 10,000 SAR</option>
+<option value="10-30k">10,000 – 30,000 SAR</option>
+<option value="30-70k">30,000 – 70,000 SAR</option>
+<option value="70k+">More than 70,000 SAR</option></select></div>
                     </div>
-
-                    <div class="form-group">
-                        <label for="target-date">Proposed Execution Date</label>
-                        <input type="date" id="target-date" name="target_date">
-                    </div>
-
-                    <div class="form-group">
-                        <label for="details">Additional Project Details</label>
-                        <textarea id="details" name="details" rows="5"
-                            placeholder="Tell us more about your vision..."></textarea>
-                    </div>
-
-                    <button type="submit" class="btn btn-primary submit-btn">Send Request <i
-                            class="fas fa-paper-plane"></i></button>
+                    <div class="form-group"><label for="message">Tell Us About Your Project</label><textarea id="message" name="message" rows="4" placeholder="A short description of your vision and goals..."></textarea></div>
+                    <button type="submit" class="btn btn-primary"><i class="fas fa-paper-plane btn-icon"></i> Send Request</button>
                 </form>
             </div>
         </div>
     </section>
 
-    <!-- Footer -->
     <footer class="footer">
         <div class="container footer-content">
-            <div class="footer-logo">
-                <img src="assets/photo-output.PNG" alt="ShootiX Logo">
-            </div>
-
+            <div class="footer-logo"><img src="assets/photo-output.PNG" alt="ShootiX Logo"></div>
             <div class="footer-social">
                 <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
                 <a href="#" aria-label="TikTok"><i class="fab fa-tiktok"></i></a>
                 <a href="https://wa.me/966537614446" aria-label="WhatsApp"><i class="fab fa-whatsapp"></i></a>
             </div>
         </div>
-        <div class="footer-bottom">
-            <p>&copy; 2024 ShootiX Visual Production. All rights reserved.</p>
-        </div>
+        <div class="footer-bottom"><p>&copy; 2024 ShootiX Visual Production. All rights reserved.</p></div>
     </footer>
 
-    <!-- AOS Script -->
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
-    <!-- Custom Script -->
     <script src="script.js"></script>
 </body>
-
 </html>
