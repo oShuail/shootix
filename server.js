@@ -1,5 +1,5 @@
 /* ==========================================================
-   SHOOTIX — Backend server
+   SHOTIX — Backend server
    - Serves the static website
    - Auth (admin / employee accounts, session cookies)
    - Admin-only image management for the portfolio
@@ -55,11 +55,11 @@ function verifyPassword(password, stored) {
 
 /* ---------- first-run admin account ---------- */
 if (!users.some(u => u.role === 'admin')) {
-    const initialPassword = process.env.SHOOTIX_ADMIN_PASSWORD || 'shootix-admin';
+    const initialPassword = process.env.SHOTIX_ADMIN_PASSWORD || 'shotix-admin';
     users.push({
         id: crypto.randomUUID(),
         username: 'admin',
-        name: 'ShootiX Admin',
+        name: 'Shotix Admin',
         role: 'admin',
         password: hashPassword(initialPassword),
         createdAt: new Date().toISOString()
@@ -294,7 +294,7 @@ app.get('/api/receipts.xlsx', requireAuth, (req, res) => {
         ? receipts
         : receipts.filter(r => r.createdById === req.user.id);
     res.setHeader('Content-Type', 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
-    res.setHeader('Content-Disposition', 'attachment; filename="shootix-receipts.xlsx"');
+    res.setHeader('Content-Disposition', 'attachment; filename="shotix-receipts.xlsx"');
     res.send(buildReceiptsWorkbook(list));
 });
 
@@ -374,7 +374,7 @@ app.delete('/api/receipts/:id', requireAdmin, (req, res) => {
 app.use(express.static(ROOT, { extensions: ['html'] }));
 
 app.listen(PORT, () => {
-    console.log(`ShootiX running →  http://localhost:${PORT}`);
+    console.log(`Shotix running →  http://localhost:${PORT}`);
     console.log(`Admin panel     →  http://localhost:${PORT}/admin.html`);
     console.log(`Staff portal    →  http://localhost:${PORT}/portal.html`);
 });

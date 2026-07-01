@@ -1,6 +1,6 @@
-# ShootiX — Cinematic Site + Admin Panel + Staff Portal
+# Shotix — Cinematic Site + Admin Panel + Staff Portal
 
-The ShootiX website, upgraded from a static page into a small full product:
+The Shotix website, upgraded from a static page into a small full product:
 
 1. **The public site** (Arabic + English) with a more cinematic, editorial look —
    same navy/cream/gold palette, more atmosphere.
@@ -25,8 +25,8 @@ npm start          # → http://localhost:3000
 | `/admin.html` | Admin panel (admins only) |
 | `/portal.html` | Staff portal (employees + admins) |
 
-**First run:** the server creates the admin account `admin` / `shootix-admin`
-(or the value of the `SHOOTIX_ADMIN_PASSWORD` env var) and prints it to the
+**First run:** the server creates the admin account `admin` / `shotix-admin`
+(or the value of the `SHOTIX_ADMIN_PASSWORD` env var) and prints it to the
 console. **Log in and change it immediately** (Admin panel → الإعدادات).
 
 > The static pages still work without the server (e.g. GitHub Pages) — the
@@ -49,7 +49,7 @@ console. **Log in and change it immediately** (Admin panel → الإعدادا�
 ## ✨ Design upgrades (v3 cinematic layer)
 
 - **Film grain** overlay across the whole site (subtle, animated).
-- **Ghost typography** — a huge outlined "SHOOTIX" drifting behind the hero.
+- **Ghost typography** — a huge outlined "SHOTIX" drifting behind the hero.
 - **Gold-gradient headline** highlight in the hero.
 - **Service marquee** — an endless scrolling strip of services under the hero
   (italic serif alternating with outlined type, spinning gold stars).
