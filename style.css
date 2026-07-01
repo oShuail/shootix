@@ -341,22 +341,6 @@ html[dir="ltr"] {--font-display: 'Montserrat', sans-serif}
 ::-webkit-scrollbar-thumb{background:var(--clr-bg-3);border-radius:5px}
 ::-webkit-scrollbar-thumb:hover{background:var(--clr-accent)}
 
-/* --- film grain over everything (very subtle) --- */
-body::after{
-    content:'';position:fixed;inset:-50%;width:200%;height:200%;
-    background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 250 250' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.7' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
-    opacity:0.035;pointer-events:none;z-index:2000;
-    animation:grain-shift 8s steps(10) infinite;
-}
-@keyframes grain-shift{
-    0%,100%{transform:translate(0,0)}
-    10%{transform:translate(-2%,-3%)}
-    30%{transform:translate(3%,-2%)}
-    50%{transform:translate(-3%,2%)}
-    70%{transform:translate(2%,3%)}
-    90%{transform:translate(-2%,1%)}
-}
-
 /* --- scroll progress hairline --- */
 .scroll-progress{
     position:fixed;top:0;inset-inline-start:0;height:2px;width:0%;
@@ -379,19 +363,6 @@ body::after{
     .cursor-hidden .cursor-dot,.cursor-hidden .cursor-ring{opacity:0}
 }
 
-/* --- hero ghost word behind the title --- */
-.hero-ghost{
-    position:absolute;top:50%;left:50%;transform:translate(-50%,-52%);
-    font-family:var(--font-latin);font-weight:700;
-    font-size:clamp(6rem,22vw,22rem);letter-spacing:0.04em;
-    color:transparent;-webkit-text-stroke:1px rgba(248,245,230,0.07);
-    z-index:1;pointer-events:none;user-select:none;white-space:nowrap;
-    animation:ghost-drift 14s ease-in-out infinite alternate;
-}
-@keyframes ghost-drift{
-    from{transform:translate(-51%,-52%) scale(1)}
-    to{transform:translate(-49%,-50%) scale(1.03)}
-}
 .hero-title .highlight{
     background:linear-gradient(120deg,var(--clr-cream) 60%,var(--clr-accent) 100%);
     -webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;
@@ -414,7 +385,7 @@ body::after{
 @keyframes marquee-run{from{transform:translateX(0)}to{transform:translateX(-50%)}}
 @keyframes star-spin{from{transform:rotate(0)}to{transform:rotate(360deg)}}
 @media (prefers-reduced-motion:reduce){
-    .marquee-track,.hero-ghost,body::after,.marquee-item .star{animation:none}
+    .marquee-track,.marquee-item .star{animation:none}
 }
 
 /* --- portfolio cards: title reveal + gold line --- */
