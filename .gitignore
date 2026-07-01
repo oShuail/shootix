@@ -1,0 +1,12 @@
+# dependencies
+node_modules/
+
+# runtime data (accounts, receipts, gallery manifest)
+data/
+
+# images uploaded through the admin panel
+assets/uploads/
+
+# misc
+.DS_Store
+npm-debug.log*

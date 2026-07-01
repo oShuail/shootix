@@ -1,0 +1,15 @@
+{
+  "name": "shootix",
+  "version": "3.0.0",
+  "description": "ShootiX visual production studio — website, admin panel & staff portal",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "engines": {
+    "node": ">=18"
+  },
+  "dependencies": {
+    "express": "^4.19.2"
+  }
+}

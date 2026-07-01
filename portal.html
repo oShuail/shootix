@@ -1,0 +1,422 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>بوابة الفريق | ShootiX</title>
+    <meta name="robots" content="noindex, nofollow">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700;800&family=Montserrat:wght@300;400;500;600;700&family=Lora:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="panel.css">
+</head>
+<body>
+
+    <!-- ===== LOGIN ===== -->
+    <div class="login-screen" id="login-screen">
+        <div class="login-card">
+            <img src="assets/photo-output.PNG" alt="ShootiX" class="logo">
+            <div class="eyebrow">Staff Portal</div>
+            <h1>بوابة الفريق</h1>
+            <p class="sub">سجّل دخولك لإصدار إيصالات العملاء وتحميلها PDF.</p>
+            <div class="msg error" id="login-msg"></div>
+            <form id="login-form">
+                <div class="field">
+                    <label>اسم المستخدم</label>
+                    <input type="text" id="login-username" autocomplete="username" required>
+                </div>
+                <div class="field">
+                    <label>كلمة المرور</label>
+                    <input type="password" id="login-password" autocomplete="current-password" required>
+                </div>
+                <button type="submit" class="btn btn-gold">تسجيل الدخول</button>
+            </form>
+            <a href="index.html" class="back-home"><i class="fas fa-arrow-right"></i> العودة للموقع</a>
+        </div>
+    </div>
+
+    <!-- ===== PORTAL ===== -->
+    <div class="shell" id="shell">
+        <header class="topbar">
+            <div class="brand">
+                <img src="assets/photo-output.PNG" alt="ShootiX">
+                <span>Staff Portal</span>
+            </div>
+            <div class="who">
+                <span class="role-badge" id="who-role">STAFF</span>
+                <b id="who-name"></b>
+                <a href="index.html" class="back-home">الموقع</a>
+                <button class="btn btn-ghost btn-sm" id="logout-btn">خروج</button>
+            </div>
+        </header>
+
+        <nav class="tabs">
+            <button class="tab-btn active" data-tab="create"><i class="fas fa-file-circle-plus"></i> إيصال جديد</button>
+            <button class="tab-btn" data-tab="history"><i class="fas fa-clock-rotate-left"></i> إيصالاتي</button>
+            <button class="tab-btn" data-tab="settings"><i class="fas fa-gear"></i> الإعدادات</button>
+        </nav>
+
+        <main class="main">
+
+            <!-- ==== CREATE RECEIPT ==== -->
+            <section class="tab-panel active" id="tab-create">
+                <h2 class="panel-title">إيصال جديد</h2>
+                <p class="panel-sub">عبّئ الحقول، احفظ الإيصال، ثم حمّله كملف PDF جاهز للإرسال للعميل.</p>
+
+                <div class="card">
+                    <h3><i class="fas fa-user"></i> بيانات العميل</h3>
+                    <div class="msg" id="create-msg"></div>
+                    <div class="form-grid">
+                        <div class="field">
+                            <label>اسم العميل *</label>
+                            <input type="text" id="rc-client" placeholder="مثال: شركة الأفق">
+                        </div>
+                        <div class="field">
+                            <label>رقم الجوال</label>
+                            <input type="tel" id="rc-phone" placeholder="05xxxxxxxx" dir="ltr">
+                        </div>
+                        <div class="field">
+                            <label>المشروع / الخدمة</label>
+                            <input type="text" id="rc-project" placeholder="مثال: تصوير افتتاح المطعم">
+                        </div>
+                        <div class="field">
+                            <label>التاريخ</label>
+                            <input type="date" id="rc-date" dir="ltr">
+                        </div>
+                        <div class="field">
+                            <label>طريقة الدفع</label>
+                            <select id="rc-payment">
+                                <option value="تحويل بنكي">تحويل بنكي</option>
+                                <option value="نقدي">نقدي</option>
+                                <option value="مدى / بطاقة">مدى / بطاقة</option>
+                                <option value="STC Pay">STC Pay</option>
+                                <option value="آجل">آجل</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <h3><i class="fas fa-list"></i> البنود</h3>
+                    <div id="items-list"></div>
+                    <button class="btn btn-ghost btn-sm" id="add-item-btn"><i class="fas fa-plus"></i> إضافة بند</button>
+
+                    <div class="form-grid" style="margin-top:26px">
+                        <div class="field">
+                            <label>خصم (ر.س)</label>
+                            <input type="number" id="rc-discount" min="0" value="0" dir="ltr">
+                        </div>
+                        <div class="field" style="justify-content:flex-end">
+                            <label class="check" style="margin-top:18px">
+                                <input type="checkbox" id="rc-vat" checked>
+                                إضافة ضريبة القيمة المضافة 15%
+                            </label>
+                        </div>
+                        <div class="field full">
+                            <label>ملاحظات (تظهر في الإيصال)</label>
+                            <textarea id="rc-notes" placeholder="مثال: دفعة أولى 50% من قيمة المشروع..."></textarea>
+                        </div>
+                    </div>
+
+                    <div class="totals">
+                        <div class="row"><span>المجموع</span><span id="t-subtotal">0.00 ر.س</span></div>
+                        <div class="row"><span>الخصم</span><span id="t-discount">0.00 ر.س</span></div>
+                        <div class="row"><span>الضريبة (15%)</span><span id="t-vat">0.00 ر.س</span></div>
+                        <div class="row grand"><span>الإجمالي</span><span id="t-total">0.00 ر.س</span></div>
+                    </div>
+
+                    <div style="display:flex;gap:12px;flex-wrap:wrap;margin-top:26px">
+                        <button class="btn btn-gold" id="save-btn"><i class="fas fa-floppy-disk"></i> حفظ الإيصال</button>
+                        <button class="btn btn-ghost" id="save-pdf-btn"><i class="fas fa-file-pdf"></i> حفظ + تحميل PDF</button>
+                    </div>
+                </div>
+            </section>
+
+            <!-- ==== HISTORY ==== -->
+            <section class="tab-panel" id="tab-history">
+                <h2 class="panel-title">إيصالاتي</h2>
+                <p class="panel-sub">كل إيصال يمكن إعادة تحميله PDF في أي وقت.</p>
+                <div class="card">
+                    <div class="table-wrap">
+                        <table>
+                            <thead><tr><th>الرقم</th><th>التاريخ</th><th>العميل</th><th>الإجمالي</th><th></th></tr></thead>
+                            <tbody id="history-tbody"></tbody>
+                        </table>
+                    </div>
+                    <div class="empty" id="history-empty" style="display:none">لم تصدر أي إيصال بعد.</div>
+                </div>
+            </section>
+
+            <!-- ==== SETTINGS ==== -->
+            <section class="tab-panel" id="tab-settings">
+                <h2 class="panel-title">الإعدادات</h2>
+                <p class="panel-sub">تغيير كلمة المرور الخاصة بك.</p>
+                <div class="card" style="max-width:480px">
+                    <h3><i class="fas fa-key"></i> تغيير كلمة المرور</h3>
+                    <div class="msg" id="pw-msg"></div>
+                    <div class="field" style="margin-bottom:18px">
+                        <label>كلمة المرور الحالية</label>
+                        <input type="password" id="pw-current" autocomplete="current-password">
+                    </div>
+                    <div class="field" style="margin-bottom:22px">
+                        <label>كلمة المرور الجديدة</label>
+                        <input type="password" id="pw-new" autocomplete="new-password">
+                    </div>
+                    <button class="btn btn-gold" id="pw-btn">حفظ</button>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <!-- printable receipt (filled by JS, shown only when printing) -->
+    <div id="receipt-print-area"></div>
+
+    <div class="toast" id="toast"></div>
+
+    <script>
+    (() => {
+        const $ = (id) => document.getElementById(id);
+        const money = (n) => Number(n).toLocaleString('en-US', { minimumFractionDigits: 2 }) + ' ر.س';
+        const esc = (s) => String(s ?? '').replace(/[&<>"']/g, (c) =>
+            ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
+
+        async function api(path, options = {}) {
+            const res = await fetch(path, {
+                headers: { 'Content-Type': 'application/json' },
+                credentials: 'same-origin',
+                ...options
+            });
+            const data = await res.json().catch(() => ({}));
+            if (!res.ok) throw new Error(data.error || 'حدث خطأ غير متوقع');
+            return data;
+        }
+        function showMsg(id, text, type = 'error') {
+            const el = $(id);
+            el.textContent = text;
+            el.className = `msg show ${type}`;
+            setTimeout(() => el.classList.remove('show'), 5000);
+        }
+        function toast(text) {
+            const el = $('toast');
+            el.textContent = text;
+            el.classList.add('show');
+            setTimeout(() => el.classList.remove('show'), 2600);
+        }
+
+        /* ---- auth ---- */
+        async function boot() {
+            try {
+                const { user } = await api('/api/me');
+                enter(user);
+            } catch { /* stay on login */ }
+        }
+        function enter(user) {
+            $('who-name').textContent = user.name;
+            $('who-role').textContent = user.role === 'admin' ? 'ADMIN' : 'STAFF';
+            $('login-screen').style.display = 'none';
+            $('shell').style.display = 'flex';
+            $('rc-date').value = new Date().toISOString().slice(0, 10);
+            if ($('items-list').children.length === 0) addItemRow();
+            loadHistory();
+        }
+        $('login-form').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            try {
+                const { user } = await api('/api/login', {
+                    method: 'POST',
+                    body: JSON.stringify({ username: $('login-username').value, password: $('login-password').value })
+                });
+                enter(user);
+            } catch (err) { showMsg('login-msg', err.message); }
+        });
+        $('logout-btn').addEventListener('click', async () => {
+            await api('/api/logout', { method: 'POST' });
+            location.reload();
+        });
+
+        /* ---- tabs ---- */
+        document.querySelectorAll('.tab-btn').forEach((btn) => {
+            btn.addEventListener('click', () => {
+                document.querySelectorAll('.tab-btn').forEach((b) => b.classList.remove('active'));
+                document.querySelectorAll('.tab-panel').forEach((p) => p.classList.remove('active'));
+                btn.classList.add('active');
+                $('tab-' + btn.dataset.tab).classList.add('active');
+            });
+        });
+
+        /* ---- line items ---- */
+        function addItemRow(description = '', qty = 1, price = '') {
+            const row = document.createElement('div');
+            row.className = 'items-row';
+            row.innerHTML = `
+                <div class="field"><label>الوصف</label><input type="text" class="i-desc" placeholder="مثال: يوم تصوير فوتوغرافي"></div>
+                <div class="field"><label>الكمية</label><input type="number" class="i-qty" min="1" value="${qty}" dir="ltr"></div>
+                <div class="field"><label>السعر (ر.س)</label><input type="number" class="i-price" min="0" step="0.01" dir="ltr"></div>
+                <button class="rm" title="حذف البند"><i class="fas fa-xmark"></i></button>`;
+            row.querySelector('.i-desc').value = description;
+            row.querySelector('.i-price').value = price;
+            row.querySelector('.rm').addEventListener('click', () => { row.remove(); updateTotals(); });
+            row.querySelectorAll('input').forEach((i) => i.addEventListener('input', updateTotals));
+            $('items-list').appendChild(row);
+        }
+        $('add-item-btn').addEventListener('click', () => addItemRow());
+        $('rc-discount').addEventListener('input', updateTotals);
+        $('rc-vat').addEventListener('change', updateTotals);
+
+        function collectItems() {
+            return Array.from(document.querySelectorAll('.items-row'))
+                .map((row) => ({
+                    description: row.querySelector('.i-desc').value.trim(),
+                    qty: Number(row.querySelector('.i-qty').value) || 1,
+                    price: Number(row.querySelector('.i-price').value) || 0
+                }))
+                .filter((i) => i.description);
+        }
+        function computeTotals() {
+            const items = collectItems();
+            const subtotal = items.reduce((s, i) => s + i.qty * i.price, 0);
+            const discount = Math.min(subtotal, Math.max(0, Number($('rc-discount').value) || 0));
+            const vat = $('rc-vat').checked ? (subtotal - discount) * 0.15 : 0;
+            return { items, subtotal, discount, vat, total: subtotal - discount + vat };
+        }
+        function updateTotals() {
+            const t = computeTotals();
+            $('t-subtotal').textContent = money(t.subtotal);
+            $('t-discount').textContent = money(t.discount);
+            $('t-vat').textContent = money(t.vat);
+            $('t-total').textContent = money(t.total);
+        }
+
+        /* ---- save ---- */
+        async function saveReceipt() {
+            const payload = {
+                clientName: $('rc-client').value,
+                clientPhone: $('rc-phone').value,
+                project: $('rc-project').value,
+                date: $('rc-date').value,
+                paymentMethod: $('rc-payment').value,
+                notes: $('rc-notes').value,
+                discount: Number($('rc-discount').value) || 0,
+                vatEnabled: $('rc-vat').checked,
+                items: collectItems()
+            };
+            const { receipt } = await api('/api/receipts', { method: 'POST', body: JSON.stringify(payload) });
+            resetForm();
+            loadHistory();
+            return receipt;
+        }
+        function resetForm() {
+            ['rc-client', 'rc-phone', 'rc-project', 'rc-notes'].forEach((id) => { $(id).value = ''; });
+            $('rc-discount').value = 0;
+            $('rc-vat').checked = true;
+            $('items-list').innerHTML = '';
+            addItemRow();
+            updateTotals();
+        }
+        $('save-btn').addEventListener('click', async () => {
+            try {
+                const r = await saveReceipt();
+                toast(`تم حفظ الإيصال ${r.number}`);
+            } catch (err) { showMsg('create-msg', err.message); }
+        });
+        $('save-pdf-btn').addEventListener('click', async () => {
+            try {
+                const r = await saveReceipt();
+                toast(`تم حفظ الإيصال ${r.number}`);
+                printReceipt(r);
+            } catch (err) { showMsg('create-msg', err.message); }
+        });
+
+        /* ---- history ---- */
+        async function loadHistory() {
+            try {
+                const { receipts } = await api('/api/receipts');
+                const tbody = $('history-tbody');
+                tbody.innerHTML = '';
+                $('history-empty').style.display = receipts.length ? 'none' : 'block';
+                receipts.forEach((r) => {
+                    const tr = document.createElement('tr');
+                    tr.innerHTML = `
+                        <td class="mono" dir="ltr">${r.number}</td>
+                        <td class="mono" dir="ltr">${r.date}</td>
+                        <td></td>
+                        <td class="mono">${money(r.total)}</td>
+                        <td><button class="btn btn-ghost btn-sm"><i class="fas fa-file-pdf"></i> PDF</button></td>`;
+                    tr.children[2].textContent = r.clientName;
+                    tr.querySelector('button').addEventListener('click', () => printReceipt(r));
+                    tbody.appendChild(tr);
+                });
+            } catch { /* ignore */ }
+        }
+
+        /* ---- printable receipt (browser print → save as PDF) ---- */
+        function printReceipt(r) {
+            const rows = r.items.map((i) => `
+                <tr>
+                    <td>${esc(i.description)}</td>
+                    <td dir="ltr">${i.qty}</td>
+                    <td dir="ltr">${money(i.price)}</td>
+                    <td dir="ltr">${money(i.qty * i.price)}</td>
+                </tr>`).join('');
+            $('receipt-print-area').innerHTML = `
+                <div class="receipt-doc" dir="rtl">
+                    <div class="rc-head">
+                        <div>
+                            <div class="rc-brand-name">SHOOTIX</div>
+                            <div class="rc-brand-sub">شوتيكس للإنتاج البصري — Visual Production Studio</div>
+                            <div class="rc-brand-sub" dir="ltr">shootix.sa@gmail.com · +966 53 761 4446</div>
+                        </div>
+                        <div class="rc-doc-type">
+                            <div class="big">إيصال / RECEIPT</div>
+                            <div class="num" dir="ltr">${esc(r.number)}</div>
+                        </div>
+                    </div>
+                    <div class="rc-meta">
+                        <div><div class="lbl">العميل / Client</div><div class="val">${esc(r.clientName)}</div></div>
+                        ${r.clientPhone ? `<div><div class="lbl">الجوال / Phone</div><div class="val" dir="ltr">${esc(r.clientPhone)}</div></div>` : ''}
+                        ${r.project ? `<div><div class="lbl">المشروع / Project</div><div class="val">${esc(r.project)}</div></div>` : ''}
+                        <div><div class="lbl">التاريخ / Date</div><div class="val" dir="ltr">${esc(r.date)}</div></div>
+                        ${r.paymentMethod ? `<div><div class="lbl">طريقة الدفع / Payment</div><div class="val">${esc(r.paymentMethod)}</div></div>` : ''}
+                    </div>
+                    <table class="rc-table">
+                        <thead><tr><th>الوصف / Description</th><th>الكمية</th><th>السعر</th><th>الإجمالي</th></tr></thead>
+                        <tbody>${rows}</tbody>
+                    </table>
+                    <div class="rc-totals">
+                        <div class="row"><span>المجموع / Subtotal</span><span dir="ltr">${money(r.subtotal)}</span></div>
+                        ${r.discount > 0 ? `<div class="row"><span>الخصم / Discount</span><span dir="ltr">- ${money(r.discount)}</span></div>` : ''}
+                        ${r.vatEnabled ? `<div class="row"><span>الضريبة / VAT 15%</span><span dir="ltr">${money(r.vat)}</span></div>` : ''}
+                        <div class="row grand"><span>الإجمالي / Total</span><span dir="ltr">${money(r.total)}</span></div>
+                    </div>
+                    ${r.notes ? `<div class="rc-notes"><div class="lbl">ملاحظات / Notes</div>${esc(r.notes)}</div>` : ''}
+                    <div class="rc-foot">
+                        <span>أصدره / Issued by: ${esc(r.createdBy)}</span>
+                        <span dir="ltr">${new Date(r.createdAt).toLocaleString('en-GB')}</span>
+                        <span>شكراً لتعاملكم معنا — Thank you for your business</span>
+                    </div>
+                </div>`;
+            const oldTitle = document.title;
+            document.title = r.number;   /* becomes the suggested PDF filename */
+            window.print();
+            document.title = oldTitle;
+        }
+
+        /* ---- change password ---- */
+        $('pw-btn').addEventListener('click', async () => {
+            try {
+                await api('/api/change-password', {
+                    method: 'POST',
+                    body: JSON.stringify({ currentPassword: $('pw-current').value, newPassword: $('pw-new').value })
+                });
+                $('pw-current').value = ''; $('pw-new').value = '';
+                showMsg('pw-msg', 'تم تغيير كلمة المرور بنجاح', 'ok');
+            } catch (err) { showMsg('pw-msg', err.message); }
+        });
+
+        boot();
+        updateTotals();
+    })();
+    </script>
+</body>
+</html>
