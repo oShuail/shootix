@@ -1,71 +1,130 @@
-# ShootiX — Editorial Redesign
+# ShootiX — Cinematic Site + Admin Panel + Staff Portal
 
-A visual redesign of the ShootiX site inspired by [tura.sa](https://www.tura.sa/) —
-editorial layout, numbered section dividers, and a darker, more cinematic palette.
-**All original features are preserved.** Only look-and-feel and markup structure changed.
+The ShootiX website, upgraded from a static page into a small full product:
 
-## 🎨 New palette (dark navy + creamy white)
+1. **The public site** (Arabic + English) with a more cinematic, editorial look —
+   same navy/cream/gold palette, more atmosphere.
+2. **An admin panel** (`admin.html`) where admins upload and manage the portfolio
+   images that appear on the live site.
+3. **A staff portal** (`portal.html`) where employees log in, fill in a few fields,
+   and issue branded client receipts as PDF.
+4. **A tiny Node.js backend** (`server.js`) that powers accounts, image uploads and
+   receipts. Only one dependency (Express).
+
+## 🚀 Running
+
+```bash
+npm install
+npm start          # → http://localhost:3000
+```
+
+| URL | What |
+|---|---|
+| `/` or `/index.html` | Arabic homepage |
+| `/en.html` | English homepage |
+| `/admin.html` | Admin panel (admins only) |
+| `/portal.html` | Staff portal (employees + admins) |
+
+**First run:** the server creates the admin account `admin` / `shootix-admin`
+(or the value of the `SHOOTIX_ADMIN_PASSWORD` env var) and prints it to the
+console. **Log in and change it immediately** (Admin panel → الإعدادات).
+
+> The static pages still work without the server (e.g. GitHub Pages) — the
+> dynamic features simply switch off and the site falls back to its built-in
+> images. Accounts, uploads and receipts need the Node server running on a host
+> such as Render, Railway, or any VPS.
+
+## 🎨 Palette (unchanged)
 
 | Token | Value | Use |
 |---|---|---|
 | `--clr-bg` | `#0A1428` | Page background (deep navy) |
 | `--clr-bg-2` | `#10223E` | Elevated sections |
 | `--clr-bg-3` | `#162C4D` | Hover / card surface |
-| `--clr-navy` | `#1A2B4C` | Original ShootiX navy (kept for continuity) |
 | `--clr-cream` | `#F8F5E6` | Primary text / headings |
 | `--clr-cream-soft` | `#E8E3CE` | Body text |
 | `--clr-cream-dim` | `#8C8B7F` | Meta / eyebrow text |
-| `--clr-accent` | `#C5A059` | Gold accents (rare, for highlights) |
+| `--clr-accent` | `#C5A059` | Gold accents |
 
-## 🗂️ What's in this folder
+## ✨ Design upgrades (v3 cinematic layer)
+
+- **Film grain** overlay across the whole site (subtle, animated).
+- **Ghost typography** — a huge outlined "SHOOTIX" drifting behind the hero.
+- **Gold-gradient headline** highlight in the hero.
+- **Service marquee** — an endless scrolling strip of services under the hero
+  (italic serif alternating with outlined type, spinning gold stars).
+- **Custom cursor** — gold dot + trailing ring that grows over links (desktop
+  only, respects `prefers-reduced-motion`).
+- **Scroll progress hairline** in gold at the top of the page.
+- **Animated stat counters** (100% / +50 / +200 count up on scroll).
+- **Richer hovers** — gold sweep lines on portfolio cards and process steps,
+  titles that shift and tint gold.
+- Custom scrollbar + gold text selection.
+
+All previous features preserved: WhatsApp button, hero video, services, portfolio
+with 6 project pages, testimonials, contact form (formsubmit.co), AR/EN toggle,
+mobile nav, AOS animations, lightbox gallery.
+
+## 🖼️ Image management (admins only)
+
+Admin panel → **صور الموقع**: drag & drop an image (≤ 8 MB), give it an Arabic +
+English title, pick a section (cars, food & hospitality, real estate, events,
+products, fashion) and upload. The image immediately appears:
+
+- in that section of the homepage portfolio (Arabic and English), and
+- in the matching project page gallery (with lightbox support).
+
+Deleting an image in the panel removes it from the site. Files are stored in
+`assets/uploads/`, metadata in `data/gallery.json`.
+
+## 👥 Accounts
+
+- **Admins** — full access: site images, team accounts, all receipts, settings.
+- **Employees** — staff portal only: create receipts, download PDFs, view their
+  own history, change their password. *They cannot touch site images.*
+
+Admins create employee accounts in Admin panel → **حسابات الفريق** (name,
+username, password, role). Passwords are hashed with scrypt; sessions are
+HttpOnly cookies.
+
+## 🧾 Receipts (staff portal)
+
+Employees fill in: client name/phone, project, date, payment method, line items
+(description × qty × price), optional discount, 15% VAT toggle, and notes.
+The portal computes totals live, saves the receipt with an automatic serial
+number (`SHX-2026-0001`, …), and **"حفظ + تحميل PDF"** opens the browser's
+print dialog with a clean bilingual (AR/EN) branded receipt — save as PDF and
+send it to the client. Every receipt can be re-downloaded from **إيصالاتي**;
+admins see all receipts from all employees.
+
+### 📊 Excel ledger
+
+Every time a receipt is created (by an employee **or** an admin) it is
+automatically appended as a **new row** in a running Excel workbook — one row
+per receipt with number, date, client, phone, project, payment method, an
+item summary, subtotal, discount, VAT, total, who issued it and when.
+
+- **Download it** from the Excel button on Admin panel → *الإيصالات* or Staff
+  portal → *إيصالاتي* (`GET /api/receipts.xlsx`). Admins get every receipt;
+  employees get only their own.
+- A master copy is also kept on disk at `data/receipts.xlsx`, refreshed on every
+  create/delete.
+- The `.xlsx` is generated by a small dependency-free writer (`lib/xlsx.js`) —
+  a real Office Open XML workbook (RTL sheet, bold header, numeric totals) that
+  opens in Excel, Numbers and Google Sheets. No external library needed.
+
+## 🗂️ Files
 
 | File | Purpose |
 |---|---|
-| `style.css` | All styling. Drop-in replacement for the old stylesheet. |
-| `index.html` | Arabic (RTL) homepage, redesigned. |
-| `en.html` | English (LTR) homepage, redesigned. |
-| `script.js` | JS — same behavior, small cleanups. |
-| `project-<slug>.html` × 6 | Arabic project detail pages. |
-| `project-<slug>-en.html` × 6 | English project detail pages. |
-
-Just drop these files into the repo root, replacing the originals. The `assets/`
-folder is untouched — keep your existing logo (`photo-output.PNG`).
-
-## ✅ Features preserved (nothing removed)
-
-- Floating WhatsApp button (966537614446)
-- Fixed navbar with scroll-state change
-- Hero with background video
-- About section with 100% / +50 / +200 stats
-- All 6 services (photography, video, drone, editing, content, website)
-- Portfolio grid linking to 6 project pages
-- 3 testimonials
-- Contact form wired to `formsubmit.co/shootix.sa@gmail.com`
-- Arabic + English versions with language toggle
-- Mobile navigation
-- AOS scroll animations
-- Project detail pages with hero, overview, 6-step journey, and gallery
-
-## ✨ What changed (design only)
-
-1. **Dark-first palette** — the whole site is now on a deep navy base with
-   creamy-white type instead of the old beige-on-navy mix.
-2. **Editorial section dividers** — each section now opens with a numbered
-   eyebrow (`01`, `02`, `03`…) the same way tura.sa breaks up its page.
-3. **Display serif for headlines** — Playfair Display is loaded alongside
-   Cairo and Montserrat for a cinematic feel.
-4. **Services are a 3×2 grid** (bordered cells) instead of the zig-zag
-   timeline. Cleaner, calmer, more editorial.
-5. **Portfolio items** are now 4:5 tiles with a dark gradient hover reveal.
-6. **Testimonials** are dark cards with a large decorative quote mark.
-7. **Contact form** is a single centered dark panel with underline-only inputs.
-8. **Project pages** now open with a full-bleed hero image + meta tag,
-   followed by an overview (sidebar of project facts + description),
-   a numbered 6-step process grid, and a 3-up gallery. Same content,
-   more magazine-like presentation.
-9. **Navbar** is transparent at the top and blurs into a dark translucent
-   bar on scroll (like tura.sa). Uppercase, tracked letters.
-
-## 🔧 Quick local check
-
-Open `en.html` or `index.html` directly in a browser. No build step needed.
+| `server.js` | Express backend: auth, users, gallery, receipts, Excel ledger |
+| `lib/xlsx.js` | Dependency-free `.xlsx` (Excel) writer |
+| `admin.html` | Admin panel (images, team, receipts overview, settings) |
+| `portal.html` | Staff portal (receipt creator + PDF, history, settings) |
+| `panel.css` | Shared styles for both panels + printable receipt |
+| `style.css` | Site styles incl. the new cinematic layer |
+| `script.js` | Site JS incl. cursor, counters, marquee, dynamic gallery |
+| `index.html` / `en.html` | Homepages (AR / EN) |
+| `project-*.html` | 6 project pages × 2 languages |
+| `data/` *(runtime, gitignored)* | users.json, gallery.json, receipts.json |
+| `assets/uploads/` *(runtime, gitignored)* | Images uploaded via the panel |

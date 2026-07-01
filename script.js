@@ -77,6 +77,14 @@ document.addEventListener('DOMContentLoaded', () => {
     // LIGHTBOX GALLERY
     // ==========================================
     initLightbox();
+
+    // ==========================================
+    // V3 cinematic layer
+    // ==========================================
+    initScrollProgress();
+    initCustomCursor();
+    initStatCounters();
+    loadManagedGallery();
 });
 
 
@@ -181,4 +189,129 @@ function initLightbox() {
         if (e.key === 'ArrowRight') goNext();
         if (e.key === 'ArrowLeft') goPrev();
     });
+}
+
+/* ==========================================
+   V3 — scroll progress hairline
+   ========================================== */
+function initScrollProgress() {
+    const bar = document.createElement('div');
+    bar.className = 'scroll-progress';
+    document.body.appendChild(bar);
+    const update = () => {
+        const max = document.documentElement.scrollHeight - window.innerHeight;
+        bar.style.width = max > 0 ? `${(window.scrollY / max) * 100}%` : '0%';
+    };
+    update();
+    window.addEventListener('scroll', update, { passive: true });
+}
+
+/* ==========================================
+   V3 — custom cursor (desktop only)
+   ========================================== */
+function initCustomCursor() {
+    if (!window.matchMedia('(hover: hover) and (pointer: fine)').matches) return;
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+
+    const dot = document.createElement('div');
+    const ring = document.createElement('div');
+    dot.className = 'cursor-dot';
+    ring.className = 'cursor-ring';
+    document.body.appendChild(dot);
+    document.body.appendChild(ring);
+    document.body.classList.add('cursor-hidden');
+
+    let x = 0, y = 0, rx = 0, ry = 0;
+    document.addEventListener('mousemove', (e) => {
+        x = e.clientX; y = e.clientY;
+        document.body.classList.remove('cursor-hidden');
+        dot.style.transform = `translate(${x}px, ${y}px) translate(-50%, -50%)`;
+    });
+    document.addEventListener('mouseleave', () => document.body.classList.add('cursor-hidden'));
+
+    (function follow() {
+        rx += (x - rx) * 0.16;
+        ry += (y - ry) * 0.16;
+        ring.style.transform = `translate(${rx}px, ${ry}px) translate(-50%, -50%)`;
+        requestAnimationFrame(follow);
+    })();
+
+    document.addEventListener('mouseover', (e) => {
+        ring.classList.toggle('is-hover', Boolean(e.target.closest('a, button, .portfolio-card, input, select, textarea')));
+    });
+}
+
+/* ==========================================
+   V3 — animated stat counters
+   ========================================== */
+function initStatCounters() {
+    const stats = document.querySelectorAll('.stat-number');
+    if (stats.length === 0 || !('IntersectionObserver' in window)) return;
+
+    const animate = (el) => {
+        const text = el.textContent.trim();
+        const match = text.match(/\d+/);
+        if (!match) return;
+        const target = parseInt(match[0], 10);
+        const prefix = text.slice(0, match.index);
+        const suffix = text.slice(match.index + match[0].length);
+        const duration = 1600;
+        const start = performance.now();
+        const tick = (now) => {
+            const p = Math.min((now - start) / duration, 1);
+            const eased = 1 - Math.pow(1 - p, 3);
+            el.textContent = prefix + Math.round(target * eased) + suffix;
+            if (p < 1) requestAnimationFrame(tick);
+        };
+        requestAnimationFrame(tick);
+    };
+
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+            if (!entry.isIntersecting) return;
+            animate(entry.target);
+            observer.unobserve(entry.target);
+        });
+    }, { threshold: 0.5 });
+    stats.forEach((el) => observer.observe(el));
+}
+
+/* ==========================================
+   V3 — admin-managed gallery
+   Pulls images uploaded through the admin panel and
+   appends them to the matching portfolio / gallery
+   sections. Fails silently on static hosting.
+   ========================================== */
+function loadManagedGallery() {
+    const targets = document.querySelectorAll('[data-category]');
+    if (targets.length === 0 || !window.fetch) return;
+    const isEnglish = document.documentElement.lang !== 'ar';
+
+    fetch('/api/gallery')
+        .then((r) => (r.ok ? r.json() : Promise.reject()))
+        .then(({ images }) => {
+            if (!Array.isArray(images) || images.length === 0) return;
+            targets.forEach((grid) => {
+                const category = grid.dataset.category;
+                images.filter((img) => img.category === category).forEach((img) => {
+                    const title = (isEnglish ? img.titleEn : img.title) || img.titleEn || img.title || '';
+                    if (grid.classList.contains('portfolio-row')) {
+                        const card = document.createElement('div');
+                        card.className = 'portfolio-card';
+                        card.innerHTML = `
+                            <img class="portfolio-card-img" src="${img.src}" alt="">
+                            <h4 class="portfolio-card-title"></h4>`;
+                        card.querySelector('img').alt = title;
+                        card.querySelector('h4').textContent = title;
+                        grid.appendChild(card);
+                    } else {
+                        const el = document.createElement('img');
+                        el.src = img.src;
+                        el.alt = title;
+                        grid.appendChild(el);
+                    }
+                });
+            });
+        })
+        .catch(() => { /* no backend (static hosting) — keep static images */ });
 }
