@@ -4,6 +4,7 @@
    - Auth (admin / employee accounts, session cookies)
    - Admin-only image management for the portfolio
    - Staff receipts (created in the portal, printed as PDF)
+   - Every receipt is also appended to an Excel ledger (.xlsx)
    Run:  npm install && npm start   →  http://localhost:3000
    ========================================================== */
 
@@ -11,6 +12,7 @@ const express = require('express');
 const crypto = require('crypto');
 const fs = require('fs');
 const path = require('path');
+const xlsx = require('./lib/xlsx');
 
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -249,6 +251,53 @@ app.delete('/api/gallery/:id', requireAdmin, (req, res) => {
 /* ==========================================================
    RECEIPTS (employees create their own, admins see all)
    ========================================================== */
+/* ---------- Excel ledger (one row per receipt) ---------- */
+const RECEIPT_COLUMNS = [
+    'Number / الرقم', 'Date / التاريخ', 'Client / العميل', 'Phone / الجوال',
+    'Project / المشروع', 'Payment / الدفع', 'Items / البنود', 'Subtotal / المجموع',
+    'Discount / الخصم', 'VAT / الضريبة', 'Total / الإجمالي', 'Issued by / أصدره', 'Created / التوقيت'
+];
+const RECEIPT_COL_WIDTHS = [18, 12, 24, 15, 24, 14, 46, 13, 11, 11, 13, 18, 20];
+
+function receiptRow(r) {
+    const itemsText = (r.items || [])
+        .map(i => `${i.description} × ${i.qty} @ ${i.price}`)
+        .join('  |  ');
+    return [
+        r.number, r.date, r.clientName, r.clientPhone || '', r.project || '',
+        r.paymentMethod || '', itemsText,
+        r.subtotal, r.discount, r.vat, r.total,
+        r.createdBy, new Date(r.createdAt).toISOString().slice(0, 19).replace('T', ' ')
+    ];
+}
+
+// chronological (oldest first) so each new receipt appends as the next row
+function buildReceiptsWorkbook(list) {
+    return xlsx.buildWorkbook(RECEIPT_COLUMNS, list.map(receiptRow), {
+        sheetName: 'Receipts', rightToLeft: true, colWidths: RECEIPT_COL_WIDTHS
+    });
+}
+
+// keep a master ledger file on disk, refreshed on every change
+function writeReceiptsLedger() {
+    try {
+        fs.writeFileSync(path.join(DATA_DIR, 'receipts.xlsx'), buildReceiptsWorkbook(receipts));
+    } catch (err) {
+        console.error('Could not write Excel ledger:', err.message);
+    }
+}
+writeReceiptsLedger();
+
+// Download the Excel ledger. Admins get every receipt; employees get their own.
+app.get('/api/receipts.xlsx', requireAuth, (req, res) => {
+    const list = req.user.role === 'admin'
+        ? receipts
+        : receipts.filter(r => r.createdById === req.user.id);
+    res.setHeader('Content-Type', 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
+    res.setHeader('Content-Disposition', 'attachment; filename="shootix-receipts.xlsx"');
+    res.send(buildReceiptsWorkbook(list));
+});
+
 app.get('/api/receipts', requireAuth, (req, res) => {
     const list = req.user.role === 'admin'
         ? receipts
@@ -307,6 +356,7 @@ app.post('/api/receipts', requireAuth, (req, res) => {
     receipts.push(receipt);
     saveJSON('receipts.json', receipts);
     saveJSON('meta.json', meta);
+    writeReceiptsLedger();   // append this receipt as a new row in the Excel ledger
     res.json({ receipt });
 });
 
@@ -316,6 +366,7 @@ app.delete('/api/receipts/:id', requireAdmin, (req, res) => {
     }
     receipts = receipts.filter(r => r.id !== req.params.id);
     saveJSON('receipts.json', receipts);
+    writeReceiptsLedger();   // keep the Excel ledger in sync
     res.json({ ok: true });
 });
 
