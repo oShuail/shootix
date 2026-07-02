@@ -265,8 +265,8 @@ td { padding: 12px; border-bottom: 1px solid var(--clr-border); color: var(--clr
 tr:hover td { background: rgba(248,245,230,0.02); }
 td .mono { font-family: var(--font-latin); font-size: 0.85rem; color: var(--clr-cream); }
 
-/* ---------- Saudi Riyal symbol ---------- */
-.riyal-icon { width: 0.82em; height: 0.82em; display: inline-block; vertical-align: -0.05em; margin-inline-start: 2px; }
+/* ---------- Riyal symbol ---------- */
+.riyal-symbol { font-family: 'Cairo', 'Segoe UI', Tahoma, Arial, sans-serif; font-weight: 600; }
 
 /* ---------- line items editor ---------- */
 .items-row { display: grid; grid-template-columns: 1fr 90px 130px 40px; gap: 14px; align-items: end; margin-bottom: 14px; }
@@ -325,6 +325,8 @@ td .mono { font-family: var(--font-latin); font-size: 0.85rem; color: var(--clr-
 }
 .receipt-doc * { color: #1A2B4C; }
 .rc-head { display: flex; justify-content: space-between; align-items: flex-start; gap: 20px; border-bottom: 3px solid #1A2B4C; padding-bottom: 22px; }
+.rc-head .rc-brand { display: flex; align-items: center; gap: 14px; }
+.rc-head .rc-logo { width: 58px; height: 58px; border-radius: 50%; object-fit: cover; flex-shrink: 0; }
 .rc-head .rc-brand-name { font-family: var(--font-latin); font-weight: 700; font-size: 1.7rem; letter-spacing: 0.08em; }
 .rc-head .rc-brand-sub { font-size: 0.8rem; color: #6b7280; margin-top: 2px; }
 .rc-head .rc-doc-type { text-align: end; }

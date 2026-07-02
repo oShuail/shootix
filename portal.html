@@ -104,7 +104,7 @@
 
                     <div class="form-grid" style="margin-top:26px">
                         <div class="field">
-                            <label>خصم (<svg class="riyal-icon" viewBox="0 0 100 100" fill="currentColor" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><polygon points="14,92 26,92 40,14 34,4 26,10 24,20"/><polygon points="38,92 50,92 62,30 56,20 48,26 46,36"/><polygon points="18,52 92,38 92,50 22,64"/><polygon points="36,70 88,58 88,70 40,82"/></svg>)</label>
+                            <label>خصم (<span class="riyal-symbol">&#xFDFC;</span>)</label>
                             <input type="number" id="rc-discount" min="0" value="0" dir="ltr">
                         </div>
                         <div class="field" style="justify-content:flex-end">
@@ -181,7 +181,7 @@
     (() => {
         const $ = (id) => document.getElementById(id);
         const FREELANCE_ID = 'FL-120734087';
-        const RIYAL_SVG = '<svg class="riyal-icon" viewBox="0 0 100 100" fill="currentColor" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><polygon points="14,92 26,92 40,14 34,4 26,10 24,20"/><polygon points="38,92 50,92 62,30 56,20 48,26 46,36"/><polygon points="18,52 92,38 92,50 22,64"/><polygon points="36,70 88,58 88,70 40,82"/></svg>';
+        const RIYAL_SVG = '<span class="riyal-symbol">&#xFDFC;</span>';
         const money = (n) => `${Number(n).toLocaleString('en-US', { minimumFractionDigits: 2 })} ${RIYAL_SVG}`;
         const esc = (s) => String(s ?? '').replace(/[&<>"']/g, (c) =>
             ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
@@ -257,7 +257,7 @@
             row.innerHTML = `
                 <div class="field"><label>الوصف</label><input type="text" class="i-desc" placeholder="مثال: يوم تصوير فوتوغرافي"></div>
                 <div class="field"><label>الكمية</label><input type="number" class="i-qty" min="1" value="${qty}" dir="ltr"></div>
-                <div class="field"><label>السعر (<svg class="riyal-icon" viewBox="0 0 100 100" fill="currentColor" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><polygon points="14,92 26,92 40,14 34,4 26,10 24,20"/><polygon points="38,92 50,92 62,30 56,20 48,26 46,36"/><polygon points="18,52 92,38 92,50 22,64"/><polygon points="36,70 88,58 88,70 40,82"/></svg>)</label><input type="number" class="i-price" min="0" step="0.01" dir="ltr"></div>
+                <div class="field"><label>السعر (<span class="riyal-symbol">&#xFDFC;</span>)</label><input type="number" class="i-price" min="0" step="0.01" dir="ltr"></div>
                 <button class="rm" title="حذف البند"><i class="fas fa-xmark"></i></button>`;
             row.querySelector('.i-desc').value = description;
             row.querySelector('.i-price').value = price;
@@ -367,11 +367,14 @@
             $('receipt-print-area').innerHTML = `
                 <div class="receipt-doc" dir="rtl">
                     <div class="rc-head">
-                        <div>
-                            <div class="rc-brand-name">SHOTIX</div>
-                            <div class="rc-brand-sub">شوتيكس للإنتاج البصري — Visual Production Studio</div>
-                            <div class="rc-brand-sub" dir="ltr">shootix.sa@gmail.com · +966 53 761 4446</div>
-                            <div class="rc-brand-sub" dir="ltr">Freelance License: ${FREELANCE_ID}</div>
+                        <div class="rc-brand">
+                            <img src="assets/photo-output.PNG" alt="Shotix" class="rc-logo">
+                            <div>
+                                <div class="rc-brand-name">SHOTIX</div>
+                                <div class="rc-brand-sub">شوتيكس للإنتاج البصري — Visual Production Studio</div>
+                                <div class="rc-brand-sub" dir="ltr">shootix.sa@gmail.com · +966 53 761 4446</div>
+                                <div class="rc-brand-sub" dir="ltr">Freelance License: ${FREELANCE_ID}</div>
+                            </div>
                         </div>
                         <div class="rc-doc-type">
                             <div class="big">إيصال / RECEIPT</div>
@@ -397,7 +400,6 @@
                     </div>
                     ${r.notes ? `<div class="rc-notes"><div class="lbl">ملاحظات / Notes</div>${esc(r.notes)}</div>` : ''}
                     <div class="rc-foot">
-                        <span>أصدره / Issued by: ${esc(r.createdBy)}</span>
                         <span dir="ltr">${new Date(r.createdAt).toLocaleString('en-GB')}</span>
                         <span>شكراً لتعاملكم معنا — Thank you for your business</span>
                     </div>
