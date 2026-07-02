@@ -333,8 +333,8 @@ td .mono { font-family: var(--font-latin); font-size: 0.85rem; color: var(--clr-
 .rc-head .rc-doc-type .big { font-size: 1.35rem; font-weight: 800; color: #C5A059; letter-spacing: 0.05em; }
 .rc-head .rc-doc-type .num { font-family: var(--font-latin); font-size: 0.95rem; margin-top: 4px; }
 .rc-meta { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 14px 24px; padding: 22px 0; border-bottom: 1px solid #e5e7eb; }
-.rc-meta .lbl { font-size: 0.68rem; letter-spacing: 0.15em; text-transform: uppercase; color: #9ca3af; font-family: var(--font-latin); }
-.rc-meta .val { font-weight: 700; font-size: 0.98rem; margin-top: 2px; }
+.rc-meta .lbl { font-size: 0.68rem; letter-spacing: 0.15em; text-transform: uppercase; color: #9ca3af; font-family: var(--font-latin); text-align: right; }
+.rc-meta .val { font-weight: 700; font-size: 0.98rem; margin-top: 2px; text-align: right; }
 .rc-table { width: 100%; border-collapse: collapse; margin: 26px 0 8px; }
 .rc-table th { background: #1A2B4C; color: #F8F5E6 !important; font-size: 0.78rem; padding: 10px 12px; text-align: start; border: none; letter-spacing: 0.06em; }
 .rc-table td { padding: 11px 12px; border-bottom: 1px solid #e5e7eb; font-size: 0.92rem; }
@@ -342,6 +342,12 @@ td .mono { font-family: var(--font-latin); font-size: 0.85rem; color: var(--clr-
 .rc-totals .row { display: flex; justify-content: space-between; padding: 5px 0; font-size: 0.92rem; }
 .rc-totals .row.grand { border-top: 2px solid #1A2B4C; margin-top: 8px; padding-top: 10px; font-size: 1.1rem; font-weight: 800; }
 .rc-totals .row.grand span:last-child { color: #C5A059; }
+.rc-bank { margin-top: 22px; padding: 16px 20px; background: #f8f7f2; border: 1px solid #e5e7eb; border-radius: 4px; }
+.rc-bank .lbl { font-size: 0.68rem; letter-spacing: 0.15em; text-transform: uppercase; color: #9ca3af; font-family: var(--font-latin); margin-bottom: 10px; }
+.rc-bank-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 10px 24px; }
+.rc-bank-grid > div { display: flex; flex-direction: column; }
+.rc-bank-grid .k { font-size: 0.7rem; color: #9ca3af; margin-bottom: 2px; }
+.rc-bank-grid .v { font-weight: 700; font-size: 0.92rem; text-align: right; }
 .rc-notes { margin-top: 26px; padding: 14px 18px; background: #f8f7f2; border-inline-start: 3px solid #C5A059; font-size: 0.88rem; }
 .rc-notes .lbl { font-size: 0.68rem; letter-spacing: 0.15em; text-transform: uppercase; color: #9ca3af; font-family: var(--font-latin); margin-bottom: 4px; }
 .rc-foot { margin-top: 34px; padding-top: 18px; border-top: 1px solid #e5e7eb; display: flex; justify-content: space-between; gap: 16px; font-size: 0.78rem; color: #6b7280; flex-wrap: wrap; }

@@ -181,6 +181,11 @@
     (() => {
         const $ = (id) => document.getElementById(id);
         const FREELANCE_ID = 'FL-120734087';
+        const BANK_INFO = {
+            bank: 'مصرف الراجحي / Al Rajhi Bank',
+            beneficiary: 'عبدالرحمن عمر النويصر',
+            iban: 'SA21 8000 0115 6080 1601 0060'
+        };
         const RIYAL_SVG = '<span class="riyal-symbol">&#xFDFC;</span>';
         const money = (n) => `${Number(n).toLocaleString('en-US', { minimumFractionDigits: 2 })} ${RIYAL_SVG}`;
         const esc = (s) => String(s ?? '').replace(/[&<>"']/g, (c) =>
@@ -356,7 +361,7 @@
         }
 
         /* ---- printable receipt (browser print → save as PDF) ---- */
-        function printReceipt(r) {
+        async function printReceipt(r) {
             const rows = r.items.map((i) => `
                 <tr>
                     <td>${esc(i.description)}</td>
@@ -398,12 +403,33 @@
                         ${r.vatEnabled ? `<div class="row"><span>الضريبة / VAT 15%</span><span dir="ltr">${money(r.vat)}</span></div>` : ''}
                         <div class="row grand"><span>الإجمالي / Total</span><span dir="ltr">${money(r.total)}</span></div>
                     </div>
+                    <div class="rc-bank">
+                        <div class="lbl">معلومات الدفع / Payment Information</div>
+                        <div class="rc-bank-grid">
+                            <div><span class="k">البنك / Bank</span><span class="v">${esc(BANK_INFO.bank)}</span></div>
+                            <div><span class="k">اسم المستفيد / Beneficiary</span><span class="v">${esc(BANK_INFO.beneficiary)}</span></div>
+                            <div><span class="k">الآيبان / IBAN</span><span class="v" dir="ltr">${esc(BANK_INFO.iban)}</span></div>
+                        </div>
+                    </div>
                     ${r.notes ? `<div class="rc-notes"><div class="lbl">ملاحظات / Notes</div>${esc(r.notes)}</div>` : ''}
                     <div class="rc-foot">
                         <span dir="ltr">${new Date(r.createdAt).toLocaleString('en-GB')}</span>
                         <span>شكراً لتعاملكم معنا — Thank you for your business</span>
                     </div>
                 </div>`;
+
+            // Wait for the logo to actually load before printing — otherwise
+            // window.print() can fire before the image request finishes and
+            // the PDF/print output shows a broken image icon instead of it.
+            const logo = $('receipt-print-area').querySelector('.rc-logo');
+            if (logo && !logo.complete) {
+                await new Promise((resolve) => {
+                    logo.addEventListener('load', resolve, { once: true });
+                    logo.addEventListener('error', resolve, { once: true });
+                    setTimeout(resolve, 3000); // never block printing for more than 3s
+                });
+            }
+
             const oldTitle = document.title;
             document.title = r.number;   /* becomes the suggested PDF filename */
             window.print();
