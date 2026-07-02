@@ -34,6 +34,32 @@ console. **Log in and change it immediately** (Admin panel → الإعدادا�
 > images. Accounts, uploads and receipts need the Node server running on a host
 > such as Render, Railway, or any VPS.
 
+## ☁️ Deploying (Render)
+
+This repo includes `render.yaml`, so deployment is a Blueprint away:
+
+1. Go to [dashboard.render.com](https://dashboard.render.com) → **New** → **Blueprint**.
+2. Connect this GitHub repo and pick the `claude/shotix-website-redesign-0dqz35`
+   branch (or `main`, once merged).
+3. Render reads `render.yaml` automatically — service name `shotix`, free plan,
+   `npm install` / `npm start`. Click **Apply**.
+4. Once it's live, open the service → **Environment** tab and copy the
+   auto-generated `SHOTIX_ADMIN_PASSWORD` value — that's your real admin
+   password (the `shotix-admin` placeholder is only used when no env var is
+   set, e.g. running locally). Log in at `/admin.html` with `admin` / that
+   password, then change it from Settings.
+
+**⚠️ Free-tier storage is ephemeral.** Render's free web services have no
+persistent disk — `data/*.json` (accounts, gallery, receipts) and
+`assets/uploads/` are wiped on every redeploy (any new push). Fine for a demo,
+not for real data. Two ways to fix it:
+
+- Upgrade the service to a paid plan and attach a
+  [Render Disk](https://render.com/docs/disks) mounted at the repo root, or
+- Finish the Supabase migration (Postgres + Storage) already scoped for this
+  project — durable regardless of plan or redeploys. Ask to pick this up once
+  Supabase is authenticated via `claude /mcp`.
+
 ## 🎨 Palette (unchanged)
 
 | Token | Value | Use |

@@ -1,0 +1,11 @@
+services:
+  - type: web
+    name: shotix
+    runtime: node
+    plan: free
+    buildCommand: npm install
+    startCommand: npm start
+    healthCheckPath: /index.html
+    envVars:
+      - key: SHOTIX_ADMIN_PASSWORD
+        generateValue: true
