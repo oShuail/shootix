@@ -4,7 +4,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // AOS
     // ==========================================
     if (typeof AOS !== 'undefined') {
-        AOS.init({ duration: 900, easing: 'ease-out-cubic', once: true, offset: 60 });
+        AOS.init({ duration: 400, easing: 'ease-out-cubic', once: true, offset: 40 });
     }
 
     // ==========================================
@@ -277,5 +277,14 @@ function loadManagedGallery() {
                 });
             });
         })
-        .catch(() => { /* no backend (static hosting) — keep static images */ });
+        .catch(() => { /* no backend (static hosting) — grids stay empty, hidden below */ })
+        .finally(() => {
+            // Categories with no real (admin-uploaded) images yet stay hidden
+            // entirely rather than showing an empty gap where stock photos used to be.
+            targets.forEach((grid) => {
+                if (grid.children.length > 0) return;
+                const container = grid.closest('.portfolio-category') || grid.closest('.project-gallery');
+                if (container) container.style.display = 'none';
+            });
+        });
 }
