@@ -276,6 +276,14 @@ h1,h2,h3,h4,h5,h6{font-weight:700;line-height:1.2;color:var(--clr-cream)}
     .hero-kicker{font-size:0.72rem;letter-spacing:0.3em}
     .process-grid{grid-template-columns:1fr}
     .process-step{padding:36px 28px;min-height:auto}
+    /* Compact service cards on mobile */
+    .timeline{margin-top:2rem}
+    .timeline-item{padding-bottom:16px}
+    .timeline-content{padding:22px 20px;border-radius:12px}
+    .service-icon{width:42px;height:42px;font-size:1.1rem;margin-bottom:1rem}
+    .service-title{font-size:1.15rem;margin-bottom:0.5rem}
+    .service-desc{font-size:0.88rem;line-height:1.55;margin-bottom:0.9rem}
+    .service-badge{font-size:0.64rem;padding:5px 11px}
 }
 
 html[dir="rtl"] .section-eyebrow{direction:rtl}

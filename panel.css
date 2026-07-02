@@ -265,6 +265,9 @@ td { padding: 12px; border-bottom: 1px solid var(--clr-border); color: var(--clr
 tr:hover td { background: rgba(248,245,230,0.02); }
 td .mono { font-family: var(--font-latin); font-size: 0.85rem; color: var(--clr-cream); }
 
+/* ---------- Saudi Riyal symbol ---------- */
+.riyal-icon { width: 0.82em; height: 0.82em; display: inline-block; vertical-align: -0.05em; margin-inline-start: 2px; }
+
 /* ---------- line items editor ---------- */
 .items-row { display: grid; grid-template-columns: 1fr 90px 130px 40px; gap: 14px; align-items: end; margin-bottom: 14px; }
 .items-row .rm {

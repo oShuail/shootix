@@ -221,7 +221,8 @@
             el.classList.add('show');
             setTimeout(() => el.classList.remove('show'), 2600);
         }
-        const money = (n) => Number(n).toLocaleString('en-US', { minimumFractionDigits: 2 }) + ' ر.س';
+        const RIYAL_SVG = '<svg class="riyal-icon" viewBox="0 0 100 100" fill="currentColor" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><polygon points="14,92 26,92 40,14 34,4 26,10 24,20"/><polygon points="38,92 50,92 62,30 56,20 48,26 46,36"/><polygon points="18,52 92,38 92,50 22,64"/><polygon points="36,70 88,58 88,70 40,82"/></svg>';
+        const money = (n) => `${Number(n).toLocaleString('en-US', { minimumFractionDigits: 2 })} ${RIYAL_SVG}`;
 
         /* ---- auth flow ---- */
         async function boot() {
