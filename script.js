@@ -1,89 +1,87 @@
+/* Run each independent feature in its own try/catch so a failure in one
+   (e.g. the AOS CDN not loading) can never take the rest of the page's
+   interactivity down with it — every block below must be able to fail
+   in isolation without breaking any other block. */
+function safeRun(name, fn) {
+    try { fn(); }
+    catch (err) { console.error(`[shotix] "${name}" failed to initialize:`, err); }
+}
+
 document.addEventListener('DOMContentLoaded', () => {
 
-    // ==========================================
-    // AOS
-    // ==========================================
-    if (typeof AOS !== 'undefined') {
-        AOS.init({ duration: 400, easing: 'ease-out-cubic', once: true, offset: 40 });
-    }
+    safeRun('AOS', () => {
+        if (typeof AOS !== 'undefined') {
+            AOS.init({ duration: 400, easing: 'ease-out-cubic', once: true, offset: 40 });
+        }
+    });
 
-    // ==========================================
-    // Navbar scroll
-    // ==========================================
-    const navbar = document.getElementById('navbar');
-    const onScroll = () => {
-        if (!navbar) return;
-        if (window.scrollY > 50) navbar.classList.add('scrolled');
-        else if (!navbar.classList.contains('force-scrolled')) navbar.classList.remove('scrolled');
-    };
-    onScroll();
-    window.addEventListener('scroll', onScroll, { passive: true });
+    safeRun('navbar scroll', () => {
+        const navbar = document.getElementById('navbar');
+        const onScroll = () => {
+            if (!navbar) return;
+            if (window.scrollY > 50) navbar.classList.add('scrolled');
+            else if (!navbar.classList.contains('force-scrolled')) navbar.classList.remove('scrolled');
+        };
+        onScroll();
+        window.addEventListener('scroll', onScroll, { passive: true });
+    });
 
-    // ==========================================
-    // Mobile menu
-    // ==========================================
-    const mobileMenuBtn = document.querySelector('.mobile-menu-btn');
-    if (mobileMenuBtn && navbar) {
-        mobileMenuBtn.addEventListener('click', () => {
-            navbar.classList.toggle('active');
-            const icon = mobileMenuBtn.querySelector('i');
-            if (icon) { icon.classList.toggle('fa-bars'); icon.classList.toggle('fa-times'); }
-        });
-        document.querySelectorAll('.nav-links a').forEach(link => {
-            link.addEventListener('click', () => {
-                if (navbar.classList.contains('active')) {
-                    navbar.classList.remove('active');
-                    const icon = mobileMenuBtn.querySelector('i');
-                    if (icon) { icon.classList.add('fa-bars'); icon.classList.remove('fa-times'); }
+    safeRun('mobile menu', () => {
+        const navbar = document.getElementById('navbar');
+        const mobileMenuBtn = document.querySelector('.mobile-menu-btn');
+        if (mobileMenuBtn && navbar) {
+            mobileMenuBtn.addEventListener('click', () => {
+                navbar.classList.toggle('active');
+                const icon = mobileMenuBtn.querySelector('i');
+                if (icon) { icon.classList.toggle('fa-bars'); icon.classList.toggle('fa-times'); }
+            });
+            document.querySelectorAll('.nav-links a').forEach(link => {
+                link.addEventListener('click', () => {
+                    if (navbar.classList.contains('active')) {
+                        navbar.classList.remove('active');
+                        const icon = mobileMenuBtn.querySelector('i');
+                        if (icon) { icon.classList.add('fa-bars'); icon.classList.remove('fa-times'); }
+                    }
+                });
+            });
+        }
+    });
+
+    safeRun('contact form submit', () => {
+        const contactForm = document.getElementById('contactForm');
+        if (contactForm) {
+            contactForm.addEventListener('submit', () => {
+                const btn = contactForm.querySelector('button[type="submit"]');
+                if (!btn) return;
+                const isRtl = document.documentElement.dir === 'rtl';
+                btn.innerHTML = `<i class="fas fa-spinner fa-spin"></i> ${isRtl ? 'جاري الإرسال...' : 'Sending...'}`;
+                btn.disabled = true;
+            });
+        }
+    });
+
+    safeRun('active nav highlight', () => {
+        const sections = document.querySelectorAll('section[id]');
+        window.addEventListener('scroll', () => {
+            let current = '';
+            sections.forEach(section => {
+                if (window.pageYOffset >= (section.offsetTop - section.clientHeight / 3)) {
+                    current = section.getAttribute('id');
                 }
             });
-        });
-    }
+            document.querySelectorAll('.nav-links a').forEach(a => {
+                const href = a.getAttribute('href') || '';
+                if (!href.startsWith('#')) return;
+                a.classList.remove('active');
+                if (href.substring(1) === current) a.classList.add('active');
+            });
+        }, { passive: true });
+    });
 
-    // ==========================================
-    // Contact form submit
-    // ==========================================
-    const contactForm = document.getElementById('contactForm');
-    if (contactForm) {
-        contactForm.addEventListener('submit', () => {
-            const btn = contactForm.querySelector('button[type="submit"]');
-            if (!btn) return;
-            const isRtl = document.documentElement.dir === 'rtl';
-            btn.innerHTML = `<i class="fas fa-spinner fa-spin"></i> ${isRtl ? 'جاري الإرسال...' : 'Sending...'}`;
-            btn.disabled = true;
-        });
-    }
-
-    // ==========================================
-    // Active nav highlight
-    // ==========================================
-    const sections = document.querySelectorAll('section[id]');
-    window.addEventListener('scroll', () => {
-        let current = '';
-        sections.forEach(section => {
-            if (window.pageYOffset >= (section.offsetTop - section.clientHeight / 3)) {
-                current = section.getAttribute('id');
-            }
-        });
-        document.querySelectorAll('.nav-links a').forEach(a => {
-            const href = a.getAttribute('href') || '';
-            if (!href.startsWith('#')) return;
-            a.classList.remove('active');
-            if (href.substring(1) === current) a.classList.add('active');
-        });
-    }, { passive: true });
-
-    // ==========================================
-    // LIGHTBOX GALLERY
-    // ==========================================
-    initLightbox();
-
-    // ==========================================
-    // V3 cinematic layer
-    // ==========================================
-    initScrollProgress();
-    initStatCounters();
-    loadManagedGallery();
+    safeRun('lightbox gallery', initLightbox);
+    safeRun('scroll progress', initScrollProgress);
+    safeRun('stat counters', initStatCounters);
+    safeRun('managed gallery', loadManagedGallery);
 });
 
 
@@ -286,5 +284,11 @@ function loadManagedGallery() {
                 const container = grid.closest('.portfolio-category') || grid.closest('.project-gallery');
                 if (container) container.style.display = 'none';
             });
+            // Hiding/populating categories changes the page's height after AOS
+            // already measured every element's scroll-trigger position on load.
+            // Without this, everything below the change can be left with stale
+            // trigger offsets and may never fade in — refresh AOS's measurements
+            // against the new layout so nothing gets stuck invisible.
+            if (typeof AOS !== 'undefined' && AOS.refresh) AOS.refresh();
         });
 }
