@@ -256,10 +256,12 @@ h1,h2,h3,h4,h5,h6{font-weight:700;line-height:1.2;color:var(--clr-cream)}
     .mobile-actions{display:flex}
     .navbar.active .nav-links{display:flex;flex-direction:column;position:absolute;top:100%;left:0;width:100%;background-color:var(--clr-bg);padding:30px 20px;text-align:center;border-top:1px solid var(--clr-border);gap:22px}
     .navbar.active .nav-cta{display:block;padding:0 20px 28px;background-color:var(--clr-bg);position:absolute;top:calc(100% + 225px);left:0;width:100%;text-align:center}
-    .timeline-item,.timeline-item.left,.timeline-item.right{width:100%;margin-inline-start:0;padding-inline-start:50px;padding-inline-end:0;text-align:start}
-    .timeline-item.left .service-icon{margin-inline-start:0}
-    .timeline-line{left:0;transform:none}
-    .timeline-dot{inset-inline-start:-7px!important;inset-inline-end:auto!important}
+    /* Mobile: no zigzag — clean full-width stacked cards */
+    .timeline{margin-top:3rem}
+    .timeline-item,.timeline-item.left,.timeline-item.right{width:100%;margin-inline-start:0;padding-inline-start:0;padding-inline-end:0;padding-bottom:24px;text-align:start}
+    .timeline-item.left .service-icon,.timeline-item.right .service-icon{margin-inline-start:0}
+    .timeline-line{display:none}
+    .timeline-dot{display:none}
 }
 @media screen and (max-width:768px){
     .about,.services,.portfolio,.testimonials,.contact,.project-details,.project-gallery{padding:90px 0}
