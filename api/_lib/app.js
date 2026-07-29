@@ -20,7 +20,7 @@ const { db, storage, health, isConfigured, SupabaseError, SUPABASE_URL } = requi
 const auth = require('./auth');
 const ledger = require('./ledger');
 
-const ROOT = path.join(__dirname, '..');
+const ROOT = path.join(__dirname, '..', '..');
 
 const CATEGORIES = ['cars', 'food', 'realestate', 'events', 'products', 'fashion'];
 const RECEIPT_STATUSES = ['paid', 'partial', 'unpaid'];

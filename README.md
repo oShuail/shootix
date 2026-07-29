@@ -7,7 +7,7 @@ The ShootiX website and the small product behind it:
    receipts, and a dashboard.
 3. **A staff portal** (`portal.html`) — employees issue branded client receipts
    and download them as PDF.
-4. **A serverless API** (`lib/app.js`) backed by **Supabase**, so nothing is
+4. **A serverless API** (`api/_lib/app.js`) backed by **Supabase**, so nothing is
    ever lost when the app restarts, redeploys or scales out.
 
 ---
@@ -140,7 +140,7 @@ issued it and when.
 - **Download** from the Excel button in the admin panel or staff portal
   (`GET /api/receipts.xlsx`). Admins get every receipt; employees get their own.
 - A master copy is kept in Supabase Storage, refreshed on every change.
-- Written by a dependency-free writer (`lib/xlsx.js`) — a real Office Open XML
+- Written by a dependency-free writer (`api/_lib/xlsx.js`) — a real Office Open XML
   workbook (RTL sheet, bold header, numeric totals) that opens in Excel, Numbers
   and Google Sheets.
 
@@ -148,14 +148,18 @@ issued it and when.
 
 ## 🗂 Files
 
+Server-only code lives under `api/_lib/`. Vercel treats `api/` as its functions
+directory, so those modules are bundled into the function but never published as
+static files the way anything in the repo root would be.
+
 | File | Purpose |
 |---|---|
-| `lib/app.js` | The API: auth, team, gallery, receipts, stats |
-| `lib/supabase.js` | Supabase Postgres + Storage client (native fetch) |
-| `lib/auth.js` | scrypt passwords, stateless signed session cookies |
-| `lib/ledger.js` | Builds and syncs the Excel ledger |
-| `lib/xlsx.js` | Dependency-free `.xlsx` writer |
 | `api/index.js` | Vercel serverless entry point |
+| `api/_lib/app.js` | The API: auth, team, gallery, receipts, stats |
+| `api/_lib/supabase.js` | Supabase Postgres + Storage client (native fetch) |
+| `api/_lib/auth.js` | scrypt passwords, stateless signed session cookies |
+| `api/_lib/ledger.js` | Builds and syncs the Excel ledger |
+| `api/_lib/xlsx.js` | Dependency-free `.xlsx` writer |
 | `server.js` | Local dev server (same app) |
 | `supabase/schema.sql` | One-time database setup |
 | `scripts/check.js` | Self-tests — `npm run check` |

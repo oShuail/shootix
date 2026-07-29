@@ -26,13 +26,11 @@
       ]
     },
     {
-      "source": "/(admin|portal).html",
+      "source": "/:panel(admin|portal).html",
       "headers": [
         { "key": "Cache-Control", "value": "no-store" },
         { "key": "X-Robots-Tag", "value": "noindex, nofollow" }
       ]
     }
-  ],
-  "cleanUrls": true,
-  "trailingSlash": false
+  ]
 }

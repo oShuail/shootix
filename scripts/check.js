@@ -12,8 +12,8 @@
 const assert = require('assert');
 const http = require('http');
 
-const auth = require('../lib/auth');
-const ledger = require('../lib/ledger');
+const auth = require('../api/_lib/auth');
+const ledger = require('../api/_lib/ledger');
 
 let passed = 0;
 const results = [];
@@ -101,7 +101,7 @@ function test(name, fn) {
 
     /* ---------- the app boots and serves ---------- */
     await test('the app serves the homepage and answers /api/health', async () => {
-        const app = require('../lib/app');
+        const app = require('../api/_lib/app');
         const server = http.createServer(app);
         await new Promise((resolve) => server.listen(0, resolve));
         const port = server.address().port;

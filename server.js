@@ -13,8 +13,8 @@
 
 'use strict';
 
-const app = require('./lib/app');
-const { isConfigured } = require('./lib/supabase');
+const app = require('./api/_lib/app');
+const { isConfigured } = require('./api/_lib/supabase');
 
 const PORT = process.env.PORT || 3000;
 
