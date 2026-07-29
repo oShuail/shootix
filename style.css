@@ -155,15 +155,11 @@ h1,h2,h3,h4,h5,h6{font-weight:700;line-height:1.2;color:var(--clr-cream)}
 .client-logos{display:flex;flex-wrap:wrap;gap:12px;align-items:center}
 .client-logo{
     display:flex;align-items:center;justify-content:center;
-    min-width:106px;height:46px;padding:0 16px;
+    min-width:150px;height:72px;padding:0 16px;
     font-family:var(--font-latin);font-size:0.68rem;letter-spacing:0.12em;
     color:var(--clr-cream-dim);white-space:nowrap;
-    border:1px dashed var(--clr-border-str);border-radius:6px;
-    background:rgba(248,245,230,0.03);transition:var(--tr-normal);
 }
-.client-logo:hover{color:var(--clr-cream-soft);border-color:var(--clr-accent);background:rgba(197,160,89,0.07)}
-.client-logos img{height:34px;width:auto;padding:0;border:0;background:none;filter:grayscale(1) brightness(1.7);opacity:0.7;transition:var(--tr-normal)}
-.client-logos img:hover{filter:none;opacity:1}
+.client-logos img{height:60px;width:auto;padding:0;border:0;background:none}
 /* The about photo is no longer a card in its column — it bleeds across the
    whole section and runs behind the copy. The column stays in the grid
    (position:static) purely to reserve the space that sets the section height;
