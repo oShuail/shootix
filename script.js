@@ -114,8 +114,6 @@ document.addEventListener('DOMContentLoaded', () => {
     // V3 cinematic layer
     // ==========================================
     initScrollProgress();
-    initCustomCursor();
-    initStatCounters();
     loadManagedGallery();
 });
 
@@ -236,76 +234,6 @@ function initScrollProgress() {
     };
     update();
     window.addEventListener('scroll', update, { passive: true });
-}
-
-/* ==========================================
-   V3 — custom cursor (desktop only)
-   ========================================== */
-function initCustomCursor() {
-    if (!window.matchMedia('(hover: hover) and (pointer: fine)').matches) return;
-    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
-
-    const dot = document.createElement('div');
-    const ring = document.createElement('div');
-    dot.className = 'cursor-dot';
-    ring.className = 'cursor-ring';
-    document.body.appendChild(dot);
-    document.body.appendChild(ring);
-    document.body.classList.add('cursor-hidden');
-
-    let x = 0, y = 0, rx = 0, ry = 0;
-    document.addEventListener('mousemove', (e) => {
-        x = e.clientX; y = e.clientY;
-        document.body.classList.remove('cursor-hidden');
-        dot.style.transform = `translate(${x}px, ${y}px) translate(-50%, -50%)`;
-    });
-    document.addEventListener('mouseleave', () => document.body.classList.add('cursor-hidden'));
-
-    (function follow() {
-        rx += (x - rx) * 0.16;
-        ry += (y - ry) * 0.16;
-        ring.style.transform = `translate(${rx}px, ${ry}px) translate(-50%, -50%)`;
-        requestAnimationFrame(follow);
-    })();
-
-    document.addEventListener('mouseover', (e) => {
-        ring.classList.toggle('is-hover', Boolean(e.target.closest('a, button, .portfolio-card, input, select, textarea')));
-    });
-}
-
-/* ==========================================
-   V3 — animated stat counters
-   ========================================== */
-function initStatCounters() {
-    const stats = document.querySelectorAll('.stat-number');
-    if (stats.length === 0 || !('IntersectionObserver' in window)) return;
-
-    const animate = (el) => {
-        const text = el.textContent.trim();
-        const match = text.match(/\d+/);
-        if (!match) return;
-        const target = parseInt(match[0], 10);
-        const prefix = text.slice(0, match.index);
-        const suffix = text.slice(match.index + match[0].length);
-        const duration = 1600;
-        const start = performance.now();
-        const tick = (now) => {
-            const p = Math.min((now - start) / duration, 1);
-            const eased = 1 - Math.pow(1 - p, 3);
-            el.textContent = prefix + Math.round(target * eased) + suffix;
-            if (p < 1) requestAnimationFrame(tick);
-        };
-        requestAnimationFrame(tick);
-    };
-
-    const observer = new IntersectionObserver((entries) => {
-        entries.forEach((entry) => {
-            if (!entry.isIntersecting) return;
-            animate(entry.target);
-            observer.unobserve(entry.target);
-        });
-    }, { threshold: 0.5 });
-    stats.forEach((el) => observer.observe(el));
 }
 
 /* ==========================================

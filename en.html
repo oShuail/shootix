@@ -54,12 +54,13 @@
 
     <section id="hero" class="hero">
         <div class="video-background">
-            <img src="assets/IMG_9688.JPG" alt="ShootiX cinematic production still" class="hero-still" fetchpriority="high" decoding="async">
+            <picture>
+                <source media="(max-width:768px)" srcset="assets/hero-mobile.jpg">
+                <img src="assets/hero-desktop.jpg" alt="ShootiX cinematic production still" class="hero-still" fetchpriority="high" decoding="async">
+            </picture>
             <div class="video-overlay"></div>
         </div>
-        <span class="hero-ghost" aria-hidden="true">SHOOTIX</span>
         <div class="hero-content" data-aos="fade-up" data-aos-duration="1000">
-            <span class="hero-kicker">Visual Production Studio — Saudi Arabia</span>
             <h1 class="hero-title">ShootiX.<br><span class="highlight">We don't just shoot,<br>we create impact.</span></h1>
             <p class="hero-subtitle">We turn your vision into a cinematic scene that lasts in memory. Experts in visual content production for leading brands.</p>
             <div class="hero-buttons">
@@ -67,46 +68,37 @@
                 <a href="#portfolio" class="btn btn-outline-light"><i class="fas fa-play-circle btn-icon"></i> Portfolio</a>
             </div>
         </div>
-        <div class="scroll-indicator"><div class="mouse"><div class="wheel"></div></div></div>
     </section>
-
-    <div class="marquee" aria-hidden="true">
-        <div class="marquee-track">
-            <span class="marquee-item"><span class="star">✦</span> Photography</span>
-            <span class="marquee-item outline">Video Production</span>
-            <span class="marquee-item"><span class="star">✦</span> Drone Cinematography</span>
-            <span class="marquee-item outline">Editing &amp; Grading</span>
-            <span class="marquee-item"><span class="star">✦</span> Content Creation</span>
-            <span class="marquee-item outline">Web Design</span>
-            <span class="marquee-item"><span class="star">✦</span> Photography</span>
-            <span class="marquee-item outline">Video Production</span>
-            <span class="marquee-item"><span class="star">✦</span> Drone Cinematography</span>
-            <span class="marquee-item outline">Editing &amp; Grading</span>
-            <span class="marquee-item"><span class="star">✦</span> Content Creation</span>
-            <span class="marquee-item outline">Web Design</span>
-        </div>
-    </div>
 
     <section id="about" class="about overlay-section">
         <div class="container">
             <div class="section-eyebrow" data-aos="fade-up">
-                <span class="num">01</span><span class="bar"></span><span>About the Studio</span>
+                <span class="num">01</span><span class="bar"></span><span>Who We Are</span>
             </div>
             <div class="layout-2-col">
                 <div class="about-text" data-aos="fade-up" data-aos-duration="1000">
                     <h2 class="section-title">We craft scenes that express your identity and leave a <em>lasting impact.</em></h2>
                     <div class="title-underline"></div>
-                    <p>At <strong>ShootiX</strong>, we don't just capture photos; we tell your visual story with passion. Our 100% Saudi team combines artistic creativity with technical expertise to deliver exceptional results.</p>
+                    <p>At <strong>ShootiX</strong>, we don't just capture photos; we tell your visual story with passion. We combine artistic creativity with technical expertise to deliver exceptional results.</p>
                     <p>Whether you manage a leading brand, a luxury real estate project, or a restaurant looking to stand out, we offer photography, video production, drone operations, and professional editing services that elevate your brand to new horizons.</p>
-                    <div class="stats-container">
-                        <div class="stat-item"><span class="stat-number">100%</span><span class="stat-label">Saudi Team</span></div>
-                        <div class="stat-item"><span class="stat-number">+50</span><span class="stat-label">Happy Clients</span></div>
-                        <div class="stat-item"><span class="stat-number">+200</span><span class="stat-label">Projects Done</span></div>
+                    <!-- Swap each .client-logo for <img src="assets/clients/NAME.svg" alt="NAME"> once real client logos are cleared for use. -->
+                    <div class="client-strip" data-aos="fade-up" data-aos-delay="150">
+                        <div class="client-logos">
+                            <span class="client-logo">Your logo here</span>
+                            <span class="client-logo">Your logo here</span>
+                            <span class="client-logo">Your logo here</span>
+                            <span class="client-logo">Your logo here</span>
+                        </div>
                     </div>
                 </div>
-                <div class="about-image" data-aos="fade-up" data-aos-delay="200" data-aos-duration="1000">
+                <!-- No data-aos here: AOS sets a transform, which would make this
+                     element the containing block and trap the full-bleed photo. -->
+                <div class="about-image">
                     <div class="image-glow"></div>
-                    <img src="https://images.pexels.com/photos/2510428/pexels-photo-2510428.jpeg?auto=compress&cs=tinysrgb&w=800" alt="ShootiX Behind the Scenes" class="rounded-image">
+                    <picture>
+                        <source media="(max-width:1024px)" srcset="assets/about-mobile.jpg">
+                        <img src="https://images.pexels.com/photos/2510428/pexels-photo-2510428.jpeg?auto=compress&cs=tinysrgb&w=800" alt="ShootiX Behind the Scenes" class="rounded-image" loading="lazy" decoding="async">
+                    </picture>
                 </div>
             </div>
         </div>
@@ -137,7 +129,7 @@
                     <div class="timeline-content">
                         <div class="service-icon"><i class="fas fa-video"></i></div>
                         <h3 class="service-title">Video Production</h3>
-                        <p class="service-desc">Cinematic visual content to tell your story and connect with your audience — from concept to delivery.</p>
+                        <p class="service-desc">Cinematic visual content to tell your story and connect with your audience, guided from concept to delivery.</p>
                         <span class="service-badge">Ideal for: Ads, Brand Films, Documentaries</span>
                     </div>
                 </div>
@@ -167,7 +159,7 @@
                     <div class="timeline-content">
                         <div class="service-icon"><i class="fas fa-pen-nib"></i></div>
                         <h3 class="service-title">Content Creation</h3>
-                        <p class="service-desc">A full content strategy — from ideation to execution — crafted to match your brand's tone and audience.</p>
+                        <p class="service-desc">A full content strategy from ideation to execution, crafted to match your brand's tone and audience.</p>
                         <span class="service-badge">Ideal for: Social Media, Campaigns</span>
                     </div>
                 </div>
@@ -207,7 +199,7 @@
     <section id="portfolio" class="portfolio">
         <div class="container">
             <div class="section-eyebrow" data-aos="fade-up">
-                <span class="num">04</span><span class="bar"></span><span>Selected Work</span>
+                <span class="num">04</span><span class="bar"></span><span>Our Work</span>
             </div>
             <h2 class="section-title" data-aos="fade-up">Portfolio</h2>
             <div class="title-underline" data-aos="fade-up"></div>
@@ -478,19 +470,29 @@
     </section>
 
     <footer class="footer">
-        <div class="container footer-content">
-            <div class="footer-logo"><img src="assets/photo-output.PNG" alt="ShootiX Logo"></div>
-            <div class="footer-social">
-                <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
-                <a href="#" aria-label="TikTok"><i class="fab fa-tiktok"></i></a>
-                <a href="https://wa.me/966537614446" aria-label="WhatsApp"><i class="fab fa-whatsapp"></i></a>
+        <div class="container footer-grid">
+            <div class="footer-brand">
+                <img src="assets/photo-output.PNG" alt="ShootiX Logo" class="footer-logo-img">
+                <p class="footer-tagline">A Saudi visual production studio<br>— we don't just shoot, we create impact.</p>
+                <a href="mailto:shootix.sa@gmail.com" class="footer-email">shootix.sa@gmail.com</a>
+            </div>
+            <div class="footer-contact">
+                <span class="footer-heading">Get in Touch</span>
+                <a href="https://wa.me/966537614446" class="footer-phone">+966 53 761 4446</a>
+                <div class="footer-social">
+                    <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                    <a href="#" aria-label="TikTok"><i class="fab fa-tiktok"></i></a>
+                    <a href="https://wa.me/966537614446" aria-label="WhatsApp"><i class="fab fa-whatsapp"></i></a>
+                </div>
             </div>
         </div>
-        <div class="container footer-links">
-            <a href="portal.html">Staff Portal</a>
-            <a href="admin.html">Admin Panel</a>
+        <div class="container footer-bottom">
+            <p>&copy; 2026 ShootiX Visual Production. All rights reserved.</p>
+            <div class="footer-links">
+                <a href="portal.html">Staff Portal</a>
+                <a href="admin.html">Admin Panel</a>
+            </div>
         </div>
-        <div class="footer-bottom"><p>&copy; 2024 ShootiX Visual Production. All rights reserved.</p></div>
     </footer>
 
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>

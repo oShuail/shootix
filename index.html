@@ -54,12 +54,13 @@
 
     <section id="hero" class="hero">
         <div class="video-background">
-            <img src="assets/IMG_9688.JPG" alt="من أعمال شوتيكس" class="hero-still" fetchpriority="high" decoding="async">
+            <picture>
+                <source media="(max-width:768px)" srcset="assets/hero-mobile.jpg">
+                <img src="assets/hero-desktop.jpg" alt="من أعمال شوتيكس" class="hero-still" fetchpriority="high" decoding="async">
+            </picture>
             <div class="video-overlay"></div>
         </div>
-        <span class="hero-ghost" aria-hidden="true">SHOOTIX</span>
         <div class="hero-content" data-aos="fade-up" data-aos-duration="1000">
-            <span class="hero-kicker">استوديو إنتاج بصري — السعودية</span>
             <h1 class="hero-title">شوتيكس.<br><span class="highlight">لا نصور فقط،<br>بل نصنع التأثير.</span></h1>
             <p class="hero-subtitle">نحول رؤيتك إلى مشهد سينمائي يخلد في الذاكرة. خبراء في إنتاج المحتوى البصري للعلامات التجارية الرائدة.</p>
             <div class="hero-buttons">
@@ -67,46 +68,37 @@
                 <a href="#portfolio" class="btn btn-outline-light"><i class="fas fa-play-circle btn-icon"></i> معرض الأعمال</a>
             </div>
         </div>
-        <div class="scroll-indicator"><div class="mouse"><div class="wheel"></div></div></div>
     </section>
-
-    <div class="marquee" aria-hidden="true">
-        <div class="marquee-track">
-            <span class="marquee-item"><span class="star">✦</span> تصوير فوتوغرافي</span>
-            <span class="marquee-item outline">إنتاج فيديو</span>
-            <span class="marquee-item"><span class="star">✦</span> تصوير درون</span>
-            <span class="marquee-item outline">مونتاج وإخراج</span>
-            <span class="marquee-item"><span class="star">✦</span> صناعة محتوى</span>
-            <span class="marquee-item outline">تصميم مواقع</span>
-            <span class="marquee-item"><span class="star">✦</span> تصوير فوتوغرافي</span>
-            <span class="marquee-item outline">إنتاج فيديو</span>
-            <span class="marquee-item"><span class="star">✦</span> تصوير درون</span>
-            <span class="marquee-item outline">مونتاج وإخراج</span>
-            <span class="marquee-item"><span class="star">✦</span> صناعة محتوى</span>
-            <span class="marquee-item outline">تصميم مواقع</span>
-        </div>
-    </div>
 
     <section id="about" class="about overlay-section">
         <div class="container">
             <div class="section-eyebrow" data-aos="fade-up">
-                <span class="num">01</span><span class="bar"></span><span>عن الاستوديو</span>
+                <span class="num">01</span><span class="bar"></span><span>من نحن ؟</span>
             </div>
             <div class="layout-2-col">
                 <div class="about-text" data-aos="fade-up" data-aos-duration="1000">
                     <h2 class="section-title">نصنع مشاهد تُعبّر عن هويتك <em>وتترك أثراً لا يُنسى.</em></h2>
                     <div class="title-underline"></div>
-                    <p>في <strong>شوتيكس</strong>، نحن لا نلتقط الصور فقط، بل نحكي قصتك البصرية بشغف. فريقنا السعودي 100% يجمع بين الإبداع الفني والخبرة التقنية لتقديم أعمال استثنائية.</p>
+                    <p>في <strong>شوتيكس</strong>، نحن لا نلتقط الصور فقط، بل نحكي قصتك البصرية بشغف. نجمع بين الإبداع الفني والخبرة التقنية لتقديم أعمال استثنائية.</p>
                     <p>سواء كنت تدير علامة تجارية رائدة، مشروعاً عقارياً فخماً، أو مطعماً يبحث عن التميز، نحن نقدم خدمات التصوير الفوتوغرافي، إنتاج الفيديو، تصوير الدرون، والمونتاج الاحترافي التي ترتقي بعلامتك إلى آفاق جديدة.</p>
-                    <div class="stats-container">
-                        <div class="stat-item"><span class="stat-number">100%</span><span class="stat-label">فريق سعودي</span></div>
-                        <div class="stat-item"><span class="stat-number">+50</span><span class="stat-label">عميل سعيد</span></div>
-                        <div class="stat-item"><span class="stat-number">+200</span><span class="stat-label">مشروع منجز</span></div>
+                    <!-- Swap each .client-logo for <img src="assets/clients/NAME.svg" alt="NAME"> once real client logos are cleared for use. -->
+                    <div class="client-strip" data-aos="fade-up" data-aos-delay="150">
+                        <div class="client-logos">
+                            <span class="client-logo">شعارك هنا</span>
+                            <span class="client-logo">شعارك هنا</span>
+                            <span class="client-logo">شعارك هنا</span>
+                            <span class="client-logo">شعارك هنا</span>
+                        </div>
                     </div>
                 </div>
-                <div class="about-image" data-aos="fade-up" data-aos-delay="200" data-aos-duration="1000">
+                <!-- No data-aos here: AOS sets a transform, which would make this
+                     element the containing block and trap the full-bleed photo. -->
+                <div class="about-image">
                     <div class="image-glow"></div>
-                    <img src="https://images.pexels.com/photos/2510428/pexels-photo-2510428.jpeg?auto=compress&cs=tinysrgb&w=800" alt="ShootiX Behind the Scenes" class="rounded-image">
+                    <picture>
+                        <source media="(max-width:1024px)" srcset="assets/about-mobile.jpg">
+                        <img src="https://images.pexels.com/photos/2510428/pexels-photo-2510428.jpeg?auto=compress&cs=tinysrgb&w=800" alt="ShootiX Behind the Scenes" class="rounded-image" loading="lazy" decoding="async">
+                    </picture>
                 </div>
             </div>
         </div>
@@ -137,7 +129,7 @@
                     <div class="timeline-content">
                         <div class="service-icon"><i class="fas fa-video"></i></div>
                         <h3 class="service-title">إنتاج الفيديو</h3>
-                        <p class="service-desc">محتوى بصري سينمائي لحكاية قصتك والتواصل مع جمهورك — من الفكرة إلى التسليم.</p>
+                        <p class="service-desc">محتوى بصري سينمائي لحكاية قصتك والتواصل مع جمهورك، نرافقك من الفكرة إلى التسليم.</p>
                         <span class="service-badge">مناسب لـ: الإعلانات، التغطيات، الهوية</span>
                     </div>
                 </div>
@@ -167,7 +159,7 @@
                     <div class="timeline-content">
                         <div class="service-icon"><i class="fas fa-pen-nib"></i></div>
                         <h3 class="service-title">صناعة المحتوى</h3>
-                        <p class="service-desc">استراتيجية محتوى متكاملة — من الفكرة إلى التنفيذ — مصممة لتناسب هوية علامتك وجمهورك.</p>
+                        <p class="service-desc">استراتيجية محتوى متكاملة من الفكرة إلى التنفيذ، مصممة لتناسب هوية علامتك وجمهورك.</p>
                         <span class="service-badge">مناسب لـ: السوشيال ميديا، الحملات</span>
                     </div>
                 </div>
@@ -207,7 +199,7 @@
     <section id="portfolio" class="portfolio">
         <div class="container">
             <div class="section-eyebrow" data-aos="fade-up">
-                <span class="num">04</span><span class="bar"></span><span>أعمال مختارة</span>
+                <span class="num">04</span><span class="bar"></span><span>أعمالنا</span>
             </div>
             <h2 class="section-title" data-aos="fade-up">أعمالنا</h2>
             <div class="title-underline" data-aos="fade-up"></div>
@@ -478,19 +470,29 @@
     </section>
 
     <footer class="footer">
-        <div class="container footer-content">
-            <div class="footer-logo"><img src="assets/photo-output.PNG" alt="ShootiX Logo"></div>
-            <div class="footer-social">
-                <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
-                <a href="#" aria-label="TikTok"><i class="fab fa-tiktok"></i></a>
-                <a href="https://wa.me/966537614446" aria-label="WhatsApp"><i class="fab fa-whatsapp"></i></a>
+        <div class="container footer-grid">
+            <div class="footer-brand">
+                <img src="assets/photo-output.PNG" alt="ShootiX Logo" class="footer-logo-img">
+                <p class="footer-tagline">استوديو إنتاج بصري سعودي<br>— لا نصور فقط، بل نصنع التأثير.</p>
+                <a href="mailto:shootix.sa@gmail.com" class="footer-email">shootix.sa@gmail.com</a>
+            </div>
+            <div class="footer-contact">
+                <span class="footer-heading">تواصل معنا</span>
+                <a href="https://wa.me/966537614446" class="footer-phone">+966 53 761 4446</a>
+                <div class="footer-social">
+                    <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                    <a href="#" aria-label="TikTok"><i class="fab fa-tiktok"></i></a>
+                    <a href="https://wa.me/966537614446" aria-label="WhatsApp"><i class="fab fa-whatsapp"></i></a>
+                </div>
             </div>
         </div>
-        <div class="container footer-links">
-            <a href="portal.html">بوابة الفريق</a>
-            <a href="admin.html">لوحة الإدارة</a>
+        <div class="container footer-bottom">
+            <p>&copy; 2026 شوتيكس للإنتاج البصري. جميع الحقوق محفوظة.</p>
+            <div class="footer-links">
+                <a href="portal.html">بوابة الفريق</a>
+                <a href="admin.html">لوحة الإدارة</a>
+            </div>
         </div>
-        <div class="footer-bottom"><p>&copy; 2024 شوتيكس للإنتاج البصري. جميع الحقوق محفوظة.</p></div>
     </footer>
 
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>

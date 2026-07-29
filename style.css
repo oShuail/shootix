@@ -111,9 +111,13 @@ h1,h2,h3,h4,h5,h6{font-weight:700;line-height:1.2;color:var(--clr-cream)}
 .lang-switch i{margin-inline-end:4px;font-size:0.9em}
 
 /* ==================== HERO ==================== */
-.hero{position:relative;height:100vh;min-height:640px;display:flex;align-items:center;justify-content:center;overflow:hidden}
+/* 100dvh (with a 100vh fallback) so mobile browsers' collapsing address bar
+   can't leave the hero taller than the screen and push the copy off-centre. */
+.hero{position:relative;height:100vh;height:100dvh;min-height:600px;display:flex;align-items:center;justify-content:center;overflow:hidden}
 .video-background{position:absolute;inset:0;z-index:1;overflow:hidden}
 .video-background video{width:100%;height:100%;object-fit:cover}
+/* <picture> is inline by default, which would collapse the still's height:100%. */
+.video-background picture{display:block;width:100%;height:100%}
 /* Hero still — the studio's own work, drifting slowly so the frame breathes
    without the weight (or the mobile autoplay problems) of a background video. */
 .hero-still{width:100%;height:100%;object-fit:cover;will-change:transform;animation:hero-drift 26s ease-in-out infinite alternate}
@@ -122,34 +126,58 @@ h1,h2,h3,h4,h5,h6{font-weight:700;line-height:1.2;color:var(--clr-cream)}
     to{transform:scale(1.13) translate3d(0,-1.5%,0)}
 }
 .video-overlay{position:absolute;inset:0;background:linear-gradient(180deg,rgba(10,20,40,0.55) 0%,rgba(10,20,40,0.75) 60%,rgba(10,20,40,0.95) 100%),linear-gradient(135deg,rgba(26,43,76,0.5) 0%,rgba(10,20,40,0.7) 100%)}
-.hero-content{position:relative;z-index:2;text-align:center;width:92%;max-width:960px;padding-top:80px}
-.hero-kicker{font-family:var(--font-latin);font-size:0.82rem;letter-spacing:0.45em;text-transform:uppercase;color:var(--clr-accent);margin-bottom:2rem;display:inline-block;padding-bottom:0.75rem;border-bottom:1px solid var(--clr-border-str)}
-.hero-title{font-family:var(--font-display);color:var(--clr-cream);font-size:clamp(2.5rem,6vw,5rem);font-weight:400;margin-bottom:1.8rem;line-height:1.1;letter-spacing:-0.01em}
+/* No padding-top: the hero is a centring flex container, so top padding only
+   shoves the copy below the optical centre and opens a gap under the nav. */
+.hero-content{position:relative;z-index:2;text-align:center;width:92%;max-width:960px}
+/* line-height 1.3 (not 1.15): Arabic ascenders plus the italic shear need the
+   extra leading or the glyph tops clip against the line box. */
+.hero-title{font-family:var(--font-display);color:var(--clr-cream);font-size:clamp(2.5rem,6vw,5rem);font-weight:400;margin-bottom:1.6rem;line-height:1.3;letter-spacing:-0.01em}
 .hero-title .highlight{color:var(--clr-cream);font-style:italic;font-weight:400}
 .hero-subtitle{color:var(--clr-cream-soft);font-family:var(--font-latin);font-size:clamp(1rem,1.4vw,1.15rem);max-width:620px;margin:0 auto 2.8rem;line-height:1.7;font-weight:300}
 .hero-buttons{display:flex;justify-content:center;gap:16px;flex-wrap:wrap}
-.scroll-indicator{position:absolute;bottom:32px;left:50%;transform:translateX(-50%);z-index:2;opacity:0.7}
-.mouse{width:26px;height:42px;border:1px solid var(--clr-cream);border-radius:20px;position:relative}
-.wheel{width:3px;height:6px;background-color:var(--clr-cream);border-radius:2px;position:absolute;top:8px;left:50%;transform:translateX(-50%);animation:wheel-bob 1.8s ease-in-out infinite}
-@keyframes wheel-bob{0%,100%{transform:translate(-50%,0);opacity:1}50%{transform:translate(-50%,10px);opacity:0}}
 
 /* ==================== ABOUT ==================== */
-.about{padding:140px 0 120px;background-color:var(--clr-bg);position:relative}
-.about.overlay-section::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;background:var(--clr-border)}
+.about{padding:96px 0 84px;background-color:var(--clr-bg);position:relative;overflow:hidden}
+.about.overlay-section::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;background:var(--clr-border);z-index:3}
+/* .container is position:relative globally, which would make IT the containing
+   block for the bleeding photo and pin the image to the 1280px column. Opt this
+   one out so the image resolves against .about and spans the full section, and
+   lift the copy above it instead. */
+.about .container{position:static}
+.about .section-eyebrow,.about .about-text{position:relative;z-index:2}
 .layout-2-col{display:grid;grid-template-columns:1.1fr 1fr;gap:80px;align-items:center}
 .about-text p{color:var(--clr-cream-soft);margin-bottom:1.2rem;font-size:1rem;line-height:1.85;font-weight:300}
 .about-text strong{color:var(--clr-cream);font-weight:600}
-.stats-container{display:flex;gap:48px;margin-top:3rem;padding-top:2.2rem;border-top:1px solid var(--clr-border)}
-.stat-item{display:flex;flex-direction:column}
-.stat-number{font-family:var(--font-display);font-size:2.6rem;font-weight:400;color:var(--clr-accent);line-height:1;margin-bottom:0.4rem}
-.stat-label{font-family:var(--font-latin);font-size:0.78rem;color:var(--clr-cream-dim);letter-spacing:0.2em;text-transform:uppercase}
-.about-image{position:relative;aspect-ratio:4/5;overflow:hidden}
-.about-image img,.about-image .rounded-image{width:100%;height:100%;object-fit:cover;border-radius:0;filter:saturate(0.85) brightness(0.92);transition:transform var(--tr-slow),filter var(--tr-slow)}
-.about-image:hover img{transform:scale(1.04);filter:saturate(1) brightness(1)}
-.image-glow{position:absolute;inset:-20px;background:radial-gradient(circle at 50% 50%,rgba(197,160,89,0.08),transparent 70%);pointer-events:none;z-index:0}
+
+/* Client logo strip. Placeholder slots today; the img rules below take over
+   untouched the moment real logos are dropped in. */
+.client-strip{margin-top:2.6rem;padding-top:1.8rem;border-top:1px solid var(--clr-border)}
+.client-logos{display:flex;flex-wrap:wrap;gap:12px;align-items:center}
+.client-logo{
+    display:flex;align-items:center;justify-content:center;
+    min-width:106px;height:46px;padding:0 16px;
+    font-family:var(--font-latin);font-size:0.68rem;letter-spacing:0.12em;
+    color:var(--clr-cream-dim);white-space:nowrap;
+    border:1px dashed var(--clr-border-str);border-radius:6px;
+    background:rgba(248,245,230,0.03);transition:var(--tr-normal);
+}
+.client-logo:hover{color:var(--clr-cream-soft);border-color:var(--clr-accent);background:rgba(197,160,89,0.07)}
+.client-logos img{height:34px;width:auto;padding:0;border:0;background:none;filter:grayscale(1) brightness(1.7);opacity:0.7;transition:var(--tr-normal)}
+.client-logos img:hover{filter:none;opacity:1}
+/* The about photo is no longer a card in its column — it bleeds across the
+   whole section and runs behind the copy. The column stays in the grid
+   (position:static) purely to reserve the space that sets the section height;
+   the image itself is positioned against .about, so it spans edge to edge. */
+.about-image{position:static;aspect-ratio:4/5}
+.about-image img,.about-image .rounded-image{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;border-radius:0;filter:saturate(0.85) brightness(0.9);z-index:0}
+/* The scrim: transparent over the photo, ramping to near-solid under the text
+   so the copy keeps its contrast instead of fighting the image. */
+.image-glow{position:absolute;inset:0;pointer-events:none;z-index:1}
+html[dir="rtl"] .image-glow{background:linear-gradient(to right,rgba(10,20,40,0.28) 0%,rgba(10,20,40,0.45) 26%,rgba(10,20,40,0.88) 52%,rgba(10,20,40,0.96) 72%,rgba(10,20,40,0.97) 100%)}
+html[dir="ltr"] .image-glow{background:linear-gradient(to left,rgba(10,20,40,0.28) 0%,rgba(10,20,40,0.45) 26%,rgba(10,20,40,0.88) 52%,rgba(10,20,40,0.96) 72%,rgba(10,20,40,0.97) 100%)}
 
 /* ==================== SERVICES — ZIGZAG TIMELINE ==================== */
-.services{padding:140px 0 120px;background-color:var(--clr-bg-2);position:relative;border-top:1px solid var(--clr-border);border-bottom:1px solid var(--clr-border)}
+.services{padding:96px 0 84px;background-color:var(--clr-bg-2);position:relative;border-top:1px solid var(--clr-border);border-bottom:1px solid var(--clr-border)}
 
 .timeline{position:relative;max-width:900px;margin:4rem auto 0;padding:20px 0}
 .timeline-line{position:absolute;top:0;bottom:0;left:50%;transform:translateX(-50%);width:2px;background:linear-gradient(180deg,transparent 0%,var(--clr-accent) 8%,var(--clr-accent) 92%,transparent 100%);z-index:0}
@@ -171,7 +199,7 @@ h1,h2,h3,h4,h5,h6{font-weight:700;line-height:1.2;color:var(--clr-cream)}
 .service-badge{display:inline-block;font-family:var(--font-latin);font-size:0.72rem;color:var(--clr-navy);letter-spacing:0.15em;text-transform:uppercase;padding:6px 14px;border:1px solid rgba(26,43,76,0.2);border-radius:20px;opacity:0.7}
 
 /* ==================== PORTFOLIO — TURA.SA CATEGORIES ==================== */
-.portfolio{padding:140px 0 60px;background-color:var(--clr-bg)}
+.portfolio{padding:96px 0 44px;background-color:var(--clr-bg)}
 .portfolio-category{margin-bottom:100px;position:relative}
 .portfolio-cat-header{display:grid;grid-template-columns:1fr 1.2fr;gap:40px;align-items:flex-start;margin-bottom:50px;padding-bottom:40px;border-bottom:1px solid var(--clr-border)}
 .portfolio-cat-title{font-family:var(--font-display);font-size:clamp(1.8rem,3.5vw,2.6rem);font-weight:400;color:var(--clr-cream);line-height:1.2}
@@ -186,7 +214,7 @@ h1,h2,h3,h4,h5,h6{font-weight:700;line-height:1.2;color:var(--clr-cream)}
 .portfolio-cat-more{text-align:center;padding-top:20px;border-top:1px solid var(--clr-border)}
 
 /* ==================== TESTIMONIALS ==================== */
-.testimonials{padding:140px 0 120px;background-color:var(--clr-bg-2);position:relative;overflow:hidden;border-top:1px solid var(--clr-border);border-bottom:1px solid var(--clr-border)}
+.testimonials{padding:96px 0 84px;background-color:var(--clr-bg-2);position:relative;overflow:hidden;border-top:1px solid var(--clr-border);border-bottom:1px solid var(--clr-border)}
 .testimonials-pattern{position:absolute;inset:0;background-image:radial-gradient(circle at 20% 30%,rgba(197,160,89,0.06),transparent 50%),radial-gradient(circle at 80% 70%,rgba(197,160,89,0.04),transparent 50%);pointer-events:none}
 .relative-z{position:relative;z-index:2}
 .testimonials-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;margin-top:4rem}
@@ -201,7 +229,7 @@ h1,h2,h3,h4,h5,h6{font-weight:700;line-height:1.2;color:var(--clr-cream)}
 .client-role{color:var(--clr-cream-dim);font-size:0.78rem;letter-spacing:0.1em;text-transform:uppercase;font-family:var(--font-latin)}
 
 /* ==================== CONTACT ==================== */
-.contact{padding:140px 0 120px;background-color:var(--clr-bg)}
+.contact{padding:96px 0 84px;background-color:var(--clr-bg)}
 .contact-wrapper{max-width:860px;margin:0 auto;padding:64px;background-color:var(--clr-bg-2);border:1px solid var(--clr-border)}
 .contact-header{margin-bottom:3rem}
 .contact-subtitle{color:var(--clr-cream-soft);font-size:1rem;font-weight:300;margin-top:1rem}
@@ -217,13 +245,21 @@ h1,h2,h3,h4,h5,h6{font-weight:700;line-height:1.2;color:var(--clr-cream)}
 .contact-form .btn{align-self:center;margin-top:1.5rem;padding:16px 48px}
 
 /* ==================== FOOTER ==================== */
-.footer{background-color:var(--clr-bg);padding:70px 0 0;border-top:1px solid var(--clr-border)}
-.footer-content{display:flex;justify-content:space-between;align-items:center;padding-bottom:40px;flex-wrap:wrap;gap:24px}
-.footer-logo img{height:48px;filter:brightness(1.05)}
-.footer-social{display:flex;gap:18px}
-.footer-social a{width:42px;height:42px;display:flex;align-items:center;justify-content:center;border:1px solid var(--clr-border);color:var(--clr-cream-soft);font-size:1rem;transition:var(--tr-normal)}
-.footer-social a:hover{background-color:var(--clr-cream);color:var(--clr-bg);border-color:var(--clr-cream)}
-.footer-bottom{text-align:center;padding:24px 0;border-top:1px solid var(--clr-border);color:var(--clr-cream-dim);font-size:0.82rem;letter-spacing:0.1em;font-family:var(--font-latin)}
+.footer{background-color:var(--clr-bg);padding:64px 0 0;border-top:1px solid var(--clr-border)}
+.footer-grid{display:flex;justify-content:space-between;align-items:flex-start;padding-bottom:48px;flex-wrap:wrap;gap:40px}
+.footer-brand{display:flex;flex-direction:column;gap:16px;max-width:380px}
+.footer-logo-img{height:48px;width:auto;align-self:flex-start;filter:brightness(1.05)}
+.footer-tagline{color:var(--clr-cream-dim);font-size:0.92rem;line-height:1.75;font-weight:300}
+.footer-email{align-self:flex-start;font-family:var(--font-latin);font-size:0.92rem;color:var(--clr-cream-soft);letter-spacing:0.02em;transition:var(--tr-normal);direction:ltr}
+.footer-email:hover{color:var(--clr-accent)}
+.footer-contact{display:flex;flex-direction:column;align-items:flex-start;gap:16px}
+.footer-heading{font-family:var(--font-latin);font-size:0.75rem;letter-spacing:0.3em;text-transform:uppercase;color:var(--clr-accent)}
+.footer-phone{font-family:var(--font-latin);font-size:1.05rem;color:var(--clr-cream-soft);letter-spacing:0.02em;transition:var(--tr-normal);direction:ltr}
+.footer-phone:hover{color:var(--clr-accent)}
+.footer-social{display:flex;gap:14px}
+.footer-social a{width:42px;height:42px;display:flex;align-items:center;justify-content:center;border:1px solid var(--clr-border);border-radius:50%;color:var(--clr-cream-soft);font-size:1rem;transition:var(--tr-normal)}
+.footer-social a:hover{background-color:var(--clr-accent);color:var(--clr-bg);border-color:var(--clr-accent)}
+.footer-bottom{display:flex;justify-content:space-between;align-items:center;padding:26px 0;border-top:1px solid var(--clr-border);color:var(--clr-cream-dim);font-size:0.8rem;letter-spacing:0.08em;font-family:var(--font-latin);flex-wrap:wrap;gap:16px}
 
 /* ==================== PROJECT DETAIL PAGES ==================== */
 .project-hero{position:relative;min-height:70vh;display:flex;align-items:flex-end;padding:180px 0 80px;overflow:hidden}
@@ -235,7 +271,7 @@ h1,h2,h3,h4,h5,h6{font-weight:700;line-height:1.2;color:var(--clr-cream)}
 .project-title{font-family:var(--font-display);font-size:clamp(2.4rem,5vw,4.2rem);font-weight:400;color:var(--clr-cream);line-height:1.1;margin-bottom:1.2rem}
 .project-tagline{color:var(--clr-cream-soft);font-size:1.1rem;font-weight:300;max-width:640px;line-height:1.7}
 
-.project-details{padding:120px 0 80px;background-color:var(--clr-bg)}
+.project-details{padding:88px 0 60px;background-color:var(--clr-bg)}
 .project-details-grid{display:grid;grid-template-columns:1fr 1.4fr;gap:80px;align-items:flex-start}
 .project-info-list{display:flex;flex-direction:column;gap:1.5rem}
 .project-info-item{display:flex;flex-direction:column;padding-bottom:1.2rem;border-bottom:1px solid var(--clr-border)}
@@ -243,14 +279,14 @@ h1,h2,h3,h4,h5,h6{font-weight:700;line-height:1.2;color:var(--clr-cream)}
 .project-info-value{color:var(--clr-cream);font-size:1.05rem;font-weight:500}
 .project-description p{color:var(--clr-cream-soft);font-size:1rem;line-height:1.9;font-weight:300;margin-bottom:1.2rem}
 
-.process-section{padding:120px 0;background-color:var(--clr-bg-2);border-top:1px solid var(--clr-border);border-bottom:1px solid var(--clr-border)}
+.process-section{padding:88px 0;background-color:var(--clr-bg-2);border-top:1px solid var(--clr-border);border-bottom:1px solid var(--clr-border)}
 .process-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background-color:var(--clr-border);margin-top:4rem;border:1px solid var(--clr-border)}
 .process-step{background-color:var(--clr-bg-2);padding:48px 40px;transition:var(--tr-normal);min-height:200px;display:flex;flex-direction:column;justify-content:flex-start}
 .process-step:hover{background-color:var(--clr-bg-3)}
 .process-num{font-family:var(--font-display);font-size:2.4rem;font-weight:400;color:var(--clr-accent);line-height:1;font-style:italic;margin-bottom:1.8rem;display:block}
 .process-step-title{font-family:var(--font-display);font-size:1.35rem;font-weight:400;color:var(--clr-cream);line-height:1.3}
 
-.project-gallery{padding:120px 0;background-color:var(--clr-bg-2);border-top:1px solid var(--clr-border)}
+.project-gallery{padding:88px 0;background-color:var(--clr-bg-2);border-top:1px solid var(--clr-border)}
 .gallery-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;margin-top:60px}
 .gallery-grid img{width:100%;height:360px;object-fit:cover;transition:var(--tr-slow);filter:saturate(0.85)}
 .gallery-grid img:hover{transform:scale(1.02);filter:saturate(1)}
@@ -259,6 +295,13 @@ h1,h2,h3,h4,h5,h6{font-weight:700;line-height:1.2;color:var(--clr-cream)}
 /* ==================== RESPONSIVE ==================== */
 @media screen and (max-width:1024px){
     .layout-2-col{grid-template-columns:1fr;gap:60px}
+    /* Stacked. The spacer moves ABOVE the copy so the photo reads as a clear
+       band at the top of the section instead of only surfacing at the bottom;
+       the scrim then ramps up behind the text underneath it. */
+    .about-image{order:-1;aspect-ratio:16/10}
+    html[dir="rtl"] .image-glow,html[dir="ltr"] .image-glow{
+        background:linear-gradient(to bottom,rgba(10,20,40,0.34) 0%,rgba(10,20,40,0.30) 26%,rgba(10,20,40,0.62) 36%,rgba(10,20,40,0.90) 46%,rgba(10,20,40,0.96) 60%,rgba(10,20,40,0.97) 100%);
+    }
     .portfolio-row{grid-template-columns:repeat(2,1fr)}
     .portfolio-cat-header{grid-template-columns:1fr;gap:20px}
     .testimonials-grid{grid-template-columns:1fr;gap:16px}
@@ -286,27 +329,47 @@ h1,h2,h3,h4,h5,h6{font-weight:700;line-height:1.2;color:var(--clr-cream)}
     html[dir="rtl"] .navbar.active .nav-links a::after{transform:translateX(50%)}
     .navbar.active .nav-cta{display:block;flex-basis:100%;width:100%;order:4;padding-bottom:22px;text-align:center}
     .navbar.active .nav-cta .btn{display:block;width:100%}
-    .timeline-item,.timeline-item.left,.timeline-item.right{width:100%;margin-inline-start:0;padding-inline-start:50px;padding-inline-end:0;text-align:start}
+    /* One full-width column — no 50px rail to indent past, so the cards sit
+       centred instead of nudged off to one side. */
+    .timeline-item,.timeline-item.left,.timeline-item.right{width:100%;margin-inline-start:0;padding-inline-start:0;padding-inline-end:0;text-align:start}
     .timeline-item.left .service-icon{margin-inline-start:0}
-    .timeline-line{left:0;transform:none}
-    .timeline-dot{inset-inline-start:-7px!important;inset-inline-end:auto!important}
+    /* The line and its dots only mean something next to the desktop zigzag;
+       on one column they just float loose against the edge. */
+    .timeline-line,.timeline-dot{display:none}
 }
 @media screen and (max-width:768px){
-    .about,.services,.portfolio,.testimonials,.contact,.project-details,.project-gallery{padding:90px 0}
+    .about,.services,.portfolio,.testimonials,.contact,.project-details,.project-gallery{padding:64px 0}
     .portfolio-row{grid-template-columns:repeat(2,1fr)}
     .form-row{grid-template-columns:1fr}
     .contact-wrapper{padding:32px 24px}
-    .stats-container{flex-wrap:wrap;gap:24px}
-    .footer-content{flex-direction:column;text-align:center}
+    /* Footer collapses to one centred column; the logo and email carry
+       align-self:flex-start on desktop, so both need re-centring here. */
+    .footer{padding-top:56px}
+    .footer-grid{flex-direction:column;align-items:center;text-align:center;gap:30px;padding-bottom:34px}
+    .footer-brand{align-items:center;max-width:34ch;gap:14px}
+    .footer-logo-img{align-self:center}
+    .footer-email{align-self:center}
+    .footer-contact{align-items:center;gap:14px}
+    /* Extra bottom room so the fixed WhatsApp button can't sit on the credit line. */
+    .footer-bottom{flex-direction:column;text-align:center;gap:14px;padding:22px 0 92px}
+    .footer-links{justify-content:center;gap:26px}
     .gallery-grid{grid-template-columns:1fr}
     .gallery-grid img{height:280px}
     .section-eyebrow .num{font-size:1.8rem}
-    .hero-kicker{font-size:0.72rem;letter-spacing:0.3em}
+    .hero-title{margin-bottom:1.1rem}
+    .hero-subtitle{margin-bottom:2rem}
+    .hero-buttons{gap:12px}
+    .hero-buttons .btn{flex:1 1 auto;min-width:170px}
     .process-grid{grid-template-columns:1fr}
     .process-step{padding:36px 28px;min-height:auto}
 }
 
 html[dir="rtl"] .section-eyebrow{direction:rtl}
+/* Arabic service cards read right-to-left in BOTH timeline columns. The
+   zigzag still alternates sides, but the copy inside a card never flips
+   to left-aligned just because the card sits on the left. */
+html[dir="rtl"] .timeline-item.left{text-align:start}
+html[dir="rtl"] .timeline-item.left .service-icon{margin-inline-start:0}
 html[dir="ltr"] body{font-family:var(--font-latin),var(--font-arabic)}
 html[dir="ltr"] .quote{font-style:italic}
 html[dir="ltr"] {--font-display: 'Montserrat', sans-serif}
@@ -360,8 +423,7 @@ html[dir="ltr"] {--font-display: 'Montserrat', sans-serif}
 
 /* ==========================================
    V3 — CINEMATIC LAYER
-   Film grain, ghost type, marquee, cursor,
-   scroll progress, richer hovers.
+   Scroll progress, richer hovers.
    Same palette — more atmosphere.
    ========================================== */
 
@@ -371,22 +433,6 @@ html[dir="ltr"] {--font-display: 'Montserrat', sans-serif}
 ::-webkit-scrollbar-thumb{background:var(--clr-bg-3);border-radius:5px}
 ::-webkit-scrollbar-thumb:hover{background:var(--clr-accent)}
 
-/* --- film grain over everything (very subtle) --- */
-body::after{
-    content:'';position:fixed;inset:-50%;width:200%;height:200%;
-    background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 250 250' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.7' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
-    opacity:0.035;pointer-events:none;z-index:2000;
-    animation:grain-shift 8s steps(10) infinite;
-}
-@keyframes grain-shift{
-    0%,100%{transform:translate(0,0)}
-    10%{transform:translate(-2%,-3%)}
-    30%{transform:translate(3%,-2%)}
-    50%{transform:translate(-3%,2%)}
-    70%{transform:translate(2%,3%)}
-    90%{transform:translate(-2%,1%)}
-}
-
 /* --- scroll progress hairline --- */
 .scroll-progress{
     position:fixed;top:0;inset-inline-start:0;height:2px;width:0%;
@@ -394,57 +440,18 @@ body::after{
     z-index:2001;pointer-events:none;transition:width 0.1s linear;
 }
 
-/* --- custom cursor (fine pointers only) --- */
-@media (hover:hover) and (pointer:fine){
-    .cursor-dot,.cursor-ring{
-        position:fixed;top:0;left:0;pointer-events:none;z-index:2002;
-        border-radius:50%;transform:translate(-50%,-50%);
-    }
-    .cursor-dot{width:6px;height:6px;background:var(--clr-accent)}
-    .cursor-ring{
-        width:34px;height:34px;border:1px solid rgba(197,160,89,0.5);
-        transition:width 0.25s ease,height 0.25s ease,border-color 0.25s ease,background-color 0.25s ease;
-    }
-    .cursor-ring.is-hover{width:56px;height:56px;border-color:var(--clr-accent);background:rgba(197,160,89,0.08)}
-    .cursor-hidden .cursor-dot,.cursor-hidden .cursor-ring{opacity:0}
-}
-
-/* --- hero ghost word behind the title --- */
-.hero-ghost{
-    position:absolute;top:50%;left:50%;transform:translate(-50%,-52%);
-    font-family:var(--font-latin);font-weight:700;
-    font-size:clamp(6rem,22vw,22rem);letter-spacing:0.04em;
-    color:transparent;-webkit-text-stroke:1px rgba(248,245,230,0.07);
-    z-index:1;pointer-events:none;user-select:none;white-space:nowrap;
-    animation:ghost-drift 14s ease-in-out infinite alternate;
-}
-@keyframes ghost-drift{
-    from{transform:translate(-51%,-52%) scale(1)}
-    to{transform:translate(-49%,-50%) scale(1.03)}
-}
+/* background-clip:text clips to each line fragment's box, and italic Arabic
+   glyphs overhang theirs — which sheared the leading "لا" / "بل" off every
+   line. clone gives each fragment its own padded box to paint into. */
 .hero-title .highlight{
     background:linear-gradient(120deg,var(--clr-cream) 60%,var(--clr-accent) 100%);
     -webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;
+    -webkit-box-decoration-break:clone;box-decoration-break:clone;
+    padding-inline:0.14em;
 }
 
-/* --- marquee strip --- */
-.marquee{
-    overflow:hidden;border-top:1px solid var(--clr-border);border-bottom:1px solid var(--clr-border);
-    background:var(--clr-bg);padding:26px 0;position:relative;direction:ltr;
-}
-.marquee-track{display:flex;width:max-content;animation:marquee-run 32s linear infinite}
-.marquee:hover .marquee-track{animation-play-state:paused}
-.marquee-item{
-    display:flex;align-items:center;gap:34px;padding-inline-end:34px;
-    font-family:var(--font-display);font-size:clamp(1.3rem,2.4vw,2rem);
-    font-weight:400;font-style:italic;color:var(--clr-cream);white-space:nowrap;
-}
-.marquee-item .star{color:var(--clr-accent);font-style:normal;font-size:0.8em;animation:star-spin 6s linear infinite}
-.marquee-item.outline{color:transparent;-webkit-text-stroke:1px rgba(248,245,230,0.4);font-style:normal}
-@keyframes marquee-run{from{transform:translateX(0)}to{transform:translateX(-50%)}}
-@keyframes star-spin{from{transform:rotate(0)}to{transform:rotate(360deg)}}
 @media (prefers-reduced-motion:reduce){
-    .marquee-track,.hero-ghost,body::after,.marquee-item .star,.hero-still{animation:none}
+    .hero-still{animation:none}
     *,*::before,*::after{transition-duration:0.01ms!important}
     html{scroll-behavior:auto}
 }
@@ -468,18 +475,16 @@ body::after{
 .process-step:hover::before{height:100%}
 .process-step:hover .process-num{transform:translateY(-4px);display:inline-block;transition:transform var(--tr-normal)}
 
-/* --- stat numbers get a soft glow --- */
-.stat-number{text-shadow:0 0 30px rgba(197,160,89,0.25)}
-
 /* --- reveal titles --- */
 .section-title{position:relative}
 
 /* --- footer utility links (staff / admin) --- */
-.footer-links{display:flex;gap:26px;flex-wrap:wrap;justify-content:center}
+.footer-links{display:flex;gap:22px;flex-wrap:wrap}
 .footer-links a{
-    font-family:var(--font-latin);font-size:0.75rem;letter-spacing:0.2em;
+    font-family:var(--font-latin);font-size:0.72rem;letter-spacing:0.15em;
     text-transform:uppercase;color:var(--clr-cream-dim);
     padding-bottom:2px;border-bottom:1px solid transparent;
+    transition:var(--tr-normal);
 }
 .footer-links a:hover{color:var(--clr-accent);border-bottom-color:var(--clr-accent)}
 
