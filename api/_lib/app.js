@@ -128,7 +128,7 @@ async function ensureBootstrapAdmin() {
             try {
                 await db.insert('shootix_users', {
                     username: 'admin',
-                    name: 'ShootiX Admin',
+                    name: 'ShotiX Admin',
                     role: 'admin',
                     password_hash: auth.hashPassword(password)
                 });

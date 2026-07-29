@@ -277,7 +277,7 @@
             <div class="receipt-doc" dir="rtl">
                 <div class="rc-head">
                     <div>
-                        <div class="rc-brand-name">SHOOTIX</div>
+                        <div class="rc-brand-name">SHOTIX</div>
                         <div class="rc-brand-sub">شوتيكس للإنتاج البصري — Visual Production Studio</div>
                         <div class="rc-brand-sub" dir="ltr">shootix.sa@gmail.com · +966 53 761 4446 · shotix.space</div>
                     </div>

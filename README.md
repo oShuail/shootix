@@ -1,6 +1,6 @@
-# ShootiX — Site + Admin Panel + Staff Portal
+# ShotiX — Site + Admin Panel + Staff Portal
 
-The ShootiX website and the small product behind it:
+The ShotiX website and the small product behind it:
 
 1. **The public site** (Arabic + English) — cinematic, editorial, mobile-first.
 2. **An admin panel** (`admin.html`) — portfolio images, team accounts, all

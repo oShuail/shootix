@@ -1,7 +1,7 @@
 {
   "name": "shootix",
   "version": "4.0.0",
-  "description": "ShootiX visual production studio — website, admin panel & staff portal",
+  "description": "ShotiX visual production studio — website, admin panel & staff portal",
   "main": "server.js",
   "scripts": {
     "start": "node server.js",
