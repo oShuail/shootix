@@ -1,40 +1,171 @@
-# ShootiX — Cinematic Site + Admin Panel + Staff Portal
+# ShootiX — Site + Admin Panel + Staff Portal
 
-The ShootiX website, upgraded from a static page into a small full product:
+The ShootiX website and the small product behind it:
 
-1. **The public site** (Arabic + English) with a more cinematic, editorial look —
-   same navy/cream/gold palette, more atmosphere.
-2. **An admin panel** (`admin.html`) where admins upload and manage the portfolio
-   images that appear on the live site.
-3. **A staff portal** (`portal.html`) where employees log in, fill in a few fields,
-   and issue branded client receipts as PDF.
-4. **A tiny Node.js backend** (`server.js`) that powers accounts, image uploads and
-   receipts. Only one dependency (Express).
+1. **The public site** (Arabic + English) — cinematic, editorial, mobile-first.
+2. **An admin panel** (`admin.html`) — portfolio images, team accounts, all
+   receipts, and a dashboard.
+3. **A staff portal** (`portal.html`) — employees issue branded client receipts
+   and download them as PDF.
+4. **A serverless API** (`lib/app.js`) backed by **Supabase**, so nothing is
+   ever lost when the app restarts, redeploys or scales out.
 
-## 🚀 Running
+---
+
+## 🏛 Architecture
+
+| Layer | What runs there | Why |
+|---|---|---|
+| **Cloudflare** | DNS for `shotix.space`, CDN, TLS | Fast worldwide, free TLS, DDoS protection |
+| **Vercel** | Static site + `/api/*` serverless function | Zero-maintenance hosting, instant rollbacks |
+| **Supabase** | Postgres (accounts, images, receipts) + Storage (photos, Excel ledger) | Managed Postgres that never gets wiped |
+
+**Data never lives on the app server.** Earlier versions kept accounts and
+receipts in JSON files inside the container and sessions in a memory `Map` —
+both vanish on every restart, and on serverless they are effectively empty on
+each cold start. Everything now lives in Supabase, and sessions are stateless
+signed cookies, so a redeploy costs nobody their login or their data.
+
+---
+
+## 🚀 Setup
+
+### 1. Supabase
+
+1. Create an organization named **shotix**, then a project inside it
+   (region: `eu-central-1`, or `me-central-1` for the Gulf).
+2. Open **SQL Editor → New query**, paste all of
+   [`supabase/schema.sql`](supabase/schema.sql) and run it once.
+   It creates the tables, the atomic receipt-numbering function, row-level
+   security and both storage buckets.
+3. Copy from **Project Settings**:
+   - **Data API → Project URL** → `SUPABASE_URL`
+   - **API Keys → `service_role`** → `SUPABASE_SERVICE_ROLE_KEY` *(secret —
+     server-side only, never ship it to the browser)*
+
+### 2. Environment variables
+
+Set these in **Vercel → Project → Settings → Environment Variables**, and
+locally in a `.env` (see [`.env.example`](.env.example)):
+
+| Variable | Required | Purpose |
+|---|---|---|
+| `SUPABASE_URL` | ✅ | Your project URL |
+| `SUPABASE_SERVICE_ROLE_KEY` | ✅ | Server-side database + storage access |
+| `SESSION_SECRET` | recommended | Signs session cookies. Falls back to a value derived from the service key |
+| `SHOOTIX_ADMIN_PASSWORD` | recommended | Password for the auto-created `admin` account on first run |
+
+### 3. Deploy
+
+Push to the repository — Vercel builds and deploys automatically.
+
+### 4. Domain (`shotix.space` on Cloudflare)
+
+In **Vercel → Project → Settings → Domains**, add `shotix.space` and
+`www.shotix.space`. Then in **Cloudflare → DNS**:
+
+| Type | Name | Content | Proxy |
+|---|---|---|---|
+| `A` | `@` | `76.76.21.21` | DNS only (grey cloud) |
+| `CNAME` | `www` | `cname.vercel-dns.com` | DNS only (grey cloud) |
+
+> Keep the records **grey-clouded** (DNS only). Vercel issues and renews its own
+> TLS certificate; proxying through Cloudflare's orange cloud on top of that
+> causes redirect loops unless Cloudflare's SSL mode is **Full (strict)**.
+
+Then set **SSL/TLS → Overview → Full (strict)** and turn on **Always Use HTTPS**.
+
+---
+
+## 🧑‍💻 Running locally
 
 ```bash
 npm install
-npm start          # → http://localhost:3000
+cp .env.example .env      # fill in your Supabase values
+npm start                 # → http://localhost:3000
+npm run check             # self-tests (passwords, sessions, Excel, routes)
 ```
 
 | URL | What |
 |---|---|
-| `/` or `/index.html` | Arabic homepage |
+| `/` | Arabic homepage |
 | `/en.html` | English homepage |
 | `/admin.html` | Admin panel (admins only) |
 | `/portal.html` | Staff portal (employees + admins) |
+| `/api/health` | Backend + database status |
 
-**First run:** the server creates the admin account `admin` / `shootix-admin`
-(or the value of the `SHOOTIX_ADMIN_PASSWORD` env var) and prints it to the
-console. **Log in and change it immediately** (Admin panel → الإعدادات).
+**First run** creates the admin account `admin` with `SHOOTIX_ADMIN_PASSWORD`
+(default `shootix-admin`). **Change it immediately** — Admin panel → الإعدادات.
 
-> The static pages still work without the server (e.g. GitHub Pages) — the
-> dynamic features simply switch off and the site falls back to its built-in
-> images. Accounts, uploads and receipts need the Node server running on a host
-> such as Render, Railway, or any VPS.
+---
 
-## 🎨 Palette (unchanged)
+## 👥 Accounts
+
+- **Admins** — everything: site images, team, all receipts, dashboard.
+- **Employees** — staff portal only: create receipts, download PDFs, see *their
+  own* history. They cannot touch site images or other people's receipts.
+
+Admins manage the team in **الفريق**: add a member (name, username, job title,
+phone, role), generate a password, reset a password, suspend/reactivate, or
+delete. Passwords are hashed with scrypt. The panel refuses to remove or demote
+the last remaining admin, so the studio can never be locked out of its own panel.
+
+## 🖼 Portfolio images
+
+Admin panel → **صور الموقع**. Drag in an image (up to 15 MB), give it an
+Arabic + English title, pick a section, optionally mark it **featured** so it
+leads that section. The image appears immediately in the homepage portfolio and
+the matching project page.
+
+Uploads go **straight from the browser to Supabase Storage** through a one-shot
+signed URL, so large photos are not limited by the ~4.5 MB serverless request
+cap. The server then verifies the stored file's magic bytes before recording it
+— a file merely *named* `.jpg` is rejected.
+
+## 🧾 Receipts
+
+Employees fill in client, project, date, payment method, payment status, line
+items, optional discount and 15% VAT, plus notes. Totals update live. Saving
+assigns a serial number (`SHX-2026-0001`, …) reserved atomically in Postgres, so
+two people saving in the same second can never collide. **"حفظ + تحميل PDF"**
+opens the print dialog with a clean bilingual branded receipt.
+
+### 📊 Excel ledger
+
+Every create, status change and delete rewrites a running workbook — one row per
+receipt with number, date, client, phone, email, project, payment method,
+status, an item summary, item count, subtotal, discount, VAT, total, notes, who
+issued it and when.
+
+- **Download** from the Excel button in the admin panel or staff portal
+  (`GET /api/receipts.xlsx`). Admins get every receipt; employees get their own.
+- A master copy is kept in Supabase Storage, refreshed on every change.
+- Written by a dependency-free writer (`lib/xlsx.js`) — a real Office Open XML
+  workbook (RTL sheet, bold header, numeric totals) that opens in Excel, Numbers
+  and Google Sheets.
+
+---
+
+## 🗂 Files
+
+| File | Purpose |
+|---|---|
+| `lib/app.js` | The API: auth, team, gallery, receipts, stats |
+| `lib/supabase.js` | Supabase Postgres + Storage client (native fetch) |
+| `lib/auth.js` | scrypt passwords, stateless signed session cookies |
+| `lib/ledger.js` | Builds and syncs the Excel ledger |
+| `lib/xlsx.js` | Dependency-free `.xlsx` writer |
+| `api/index.js` | Vercel serverless entry point |
+| `server.js` | Local dev server (same app) |
+| `supabase/schema.sql` | One-time database setup |
+| `scripts/check.js` | Self-tests — `npm run check` |
+| `admin.html` / `portal.html` | The two panels |
+| `panel.js` / `panel.css` | Shared panel runtime and styles |
+| `style.css` / `script.js` | Public site |
+| `index.html` / `en.html` | Homepages (AR / EN) |
+| `project-*.html` | 6 project pages × 2 languages |
+
+## 🎨 Palette
 
 | Token | Value | Use |
 |---|---|---|
@@ -45,86 +176,3 @@ console. **Log in and change it immediately** (Admin panel → الإعدادا�
 | `--clr-cream-soft` | `#E8E3CE` | Body text |
 | `--clr-cream-dim` | `#8C8B7F` | Meta / eyebrow text |
 | `--clr-accent` | `#C5A059` | Gold accents |
-
-## ✨ Design upgrades (v3 cinematic layer)
-
-- **Film grain** overlay across the whole site (subtle, animated).
-- **Ghost typography** — a huge outlined "SHOOTIX" drifting behind the hero.
-- **Gold-gradient headline** highlight in the hero.
-- **Service marquee** — an endless scrolling strip of services under the hero
-  (italic serif alternating with outlined type, spinning gold stars).
-- **Custom cursor** — gold dot + trailing ring that grows over links (desktop
-  only, respects `prefers-reduced-motion`).
-- **Scroll progress hairline** in gold at the top of the page.
-- **Animated stat counters** (100% / +50 / +200 count up on scroll).
-- **Richer hovers** — gold sweep lines on portfolio cards and process steps,
-  titles that shift and tint gold.
-- Custom scrollbar + gold text selection.
-
-All previous features preserved: WhatsApp button, hero video, services, portfolio
-with 6 project pages, testimonials, contact form (formsubmit.co), AR/EN toggle,
-mobile nav, AOS animations, lightbox gallery.
-
-## 🖼️ Image management (admins only)
-
-Admin panel → **صور الموقع**: drag & drop an image (≤ 8 MB), give it an Arabic +
-English title, pick a section (cars, food & hospitality, real estate, events,
-products, fashion) and upload. The image immediately appears:
-
-- in that section of the homepage portfolio (Arabic and English), and
-- in the matching project page gallery (with lightbox support).
-
-Deleting an image in the panel removes it from the site. Files are stored in
-`assets/uploads/`, metadata in `data/gallery.json`.
-
-## 👥 Accounts
-
-- **Admins** — full access: site images, team accounts, all receipts, settings.
-- **Employees** — staff portal only: create receipts, download PDFs, view their
-  own history, change their password. *They cannot touch site images.*
-
-Admins create employee accounts in Admin panel → **حسابات الفريق** (name,
-username, password, role). Passwords are hashed with scrypt; sessions are
-HttpOnly cookies.
-
-## 🧾 Receipts (staff portal)
-
-Employees fill in: client name/phone, project, date, payment method, line items
-(description × qty × price), optional discount, 15% VAT toggle, and notes.
-The portal computes totals live, saves the receipt with an automatic serial
-number (`SHX-2026-0001`, …), and **"حفظ + تحميل PDF"** opens the browser's
-print dialog with a clean bilingual (AR/EN) branded receipt — save as PDF and
-send it to the client. Every receipt can be re-downloaded from **إيصالاتي**;
-admins see all receipts from all employees.
-
-### 📊 Excel ledger
-
-Every time a receipt is created (by an employee **or** an admin) it is
-automatically appended as a **new row** in a running Excel workbook — one row
-per receipt with number, date, client, phone, project, payment method, an
-item summary, subtotal, discount, VAT, total, who issued it and when.
-
-- **Download it** from the Excel button on Admin panel → *الإيصالات* or Staff
-  portal → *إيصالاتي* (`GET /api/receipts.xlsx`). Admins get every receipt;
-  employees get only their own.
-- A master copy is also kept on disk at `data/receipts.xlsx`, refreshed on every
-  create/delete.
-- The `.xlsx` is generated by a small dependency-free writer (`lib/xlsx.js`) —
-  a real Office Open XML workbook (RTL sheet, bold header, numeric totals) that
-  opens in Excel, Numbers and Google Sheets. No external library needed.
-
-## 🗂️ Files
-
-| File | Purpose |
-|---|---|
-| `server.js` | Express backend: auth, users, gallery, receipts, Excel ledger |
-| `lib/xlsx.js` | Dependency-free `.xlsx` (Excel) writer |
-| `admin.html` | Admin panel (images, team, receipts overview, settings) |
-| `portal.html` | Staff portal (receipt creator + PDF, history, settings) |
-| `panel.css` | Shared styles for both panels + printable receipt |
-| `style.css` | Site styles incl. the new cinematic layer |
-| `script.js` | Site JS incl. cursor, counters, marquee, dynamic gallery |
-| `index.html` / `en.html` | Homepages (AR / EN) |
-| `project-*.html` | 6 project pages × 2 languages |
-| `data/` *(runtime, gitignored)* | users.json, gallery.json, receipts.json |
-| `assets/uploads/` *(runtime, gitignored)* | Images uploaded via the panel |
