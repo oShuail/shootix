@@ -113,13 +113,6 @@ h1,h2,h3,h4,h5,h6{font-weight:700;line-height:1.2;color:var(--clr-cream)}
 /* ==================== HERO ==================== */
 /* 100dvh (with a 100vh fallback) so mobile browsers' collapsing address bar
    can't leave the hero taller than the screen and push the copy off-centre. */
-/* Straddles the hero/about boundary: zero net margin so it adds no extra
-   scroll height, but paints (via the positive z-index) over the tail of
-   both sections to smooth the hard cut between them. */
-.section-seam-fade{position:relative;height:160px;margin:-80px 0;z-index:5;pointer-events:none;background:linear-gradient(to bottom,rgba(0,0,0,0) 0%,rgba(0,0,0,0.65) 50%,rgba(0,0,0,0) 100%)}
-@media screen and (max-width:768px){
-    .section-seam-fade{height:100px;margin:-50px 0}
-}
 .hero{position:relative;height:100vh;height:100dvh;min-height:600px;display:flex;align-items:center;justify-content:center;overflow:hidden}
 .video-background{position:absolute;inset:0;z-index:1;overflow:hidden}
 .video-background video{width:100%;height:100%;object-fit:cover}
@@ -143,15 +136,56 @@ h1,h2,h3,h4,h5,h6{font-weight:700;line-height:1.2;color:var(--clr-cream)}
 .hero-subtitle{color:var(--clr-cream-soft);font-family:var(--font-latin);font-size:clamp(1rem,1.4vw,1.15rem);max-width:620px;margin:0 auto 2.8rem;line-height:1.7;font-weight:300}
 .hero-buttons{display:flex;justify-content:center;gap:16px;flex-wrap:wrap}
 
+/* ==================== SECTION SEAM ==================== */
+/* The hero/about boundary is a hard cut: solid dark hero meeting a bright
+   photo. Two halves blend it, both tinted with the page background rather
+   than black — black over navy reads as a dirty smudge, whereas the bg colour
+   disappears into the hero and only does visible work against the photo.
+   Each half carries many stops to approximate an ease curve; a 3-stop linear
+   gradient leaves visible kinks where the slope changes abruptly.
+
+   This half rides the tail of the hero. margin-top cancels its height exactly,
+   so it adds no scroll height, and it sits entirely ABOVE the seam — it never
+   reaches into .about, so it cannot dim that section's copy. */
+.section-seam-fade{
+    position:relative;height:240px;margin-top:-240px;z-index:1;pointer-events:none;
+    background:linear-gradient(to bottom,
+        rgba(10,20,40,0) 0%,
+        rgba(10,20,40,0.08) 20%,
+        rgba(10,20,40,0.22) 35%,
+        rgba(10,20,40,0.42) 50%,
+        rgba(10,20,40,0.62) 62%,
+        rgba(10,20,40,0.79) 73%,
+        rgba(10,20,40,0.91) 83%,
+        rgba(10,20,40,0.98) 92%,
+        rgba(10,20,40,1) 100%);
+}
+
 /* ==================== ABOUT ==================== */
 .about{padding:96px 0 84px;background-color:var(--clr-bg);position:relative;overflow:hidden}
-.about.overlay-section::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;background:var(--clr-border);z-index:3}
+/* Second half of the seam blend (see .section-seam-fade). Was a 1px border,
+   which was itself part of the hard edge. z-index 2 clears the photo and its
+   scrim but stays under the copy at z-index 3, so the eyebrow and body text
+   read at full strength instead of being dimmed by the fade. */
+.about.overlay-section::before{
+    content:'';position:absolute;top:0;left:0;right:0;height:240px;z-index:2;pointer-events:none;
+    background:linear-gradient(to bottom,
+        rgba(10,20,40,1) 0%,
+        rgba(10,20,40,0.98) 8%,
+        rgba(10,20,40,0.91) 17%,
+        rgba(10,20,40,0.79) 27%,
+        rgba(10,20,40,0.62) 38%,
+        rgba(10,20,40,0.42) 50%,
+        rgba(10,20,40,0.22) 65%,
+        rgba(10,20,40,0.08) 80%,
+        rgba(10,20,40,0) 100%);
+}
 /* .container is position:relative globally, which would make IT the containing
    block for the bleeding photo and pin the image to the 1280px column. Opt this
    one out so the image resolves against .about and spans the full section, and
    lift the copy above it instead. */
 .about .container{position:static}
-.about .section-eyebrow,.about .about-text{position:relative;z-index:2}
+.about .section-eyebrow,.about .about-text{position:relative;z-index:3}
 .layout-2-col{display:grid;grid-template-columns:1.1fr 1fr;gap:80px;align-items:center}
 .about-text p{color:var(--clr-cream-soft);margin-bottom:1.2rem;font-size:1rem;line-height:1.85;font-weight:300}
 .about-text strong{color:var(--clr-cream);font-weight:600}
