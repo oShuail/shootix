@@ -176,8 +176,8 @@
                             <input type="text" id="new-name" placeholder="مثال: عمر الشعيل">
                         </div>
                         <div class="field">
-                            <label for="new-username">اسم المستخدم (إنجليزي)</label>
-                            <input type="text" id="new-username" placeholder="omar" dir="ltr" autocomplete="off">
+                            <label for="new-username">اسم المستخدم (للدخول — إنجليزي بدون مسافات)</label>
+                            <input type="text" id="new-username" placeholder="omar.alshuail" dir="ltr" autocomplete="off">
                         </div>
                         <div class="field">
                             <label for="new-jobtitle">المسمى الوظيفي</label>
@@ -502,6 +502,34 @@
             $('new-password').value = btoa(String.fromCharCode(...bytes)).replace(/[+/=]/g, '').slice(0, 12);
         });
 
+        /* The username is a login handle, not a display name: the server only
+           accepts a-z 0-9 . _ - (3–30). Staff kept typing their full name here
+           ("abdulrhman alnoaser") and the submit failed on the space, so fold
+           whitespace into dots and drop anything the server would reject. */
+        const slugUsername = (raw) => String(raw)
+            .toLowerCase()
+            .replace(/\s+/g, '.')
+            .replace(/[^a-z0-9_.-]/g, '')
+            .slice(0, 30);
+
+        (() => {
+            const el = $('new-username');
+            el.addEventListener('input', () => {
+                const clean = slugUsername(el.value);
+                if (clean === el.value) return;
+                // Keep the caret where the user was typing instead of snapping to the end.
+                const pos = el.selectionStart ?? el.value.length;
+                const dropped = pos - slugUsername(el.value.slice(0, pos)).length;
+                el.value = clean;
+                const next = Math.max(0, pos - dropped);
+                el.setSelectionRange(next, next);
+            });
+            // A trailing separator is legal but looks like a typo — tidy it on the way out.
+            el.addEventListener('blur', () => {
+                el.value = el.value.replace(/\.{2,}/g, '.').replace(/^[._-]+|[._-]+$/g, '');
+            });
+        })();
+
         $('add-user-btn').addEventListener('click', async () => {
             await withBusy($('add-user-btn'), 'جاري الإنشاء...', async () => {
                 try {
@@ -510,7 +538,7 @@
                         method: 'POST',
                         body: JSON.stringify({
                             name: $('new-name').value,
-                            username: $('new-username').value,
+                            username: slugUsername($('new-username').value),
                             password,
                             role: $('new-role').value,
                             phone: $('new-phone').value,
