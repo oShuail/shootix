@@ -24,19 +24,35 @@ document.addEventListener('DOMContentLoaded', () => {
     // ==========================================
     const mobileMenuBtn = document.querySelector('.mobile-menu-btn');
     if (mobileMenuBtn && navbar) {
-        mobileMenuBtn.addEventListener('click', () => {
-            navbar.classList.toggle('active');
+        mobileMenuBtn.setAttribute('role', 'button');
+        mobileMenuBtn.setAttribute('tabindex', '0');
+        mobileMenuBtn.setAttribute('aria-label', 'القائمة');
+        mobileMenuBtn.setAttribute('aria-expanded', 'false');
+
+        const setMenu = (open) => {
+            navbar.classList.toggle('active', open);
+            mobileMenuBtn.setAttribute('aria-expanded', open ? 'true' : 'false');
             const icon = mobileMenuBtn.querySelector('i');
-            if (icon) { icon.classList.toggle('fa-bars'); icon.classList.toggle('fa-times'); }
+            if (icon) {
+                icon.classList.toggle('fa-bars', !open);
+                icon.classList.toggle('fa-times', open);
+            }
+        };
+        const toggle = () => setMenu(!navbar.classList.contains('active'));
+
+        mobileMenuBtn.addEventListener('click', toggle);
+        mobileMenuBtn.addEventListener('keydown', (e) => {
+            if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); toggle(); }
         });
-        document.querySelectorAll('.nav-links a').forEach(link => {
-            link.addEventListener('click', () => {
-                if (navbar.classList.contains('active')) {
-                    navbar.classList.remove('active');
-                    const icon = mobileMenuBtn.querySelector('i');
-                    if (icon) { icon.classList.add('fa-bars'); icon.classList.remove('fa-times'); }
-                }
-            });
+
+        // Close on link tap, on Escape, and on a tap outside the bar.
+        document.querySelectorAll('.nav-links a').forEach(link =>
+            link.addEventListener('click', () => setMenu(false)));
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') setMenu(false);
+        });
+        document.addEventListener('click', (e) => {
+            if (navbar.classList.contains('active') && !navbar.contains(e.target)) setMenu(false);
         });
     }
 
@@ -56,22 +72,38 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // ==========================================
     // Active nav highlight
+    // Uses IntersectionObserver instead of measuring every section on every
+    // scroll event — the old version forced a layout on each frame, which is
+    // what made scrolling stutter on phones.
     // ==========================================
     const sections = document.querySelectorAll('section[id]');
-    window.addEventListener('scroll', () => {
-        let current = '';
-        sections.forEach(section => {
-            if (window.pageYOffset >= (section.offsetTop - section.clientHeight / 3)) {
-                current = section.getAttribute('id');
-            }
-        });
-        document.querySelectorAll('.nav-links a').forEach(a => {
-            const href = a.getAttribute('href') || '';
-            if (!href.startsWith('#')) return;
-            a.classList.remove('active');
-            if (href.substring(1) === current) a.classList.add('active');
-        });
-    }, { passive: true });
+    const navAnchors = Array.from(document.querySelectorAll('.nav-links a'))
+        .filter(a => (a.getAttribute('href') || '').startsWith('#'));
+
+    if (sections.length && navAnchors.length && 'IntersectionObserver' in window) {
+        const visible = new Set();
+        const setActive = () => {
+            // The section closest to the top of the viewport wins.
+            let best = null;
+            visible.forEach(id => {
+                const el = document.getElementById(id);
+                if (!el) return;
+                const top = el.getBoundingClientRect().top;
+                if (!best || Math.abs(top) < Math.abs(best.top)) best = { id, top };
+            });
+            navAnchors.forEach(a => a.classList.toggle('active', best && a.getAttribute('href') === '#' + best.id));
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(e => {
+                if (e.isIntersecting) visible.add(e.target.id);
+                else visible.delete(e.target.id);
+            });
+            setActive();
+        }, { rootMargin: '-45% 0px -45% 0px', threshold: 0 });
+
+        sections.forEach(s => observer.observe(s));
+    }
 
     // ==========================================
     // LIGHTBOX GALLERY
@@ -288,30 +320,53 @@ function loadManagedGallery() {
     const isEnglish = document.documentElement.lang !== 'ar';
 
     fetch('/api/gallery')
-        .then((r) => (r.ok ? r.json() : Promise.reject()))
+        .then((r) => (r.ok ? r.json() : Promise.reject(new Error('no backend'))))
         .then(({ images }) => {
             if (!Array.isArray(images) || images.length === 0) return;
+
             targets.forEach((grid) => {
                 const category = grid.dataset.category;
-                images.filter((img) => img.category === category).forEach((img) => {
+                const mine = images
+                    .filter((img) => img.category === category)
+                    // Images flagged "featured" in the admin panel lead the section.
+                    .sort((a, b) => (b.featured === true) - (a.featured === true));
+                if (mine.length === 0) return;
+
+                const isRow = grid.classList.contains('portfolio-row');
+                const frag = document.createDocumentFragment();
+
+                mine.forEach((img) => {
                     const title = (isEnglish ? img.titleEn : img.title) || img.titleEn || img.title || '';
-                    if (grid.classList.contains('portfolio-row')) {
+
+                    const picture = document.createElement('img');
+                    picture.src = img.src;
+                    picture.alt = title;
+                    picture.loading = 'lazy';
+                    picture.decoding = 'async';
+                    picture.className = 'managed-img';
+                    // Fade in once decoded so the grid never flashes a broken frame.
+                    picture.addEventListener('load', () => picture.classList.add('loaded'));
+                    // A single dead image must not leave a gap in the portfolio.
+                    picture.addEventListener('error', () => {
+                        (isRow ? picture.closest('.portfolio-card') : picture)?.remove();
+                    });
+
+                    if (isRow) {
                         const card = document.createElement('div');
                         card.className = 'portfolio-card';
-                        card.innerHTML = `
-                            <img class="portfolio-card-img" src="${img.src}" alt="">
-                            <h4 class="portfolio-card-title"></h4>`;
-                        card.querySelector('img').alt = title;
-                        card.querySelector('h4').textContent = title;
-                        grid.appendChild(card);
+                        picture.classList.add('portfolio-card-img');
+                        const heading = document.createElement('h4');
+                        heading.className = 'portfolio-card-title';
+                        heading.textContent = title;
+                        card.append(picture, heading);
+                        frag.appendChild(card);
                     } else {
-                        const el = document.createElement('img');
-                        el.src = img.src;
-                        el.alt = title;
-                        grid.appendChild(el);
+                        frag.appendChild(picture);
                     }
                 });
+
+                grid.appendChild(frag);
             });
         })
-        .catch(() => { /* no backend (static hosting) — keep static images */ });
+        .catch(() => { /* static hosting or backend down — keep the built-in images */ });
 }

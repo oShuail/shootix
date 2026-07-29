@@ -2,9 +2,11 @@
 <html lang="ar" dir="rtl">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <meta name="theme-color" content="#0A1428">
     <title>لوحة الإدارة | ShootiX</title>
     <meta name="robots" content="noindex, nofollow">
+    <link rel="icon" href="assets/photo-output.PNG">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700;800&family=Montserrat:wght@300;400;500;600;700&family=Lora:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
@@ -19,18 +21,18 @@
             <img src="assets/photo-output.PNG" alt="ShootiX" class="logo">
             <div class="eyebrow">Admin Panel</div>
             <h1>لوحة الإدارة</h1>
-            <p class="sub">إدارة صور الموقع وحسابات الفريق — للمسؤولين فقط.</p>
+            <p class="sub">إدارة صور الموقع وحسابات الفريق والإيصالات — للمسؤولين فقط.</p>
             <div class="msg error" id="login-msg"></div>
             <form id="login-form">
                 <div class="field">
-                    <label>اسم المستخدم</label>
-                    <input type="text" id="login-username" autocomplete="username" required>
+                    <label for="login-username">اسم المستخدم</label>
+                    <input type="text" id="login-username" autocomplete="username" dir="ltr" required>
                 </div>
                 <div class="field">
-                    <label>كلمة المرور</label>
+                    <label for="login-password">كلمة المرور</label>
                     <input type="password" id="login-password" autocomplete="current-password" required>
                 </div>
-                <button type="submit" class="btn btn-gold">تسجيل الدخول</button>
+                <button type="submit" class="btn btn-gold btn-block">تسجيل الدخول</button>
             </form>
             <a href="index.html" class="back-home"><i class="fas fa-arrow-right"></i> العودة للموقع</a>
         </div>
@@ -40,50 +42,88 @@
     <div class="shell" id="shell">
         <header class="topbar">
             <div class="brand">
-                <img src="assets/photo-output.PNG" alt="ShootiX">
+                <img src="assets/photo-output.PNG" alt="">
                 <span>Admin Panel</span>
             </div>
             <div class="who">
                 <span class="role-badge">ADMIN</span>
                 <b id="who-name"></b>
-                <a href="index.html" class="back-home">الموقع</a>
-                <button class="btn btn-ghost btn-sm" id="logout-btn">خروج</button>
+                <a href="index.html" class="back-home" title="الموقع"><i class="fas fa-globe"></i><span class="hide-xs"> الموقع</span></a>
+                <button class="btn btn-ghost btn-sm" id="logout-btn"><i class="fas fa-right-from-bracket"></i><span class="hide-xs"> خروج</span></button>
             </div>
         </header>
 
-        <nav class="tabs">
-            <button class="tab-btn active" data-tab="images"><i class="fas fa-images"></i> صور الموقع</button>
-            <button class="tab-btn" data-tab="team"><i class="fas fa-users"></i> حسابات الفريق</button>
-            <button class="tab-btn" data-tab="receipts"><i class="fas fa-file-invoice"></i> الإيصالات</button>
-            <button class="tab-btn" data-tab="settings"><i class="fas fa-gear"></i> الإعدادات</button>
+        <nav class="tabs" role="tablist" aria-label="أقسام اللوحة">
+            <button class="tab-btn" data-tab="overview" role="tab"><i class="fas fa-chart-simple"></i> نظرة عامة</button>
+            <button class="tab-btn" data-tab="images" role="tab"><i class="fas fa-images"></i> صور الموقع</button>
+            <button class="tab-btn" data-tab="team" role="tab"><i class="fas fa-users"></i> الفريق</button>
+            <button class="tab-btn" data-tab="receipts" role="tab"><i class="fas fa-file-invoice"></i> الإيصالات</button>
+            <button class="tab-btn" data-tab="settings" role="tab"><i class="fas fa-gear"></i> الإعدادات</button>
         </nav>
 
         <main class="main">
 
+            <!-- ==== OVERVIEW ==== -->
+            <section class="tab-panel" id="tab-overview">
+                <h2 class="panel-title">نظرة عامة</h2>
+                <p class="panel-sub">ملخص سريع لنشاط الاستوديو.</p>
+
+                <div class="stat-grid" id="stat-grid">
+                    <div class="stat-card"><span class="lbl">إيصالات هذا الشهر</span><b class="num" id="s-month-count">—</b><span class="sub" id="s-month-total"></span></div>
+                    <div class="stat-card"><span class="lbl">إجمالي الإيصالات</span><b class="num" id="s-count">—</b><span class="sub" id="s-total"></span></div>
+                    <div class="stat-card"><span class="lbl">صور الموقع</span><b class="num" id="s-images">—</b><span class="sub">في معرض الأعمال</span></div>
+                    <div class="stat-card"><span class="lbl">أعضاء الفريق</span><b class="num" id="s-team">—</b><span class="sub" id="s-team-sub"></span></div>
+                </div>
+
+                <div class="card">
+                    <h3><i class="fas fa-bolt"></i> اختصارات</h3>
+                    <div class="quick-actions">
+                        <button class="quick" data-goto="images"><i class="fas fa-cloud-arrow-up"></i><span>رفع صورة جديدة</span></button>
+                        <button class="quick" data-goto="team"><i class="fas fa-user-plus"></i><span>إضافة عضو للفريق</span></button>
+                        <button class="quick" data-goto="receipts"><i class="fas fa-file-invoice"></i><span>مراجعة الإيصالات</span></button>
+                        <a class="quick" href="portal.html"><i class="fas fa-file-circle-plus"></i><span>إصدار إيصال</span></a>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <h3><i class="fas fa-clock-rotate-left"></i> آخر الإيصالات</h3>
+                    <div class="table-wrap">
+                        <table class="compact">
+                            <thead><tr><th>الرقم</th><th>العميل</th><th>الإجمالي</th><th class="col-optional">أصدره</th></tr></thead>
+                            <tbody id="recent-tbody"></tbody>
+                        </table>
+                    </div>
+                    <div class="empty" id="recent-empty" style="display:none">لا توجد إيصالات بعد.</div>
+                </div>
+            </section>
+
             <!-- ==== IMAGES ==== -->
-            <section class="tab-panel active" id="tab-images">
+            <section class="tab-panel" id="tab-images">
                 <h2 class="panel-title">صور الموقع</h2>
-                <p class="panel-sub">الصور التي ترفعها هنا تظهر مباشرة في قسم الأعمال بالموقع وفي صفحة المشروع المطابقة.</p>
+                <p class="panel-sub">الصور تُحفظ في Supabase وتظهر مباشرة في قسم الأعمال وفي صفحة المشروع المطابقة.</p>
 
                 <div class="card">
                     <h3><i class="fas fa-cloud-arrow-up"></i> رفع صورة جديدة</h3>
                     <div class="msg" id="upload-msg"></div>
-                    <div class="dropzone" id="dropzone">
+
+                    <div class="dropzone" id="dropzone" tabindex="0" role="button" aria-label="اختر صورة">
                         <i class="fas fa-image"></i>
-                        <span id="dropzone-text">اسحب الصورة هنا أو اضغط للاختيار (حتى 8 ميجا)</span>
+                        <span id="dropzone-text">اسحب الصورة هنا أو اضغط للاختيار (حتى ١٥ ميجابايت)</span>
                         <input type="file" id="file-input" accept="image/png,image/jpeg,image/webp,image/gif" hidden>
                     </div>
+                    <div class="progress" id="upload-progress"><span></span></div>
+
                     <div class="form-grid" style="margin-top:20px">
                         <div class="field">
-                            <label>عنوان الصورة (عربي)</label>
+                            <label for="img-title">عنوان الصورة (عربي)</label>
                             <input type="text" id="img-title" placeholder="مثال: حملة سيارة رياضية">
                         </div>
                         <div class="field">
-                            <label>Title (English)</label>
+                            <label for="img-title-en">Title (English)</label>
                             <input type="text" id="img-title-en" placeholder="e.g. Sports Car Campaign" dir="ltr">
                         </div>
-                        <div class="field full">
-                            <label>القسم</label>
+                        <div class="field">
+                            <label for="img-category">القسم</label>
                             <select id="img-category">
                                 <option value="cars">تصوير سيارات</option>
                                 <option value="food">طعام وضيافة</option>
@@ -93,6 +133,12 @@
                                 <option value="fashion">أزياء وأسلوب حياة</option>
                             </select>
                         </div>
+                        <div class="field">
+                            <label class="check" style="margin-top:26px">
+                                <input type="checkbox" id="img-featured">
+                                صورة مميزة (تظهر أولاً)
+                            </label>
+                        </div>
                     </div>
                     <button class="btn btn-gold" id="upload-btn" style="margin-top:22px" disabled>
                         <i class="fas fa-cloud-arrow-up"></i> رفع الصورة
@@ -100,7 +146,18 @@
                 </div>
 
                 <div class="card">
-                    <h3><i class="fas fa-photo-film"></i> الصور الحالية</h3>
+                    <div class="card-head">
+                        <h3><i class="fas fa-photo-film"></i> الصور الحالية <span class="count" id="img-count"></span></h3>
+                        <select id="img-filter" class="inline-select">
+                            <option value="">كل الأقسام</option>
+                            <option value="cars">تصوير سيارات</option>
+                            <option value="food">طعام وضيافة</option>
+                            <option value="realestate">عقاري</option>
+                            <option value="events">فعاليات ومؤتمرات</option>
+                            <option value="products">تصوير منتجات</option>
+                            <option value="fashion">أزياء وأسلوب حياة</option>
+                        </select>
+                    </div>
                     <div class="img-grid" id="img-grid"></div>
                     <div class="empty" id="img-empty" style="display:none">لا توجد صور مرفوعة بعد.</div>
                 </div>
@@ -108,27 +165,38 @@
 
             <!-- ==== TEAM ==== -->
             <section class="tab-panel" id="tab-team">
-                <h2 class="panel-title">حسابات الفريق</h2>
-                <p class="panel-sub">أنشئ حسابات لموظفيك ليتمكنوا من إصدار الإيصالات من بوابة الفريق. تعديل صور الموقع متاح للمسؤولين فقط.</p>
+                <h2 class="panel-title">الفريق</h2>
+                <p class="panel-sub">أنشئ حسابات لموظفيك ليصدروا الإيصالات من بوابة الفريق. تعديل صور الموقع للمسؤولين فقط.</p>
 
                 <div class="card">
-                    <h3><i class="fas fa-user-plus"></i> إضافة حساب جديد</h3>
+                    <h3><i class="fas fa-user-plus"></i> إضافة عضو جديد</h3>
                     <div class="msg" id="user-msg"></div>
                     <div class="form-grid">
                         <div class="field">
-                            <label>الاسم الكامل</label>
+                            <label for="new-name">الاسم الكامل</label>
                             <input type="text" id="new-name" placeholder="مثال: عمر الشعيل">
                         </div>
                         <div class="field">
-                            <label>اسم المستخدم (إنجليزي)</label>
+                            <label for="new-username">اسم المستخدم (إنجليزي)</label>
                             <input type="text" id="new-username" placeholder="omar" dir="ltr" autocomplete="off">
                         </div>
                         <div class="field">
-                            <label>كلمة المرور (٦ أحرف على الأقل)</label>
-                            <input type="text" id="new-password" dir="ltr" autocomplete="off">
+                            <label for="new-jobtitle">المسمى الوظيفي</label>
+                            <input type="text" id="new-jobtitle" placeholder="مصور / منتج">
                         </div>
                         <div class="field">
-                            <label>الصلاحية</label>
+                            <label for="new-phone">رقم الجوال</label>
+                            <input type="tel" id="new-phone" placeholder="05xxxxxxxx" dir="ltr">
+                        </div>
+                        <div class="field">
+                            <label for="new-password">كلمة المرور (٨ أحرف على الأقل)</label>
+                            <div class="input-with-btn">
+                                <input type="text" id="new-password" dir="ltr" autocomplete="off">
+                                <button type="button" class="mini" id="gen-password" title="توليد كلمة مرور"><i class="fas fa-dice"></i></button>
+                            </div>
+                        </div>
+                        <div class="field">
+                            <label for="new-role">الصلاحية</label>
                             <select id="new-role">
                                 <option value="employee">موظف — بوابة الفريق فقط</option>
                                 <option value="admin">مسؤول — كامل الصلاحيات</option>
@@ -139,10 +207,10 @@
                 </div>
 
                 <div class="card">
-                    <h3><i class="fas fa-users"></i> الحسابات الحالية</h3>
+                    <h3><i class="fas fa-users"></i> الأعضاء <span class="count" id="team-count"></span></h3>
                     <div class="table-wrap">
-                        <table>
-                            <thead><tr><th>الاسم</th><th>اسم المستخدم</th><th>الصلاحية</th><th>أضيف في</th><th></th></tr></thead>
+                        <table class="stack-mobile">
+                            <thead><tr><th>الاسم</th><th>اسم المستخدم</th><th>الصلاحية</th><th>الحالة</th><th>آخر دخول</th><th></th></tr></thead>
                             <tbody id="users-tbody"></tbody>
                         </table>
                     </div>
@@ -152,305 +220,472 @@
             <!-- ==== RECEIPTS ==== -->
             <section class="tab-panel" id="tab-receipts">
                 <h2 class="panel-title">جميع الإيصالات</h2>
-                <p class="panel-sub">كل الإيصالات الصادرة من بوابة الفريق. كل إيصال يُضاف تلقائياً كصف جديد في ملف Excel.</p>
-                <div style="display:flex;justify-content:flex-end;margin-bottom:16px">
-                    <a class="btn btn-ghost btn-sm" href="/api/receipts.xlsx"><i class="fas fa-file-excel"></i> تحميل جدول Excel (كل الإيصالات)</a>
+                <p class="panel-sub">كل إيصال يُضاف تلقائياً كصف جديد في ملف Excel.</p>
+
+                <div class="card">
+                    <div class="filter-bar">
+                        <div class="field grow">
+                            <label for="rq">بحث</label>
+                            <input type="search" id="rq" placeholder="رقم الإيصال، العميل، المشروع، الجوال...">
+                        </div>
+                        <div class="field">
+                            <label for="rstatus">الحالة</label>
+                            <select id="rstatus">
+                                <option value="">الكل</option>
+                                <option value="paid">مدفوع</option>
+                                <option value="partial">جزئي</option>
+                                <option value="unpaid">غير مدفوع</option>
+                            </select>
+                        </div>
+                        <div class="field">
+                            <label for="rfrom">من</label>
+                            <input type="date" id="rfrom" dir="ltr">
+                        </div>
+                        <div class="field">
+                            <label for="rto">إلى</label>
+                            <input type="date" id="rto" dir="ltr">
+                        </div>
+                        <button class="btn btn-ghost btn-sm" id="r-clear"><i class="fas fa-rotate-left"></i> مسح</button>
+                        <a class="btn btn-ghost btn-sm" href="/api/receipts.xlsx"><i class="fas fa-file-excel"></i> تحميل Excel</a>
+                    </div>
                 </div>
+
                 <div class="card">
                     <div class="table-wrap">
-                        <table>
-                            <thead><tr><th>الرقم</th><th>التاريخ</th><th>العميل</th><th>الإجمالي</th><th>أصدره</th><th></th></tr></thead>
+                        <table class="stack-mobile">
+                            <thead><tr><th>الرقم</th><th>التاريخ</th><th>العميل</th><th>الإجمالي</th><th>الحالة</th><th>أصدره</th><th></th></tr></thead>
                             <tbody id="receipts-tbody"></tbody>
                         </table>
                     </div>
-                    <div class="empty" id="receipts-empty" style="display:none">لا توجد إيصالات بعد.</div>
+                    <div class="empty" id="receipts-empty" style="display:none">لا توجد إيصالات مطابقة.</div>
                 </div>
             </section>
 
             <!-- ==== SETTINGS ==== -->
             <section class="tab-panel" id="tab-settings">
                 <h2 class="panel-title">الإعدادات</h2>
-                <p class="panel-sub">تغيير كلمة المرور الخاصة بك.</p>
-                <div class="card" style="max-width:480px">
+                <p class="panel-sub">حسابك وحالة النظام.</p>
+
+                <div class="card" style="max-width:520px">
                     <h3><i class="fas fa-key"></i> تغيير كلمة المرور</h3>
                     <div class="msg" id="pw-msg"></div>
                     <div class="field" style="margin-bottom:18px">
-                        <label>كلمة المرور الحالية</label>
+                        <label for="pw-current">كلمة المرور الحالية</label>
                         <input type="password" id="pw-current" autocomplete="current-password">
                     </div>
                     <div class="field" style="margin-bottom:22px">
-                        <label>كلمة المرور الجديدة</label>
+                        <label for="pw-new">كلمة المرور الجديدة (٨ أحرف على الأقل)</label>
                         <input type="password" id="pw-new" autocomplete="new-password">
                     </div>
                     <button class="btn btn-gold" id="pw-btn">حفظ</button>
+                </div>
+
+                <div class="card" style="max-width:520px">
+                    <h3><i class="fas fa-heart-pulse"></i> حالة النظام</h3>
+                    <ul class="status-list" id="status-list">
+                        <li><span>قاعدة البيانات</span><b id="st-db">جاري الفحص…</b></li>
+                        <li><span>تخزين الصور</span><b id="st-storage">—</b></li>
+                        <li><span>سجل Excel</span><b id="st-ledger">يُحدَّث مع كل إيصال</b></li>
+                    </ul>
                 </div>
             </section>
         </main>
     </div>
 
+    <div id="receipt-print-area"></div>
     <div class="toast" id="toast"></div>
 
+    <script src="panel.js"></script>
     <script>
     (() => {
-        const $ = (id) => document.getElementById(id);
+        const { $, esc, money, STATUS, api, showMsg, toast, dialog, confirmAction,
+                withBusy, initTabs, initAuth, uploadImage, printReceipt, checkBackend } = window.SX;
+
         const CAT_LABELS = {
             cars: 'تصوير سيارات', food: 'طعام وضيافة', realestate: 'عقاري',
             events: 'فعاليات ومؤتمرات', products: 'تصوير منتجات', fashion: 'أزياء وأسلوب حياة'
         };
-        let pendingImage = null;
 
-        async function api(path, options = {}) {
-            const res = await fetch(path, {
-                headers: { 'Content-Type': 'application/json' },
-                credentials: 'same-origin',
-                ...options
-            });
-            const data = await res.json().catch(() => ({}));
-            if (!res.ok) throw new Error(data.error || 'حدث خطأ غير متوقع');
-            return data;
-        }
-        function showMsg(id, text, type = 'error') {
-            const el = $(id);
-            el.textContent = text;
-            el.className = `msg show ${type}`;
-            setTimeout(() => el.classList.remove('show'), 5000);
-        }
-        function toast(text) {
-            const el = $('toast');
-            el.textContent = text;
-            el.classList.add('show');
-            setTimeout(() => el.classList.remove('show'), 2600);
-        }
-        const money = (n) => Number(n).toLocaleString('en-US', { minimumFractionDigits: 2 }) + ' ر.س';
+        let pendingFile = null;
+        let allImages = [];
+        const gotoTab = initTabs('sx-admin-tab');
 
-        /* ---- auth flow ---- */
-        async function boot() {
-            try {
-                const { user } = await api('/api/me');
-                if (user.role !== 'admin') {
-                    showMsg('login-msg', 'هذا الحساب موظف — استخدم بوابة الفريق (portal.html)');
-                    await api('/api/logout', { method: 'POST' });
-                    return;
-                }
-                enter(user);
-            } catch { /* stay on login */ }
-        }
-        function enter(user) {
-            $('who-name').textContent = user.name;
-            $('login-screen').style.display = 'none';
-            $('shell').style.display = 'flex';
-            loadImages(); loadUsers(); loadReceipts();
-        }
-
-        $('login-form').addEventListener('submit', async (e) => {
-            e.preventDefault();
-            try {
-                const { user } = await api('/api/login', {
-                    method: 'POST',
-                    body: JSON.stringify({ username: $('login-username').value, password: $('login-password').value })
+        /* ---------------- boot ---------------- */
+        initAuth({
+            adminOnly: true,
+            onEnter: () => {
+                loadStats(); loadImages(); loadUsers(); loadReceipts();
+                checkBackend().then((ok) => {
+                    $('st-db').textContent = ok ? 'متصلة ✓' : 'غير متاحة';
+                    $('st-db').className = ok ? 'good' : 'bad';
+                    $('st-storage').textContent = ok ? 'Supabase Storage ✓' : 'غير متاح';
+                    $('st-storage').className = ok ? 'good' : 'bad';
                 });
-                if (user.role !== 'admin') {
-                    showMsg('login-msg', 'هذا الحساب موظف — استخدم بوابة الفريق (portal.html)');
-                    await api('/api/logout', { method: 'POST' });
-                    return;
-                }
-                enter(user);
-            } catch (err) { showMsg('login-msg', err.message); }
+            }
         });
 
-        $('logout-btn').addEventListener('click', async () => {
-            await api('/api/logout', { method: 'POST' });
-            location.reload();
-        });
+        document.querySelectorAll('.quick[data-goto]').forEach((b) =>
+            b.addEventListener('click', () => gotoTab(b.dataset.goto)));
 
-        /* ---- tabs ---- */
-        document.querySelectorAll('.tab-btn').forEach((btn) => {
-            btn.addEventListener('click', () => {
-                document.querySelectorAll('.tab-btn').forEach((b) => b.classList.remove('active'));
-                document.querySelectorAll('.tab-panel').forEach((p) => p.classList.remove('active'));
-                btn.classList.add('active');
-                $('tab-' + btn.dataset.tab).classList.add('active');
+        /* ---------------- overview ---------------- */
+        async function loadStats() {
+            try {
+                const s = await api('/api/stats');
+                $('s-month-count').textContent = s.receipts.monthCount;
+                $('s-month-total').textContent = money(s.receipts.monthTotal);
+                $('s-count').textContent = s.receipts.count;
+                $('s-total').textContent = money(s.receipts.total);
+                $('s-images').textContent = s.images;
+                $('s-team').textContent = s.team.total;
+                $('s-team-sub').textContent = `${s.team.admins} مسؤول · ${s.team.active} فعّال`;
+            } catch { /* the banner already explains why */ }
+        }
+
+        function renderRecent(receipts) {
+            const tbody = $('recent-tbody');
+            tbody.innerHTML = '';
+            const recent = receipts.slice(0, 5);
+            $('recent-empty').style.display = recent.length ? 'none' : 'block';
+            recent.forEach((r) => {
+                const tr = document.createElement('tr');
+                tr.innerHTML = `<td class="mono" dir="ltr"></td><td></td><td class="mono"></td><td class="col-optional"></td>`;
+                tr.children[0].textContent = r.number;
+                tr.children[1].textContent = r.clientName;
+                tr.children[2].textContent = money(r.total);
+                tr.children[3].textContent = r.createdBy;
+                tbody.appendChild(tr);
             });
-        });
+        }
 
-        /* ---- images ---- */
+        /* ---------------- images ---------------- */
         const dropzone = $('dropzone');
         const fileInput = $('file-input');
+
         dropzone.addEventListener('click', () => fileInput.click());
-        dropzone.addEventListener('dragover', (e) => { e.preventDefault(); dropzone.classList.add('dragover'); });
-        dropzone.addEventListener('dragleave', () => dropzone.classList.remove('dragover'));
+        dropzone.addEventListener('keydown', (e) => {
+            if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); fileInput.click(); }
+        });
+        ['dragenter', 'dragover'].forEach((ev) =>
+            dropzone.addEventListener(ev, (e) => { e.preventDefault(); dropzone.classList.add('dragover'); }));
+        ['dragleave', 'drop'].forEach((ev) =>
+            dropzone.addEventListener(ev, () => dropzone.classList.remove('dragover')));
         dropzone.addEventListener('drop', (e) => {
             e.preventDefault();
-            dropzone.classList.remove('dragover');
-            if (e.dataTransfer.files[0]) readFile(e.dataTransfer.files[0]);
+            if (e.dataTransfer.files[0]) pickFile(e.dataTransfer.files[0]);
         });
-        fileInput.addEventListener('change', () => { if (fileInput.files[0]) readFile(fileInput.files[0]); });
+        fileInput.addEventListener('change', () => { if (fileInput.files[0]) pickFile(fileInput.files[0]); });
 
-        function readFile(file) {
-            if (file.size > 8 * 1024 * 1024) { showMsg('upload-msg', 'حجم الصورة أكبر من 8 ميجا'); return; }
-            const reader = new FileReader();
-            reader.onload = () => {
-                pendingImage = reader.result;
-                $('dropzone-text').textContent = file.name;
-                let preview = dropzone.querySelector('.preview');
-                if (!preview) {
-                    preview = document.createElement('img');
-                    preview.className = 'preview';
-                    dropzone.appendChild(preview);
-                }
-                preview.src = pendingImage;
-                $('upload-btn').disabled = false;
-            };
-            reader.readAsDataURL(file);
+        function pickFile(file) {
+            if (!/^image\//.test(file.type)) { showMsg('upload-msg', 'الملف ليس صورة'); return; }
+            if (file.size > 15 * 1024 * 1024) { showMsg('upload-msg', 'حجم الصورة أكبر من ١٥ ميجابايت'); return; }
+            pendingFile = file;
+            $('dropzone-text').textContent = `${file.name} — ${(file.size / 1024 / 1024).toFixed(1)} MB`;
+
+            let preview = dropzone.querySelector('.preview');
+            if (!preview) {
+                preview = document.createElement('img');
+                preview.className = 'preview';
+                dropzone.appendChild(preview);
+            }
+            preview.src = URL.createObjectURL(file);
+            preview.onload = () => URL.revokeObjectURL(preview.src);
+            $('upload-btn').disabled = false;
+        }
+
+        function resetUploadForm() {
+            pendingFile = null;
+            fileInput.value = '';
+            $('img-title').value = '';
+            $('img-title-en').value = '';
+            $('img-featured').checked = false;
+            $('dropzone-text').textContent = 'اسحب الصورة هنا أو اضغط للاختيار (حتى ١٥ ميجابايت)';
+            dropzone.querySelector('.preview')?.remove();
+            $('upload-btn').disabled = true;
+            setProgress(0);
+        }
+
+        function setProgress(pct) {
+            const bar = $('upload-progress');
+            bar.classList.toggle('show', pct > 0 && pct < 100);
+            bar.firstElementChild.style.width = `${pct}%`;
         }
 
         $('upload-btn').addEventListener('click', async () => {
-            if (!pendingImage) return;
-            const btn = $('upload-btn');
-            btn.disabled = true;
-            btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> جاري الرفع...';
-            try {
-                await api('/api/gallery', {
-                    method: 'POST',
-                    body: JSON.stringify({
+            if (!pendingFile) return;
+            await withBusy($('upload-btn'), 'جاري الرفع...', async () => {
+                try {
+                    await uploadImage({
+                        file: pendingFile,
+                        category: $('img-category').value,
                         title: $('img-title').value,
                         titleEn: $('img-title-en').value,
-                        category: $('img-category').value,
-                        image: pendingImage
-                    })
-                });
-                pendingImage = null;
-                fileInput.value = '';
-                $('img-title').value = ''; $('img-title-en').value = '';
-                $('dropzone-text').textContent = 'اسحب الصورة هنا أو اضغط للاختيار (حتى 8 ميجا)';
-                dropzone.querySelector('.preview')?.remove();
-                toast('تم رفع الصورة — أصبحت ظاهرة في الموقع');
-                loadImages();
-            } catch (err) { showMsg('upload-msg', err.message); }
-            btn.disabled = !pendingImage;
-            btn.innerHTML = '<i class="fas fa-cloud-arrow-up"></i> رفع الصورة';
+                        featured: $('img-featured').checked,
+                        onProgress: setProgress
+                    });
+                    resetUploadForm();
+                    toast('تم رفع الصورة — أصبحت ظاهرة في الموقع');
+                    loadImages(); loadStats();
+                } catch (err) {
+                    setProgress(0);
+                    showMsg('upload-msg', err.message);
+                }
+            });
         });
+
+        $('img-filter').addEventListener('change', renderImages);
 
         async function loadImages() {
             try {
                 const { images } = await api('/api/gallery');
-                const grid = $('img-grid');
-                grid.innerHTML = '';
-                $('img-empty').style.display = images.length ? 'none' : 'block';
-                images.slice().reverse().forEach((img) => {
-                    const card = document.createElement('div');
-                    card.className = 'img-card';
-                    card.innerHTML = `
-                        <img src="${img.src}" alt="">
-                        <div class="meta">
-                            <div class="t"></div>
-                            <span class="c">${CAT_LABELS[img.category] || img.category}</span>
-                            <button class="btn btn-danger btn-sm"><i class="fas fa-trash"></i> حذف</button>
-                        </div>`;
-                    card.querySelector('.t').textContent = img.title || img.titleEn || '—';
-                    card.querySelector('button').addEventListener('click', async () => {
-                        if (!confirm('حذف هذه الصورة من الموقع؟')) return;
-                        try { await api('/api/gallery/' + img.id, { method: 'DELETE' }); toast('تم حذف الصورة'); loadImages(); }
-                        catch (err) { alert(err.message); }
-                    });
-                    grid.appendChild(card);
-                });
-            } catch { /* not logged in yet */ }
+                allImages = images;
+                renderImages();
+            } catch { /* ignore */ }
         }
 
-        /* ---- users ---- */
-        $('add-user-btn').addEventListener('click', async () => {
-            try {
-                await api('/api/users', {
-                    method: 'POST',
-                    body: JSON.stringify({
-                        name: $('new-name').value,
-                        username: $('new-username').value,
-                        password: $('new-password').value,
-                        role: $('new-role').value
-                    })
+        function renderImages() {
+            const filter = $('img-filter').value;
+            const list = (filter ? allImages.filter((i) => i.category === filter) : allImages)
+                .slice().reverse();
+
+            $('img-count').textContent = list.length ? `(${list.length})` : '';
+            $('img-empty').style.display = list.length ? 'none' : 'block';
+
+            const grid = $('img-grid');
+            grid.innerHTML = '';
+            list.forEach((img) => {
+                const card = document.createElement('div');
+                card.className = 'img-card';
+                card.innerHTML = `
+                    <div class="thumb"><img src="${esc(img.src)}" alt="" loading="lazy"></div>
+                    <div class="meta">
+                        <div class="t"></div>
+                        <span class="c">${esc(CAT_LABELS[img.category] || img.category)}</span>
+                        ${img.featured ? '<span class="c star"><i class="fas fa-star"></i> مميزة</span>' : ''}
+                        <div class="row-actions">
+                            <button class="btn btn-ghost btn-sm edit"><i class="fas fa-pen"></i> تعديل</button>
+                            <button class="btn btn-danger btn-sm del"><i class="fas fa-trash"></i></button>
+                        </div>
+                    </div>`;
+                card.querySelector('.t').textContent = img.title || img.titleEn || '—';
+
+                card.querySelector('.edit').addEventListener('click', async () => {
+                    const title = await dialog({
+                        title: 'تعديل عنوان الصورة',
+                        confirmText: 'حفظ',
+                        input: { label: 'العنوان (عربي)', placeholder: img.title || '' }
+                    });
+                    if (title === null) return;
+                    try {
+                        await api('/api/gallery/' + img.id, {
+                            method: 'PATCH',
+                            body: JSON.stringify({ title })
+                        });
+                        toast('تم التحديث');
+                        loadImages();
+                    } catch (err) { toast(err.message, 'error'); }
                 });
-                $('new-name').value = ''; $('new-username').value = ''; $('new-password').value = '';
-                toast('تم إنشاء الحساب');
-                loadUsers();
-            } catch (err) { showMsg('user-msg', err.message); }
+
+                card.querySelector('.del').addEventListener('click', async () => {
+                    if (!await confirmAction('حذف الصورة؟', 'ستختفي من الموقع فوراً.')) return;
+                    try {
+                        await api('/api/gallery/' + img.id, { method: 'DELETE' });
+                        toast('تم حذف الصورة');
+                        loadImages(); loadStats();
+                    } catch (err) { toast(err.message, 'error'); }
+                });
+                grid.appendChild(card);
+            });
+        }
+
+        /* ---------------- team ---------------- */
+        $('gen-password').addEventListener('click', () => {
+            const bytes = crypto.getRandomValues(new Uint8Array(9));
+            $('new-password').value = btoa(String.fromCharCode(...bytes)).replace(/[+/=]/g, '').slice(0, 12);
+        });
+
+        $('add-user-btn').addEventListener('click', async () => {
+            await withBusy($('add-user-btn'), 'جاري الإنشاء...', async () => {
+                try {
+                    const password = $('new-password').value;
+                    const { user } = await api('/api/users', {
+                        method: 'POST',
+                        body: JSON.stringify({
+                            name: $('new-name').value,
+                            username: $('new-username').value,
+                            password,
+                            role: $('new-role').value,
+                            phone: $('new-phone').value,
+                            jobTitle: $('new-jobtitle').value
+                        })
+                    });
+                    ['new-name', 'new-username', 'new-password', 'new-phone', 'new-jobtitle']
+                        .forEach((id) => { $(id).value = ''; });
+                    showMsg('user-msg',
+                        `تم إنشاء الحساب — اسم المستخدم: ${user.username} · كلمة المرور: ${password}`, 'ok');
+                    loadUsers(); loadStats();
+                } catch (err) { showMsg('user-msg', err.message); }
+            });
         });
 
         async function loadUsers() {
             try {
                 const { users } = await api('/api/users');
+                $('team-count').textContent = users.length ? `(${users.length})` : '';
                 const tbody = $('users-tbody');
                 tbody.innerHTML = '';
+
                 users.forEach((u) => {
                     const tr = document.createElement('tr');
+                    if (!u.active) tr.classList.add('is-off');
                     tr.innerHTML = `
-                        <td></td>
-                        <td class="mono" dir="ltr"></td>
-                        <td>${u.role === 'admin' ? '<span style="color:var(--clr-accent)">مسؤول</span>' : 'موظف'}</td>
-                        <td>${new Date(u.createdAt).toLocaleDateString('ar-SA')}</td>
-                        <td style="white-space:nowrap">
-                            <button class="btn btn-ghost btn-sm rp">كلمة مرور جديدة</button>
-                            <button class="btn btn-danger btn-sm del"><i class="fas fa-trash"></i></button>
+                        <td data-label="الاسم"><span class="who-cell"><b></b><small></small></span></td>
+                        <td data-label="اسم المستخدم" class="mono" dir="ltr"></td>
+                        <td data-label="الصلاحية">${u.role === 'admin'
+                            ? '<span class="pill gold">مسؤول</span>' : '<span class="pill">موظف</span>'}</td>
+                        <td data-label="الحالة">${u.active
+                            ? '<span class="pill ok">فعّال</span>' : '<span class="pill bad">موقوف</span>'}</td>
+                        <td data-label="آخر دخول" class="mono" dir="ltr">${u.lastLoginAt
+                            ? new Date(u.lastLoginAt).toLocaleDateString('en-GB') : '—'}</td>
+                        <td class="row-actions">
+                            <button class="btn btn-ghost btn-sm rp" title="كلمة مرور جديدة"><i class="fas fa-key"></i></button>
+                            <button class="btn btn-ghost btn-sm tg" title="${u.active ? 'إيقاف' : 'تفعيل'}">
+                                <i class="fas fa-${u.active ? 'ban' : 'circle-check'}"></i></button>
+                            <button class="btn btn-danger btn-sm del" title="حذف"><i class="fas fa-trash"></i></button>
                         </td>`;
-                    tr.children[0].textContent = u.name;
+                    tr.querySelector('.who-cell b').textContent = u.name;
+                    tr.querySelector('.who-cell small').textContent = u.jobTitle || '';
                     tr.children[1].textContent = u.username;
+
                     tr.querySelector('.rp').addEventListener('click', async () => {
-                        const pw = prompt(`كلمة مرور جديدة للمستخدم ${u.username} (٦ أحرف على الأقل):`);
+                        const pw = await dialog({
+                            title: `كلمة مرور جديدة لـ ${u.name}`,
+                            message: 'ثمانية أحرف على الأقل. سيتم تسجيل خروجه من كل الأجهزة.',
+                            confirmText: 'تعيين',
+                            input: { label: 'كلمة المرور', dir: 'ltr', placeholder: '••••••••' }
+                        });
                         if (!pw) return;
-                        try { await api(`/api/users/${u.id}/reset-password`, { method: 'POST', body: JSON.stringify({ newPassword: pw }) }); toast('تم تغيير كلمة المرور'); }
-                        catch (err) { alert(err.message); }
+                        try {
+                            await api(`/api/users/${u.id}/reset-password`, {
+                                method: 'POST', body: JSON.stringify({ newPassword: pw })
+                            });
+                            toast('تم تغيير كلمة المرور');
+                        } catch (err) { toast(err.message, 'error'); }
                     });
+
+                    tr.querySelector('.tg').addEventListener('click', async () => {
+                        try {
+                            await api('/api/users/' + u.id, {
+                                method: 'PATCH', body: JSON.stringify({ active: !u.active })
+                            });
+                            toast(u.active ? 'تم إيقاف الحساب' : 'تم تفعيل الحساب');
+                            loadUsers(); loadStats();
+                        } catch (err) { toast(err.message, 'error'); }
+                    });
+
                     tr.querySelector('.del').addEventListener('click', async () => {
-                        if (!confirm(`حذف حساب ${u.name}؟`)) return;
-                        try { await api('/api/users/' + u.id, { method: 'DELETE' }); toast('تم حذف الحساب'); loadUsers(); }
-                        catch (err) { alert(err.message); }
+                        if (!await confirmAction(`حذف ${u.name}؟`, 'لا يمكن التراجع عن هذا الإجراء.')) return;
+                        try {
+                            await api('/api/users/' + u.id, { method: 'DELETE' });
+                            toast('تم حذف الحساب');
+                            loadUsers(); loadStats();
+                        } catch (err) { toast(err.message, 'error'); }
                     });
                     tbody.appendChild(tr);
                 });
             } catch { /* ignore */ }
         }
 
-        /* ---- receipts overview ---- */
+        /* ---------------- receipts ---------------- */
+        let searchTimer = null;
+        ['rq', 'rstatus', 'rfrom', 'rto'].forEach((id) =>
+            $(id).addEventListener('input', () => {
+                clearTimeout(searchTimer);
+                searchTimer = setTimeout(loadReceipts, 280);
+            }));
+
+        $('r-clear').addEventListener('click', () => {
+            ['rq', 'rstatus', 'rfrom', 'rto'].forEach((id) => { $(id).value = ''; });
+            loadReceipts();
+        });
+
         async function loadReceipts() {
             try {
-                const { receipts } = await api('/api/receipts');
+                const params = new URLSearchParams();
+                if ($('rq').value.trim()) params.set('q', $('rq').value.trim());
+                if ($('rstatus').value) params.set('status', $('rstatus').value);
+                if ($('rfrom').value) params.set('from', $('rfrom').value);
+                if ($('rto').value) params.set('to', $('rto').value);
+
+                const { receipts } = await api('/api/receipts?' + params);
+                renderRecent(receipts);
+
                 const tbody = $('receipts-tbody');
                 tbody.innerHTML = '';
                 $('receipts-empty').style.display = receipts.length ? 'none' : 'block';
+
                 receipts.forEach((r) => {
+                    const st = STATUS[r.status] || STATUS.paid;
                     const tr = document.createElement('tr');
                     tr.innerHTML = `
-                        <td class="mono" dir="ltr">${r.number}</td>
-                        <td class="mono" dir="ltr">${r.date}</td>
-                        <td></td>
-                        <td class="mono">${money(r.total)}</td>
-                        <td></td>
-                        <td><button class="btn btn-danger btn-sm del"><i class="fas fa-trash"></i></button></td>`;
+                        <td data-label="الرقم" class="mono" dir="ltr"></td>
+                        <td data-label="التاريخ" class="mono" dir="ltr"></td>
+                        <td data-label="العميل"></td>
+                        <td data-label="الإجمالي" class="mono"></td>
+                        <td data-label="الحالة"><button class="pill ${st.cls} status-btn">${st.label}</button></td>
+                        <td data-label="أصدره"></td>
+                        <td class="row-actions">
+                            <button class="btn btn-ghost btn-sm pdf" title="PDF"><i class="fas fa-file-pdf"></i></button>
+                            <button class="btn btn-danger btn-sm del" title="حذف"><i class="fas fa-trash"></i></button>
+                        </td>`;
+                    tr.children[0].textContent = r.number;
+                    tr.children[1].textContent = r.date;
                     tr.children[2].textContent = r.clientName;
-                    tr.children[4].textContent = r.createdBy;
+                    tr.children[3].textContent = money(r.total);
+                    tr.children[5].textContent = r.createdBy;
+
+                    tr.querySelector('.status-btn').addEventListener('click', async () => {
+                        const order = ['paid', 'partial', 'unpaid'];
+                        const next = order[(order.indexOf(r.status) + 1) % order.length];
+                        try {
+                            await api('/api/receipts/' + r.id, {
+                                method: 'PATCH', body: JSON.stringify({ status: next })
+                            });
+                            toast(`الحالة الآن: ${STATUS[next].label}`);
+                            loadReceipts();
+                        } catch (err) { toast(err.message, 'error'); }
+                    });
+
+                    tr.querySelector('.pdf').addEventListener('click', () => printReceipt(r));
+
                     tr.querySelector('.del').addEventListener('click', async () => {
-                        if (!confirm(`حذف الإيصال ${r.number}؟`)) return;
-                        try { await api('/api/receipts/' + r.id, { method: 'DELETE' }); toast('تم حذف الإيصال'); loadReceipts(); }
-                        catch (err) { alert(err.message); }
+                        if (!await confirmAction(`حذف الإيصال ${r.number}؟`, 'سيُحذف أيضاً من ملف Excel.')) return;
+                        try {
+                            await api('/api/receipts/' + r.id, { method: 'DELETE' });
+                            toast('تم حذف الإيصال');
+                            loadReceipts(); loadStats();
+                        } catch (err) { toast(err.message, 'error'); }
                     });
                     tbody.appendChild(tr);
                 });
             } catch { /* ignore */ }
         }
 
-        /* ---- change password ---- */
+        /* ---------------- settings ---------------- */
         $('pw-btn').addEventListener('click', async () => {
-            try {
-                await api('/api/change-password', {
-                    method: 'POST',
-                    body: JSON.stringify({ currentPassword: $('pw-current').value, newPassword: $('pw-new').value })
-                });
-                $('pw-current').value = ''; $('pw-new').value = '';
-                showMsg('pw-msg', 'تم تغيير كلمة المرور بنجاح', 'ok');
-            } catch (err) { showMsg('pw-msg', err.message); }
+            await withBusy($('pw-btn'), 'جاري الحفظ...', async () => {
+                try {
+                    await api('/api/change-password', {
+                        method: 'POST',
+                        body: JSON.stringify({
+                            currentPassword: $('pw-current').value,
+                            newPassword: $('pw-new').value
+                        })
+                    });
+                    $('pw-current').value = ''; $('pw-new').value = '';
+                    showMsg('pw-msg', 'تم تغيير كلمة المرور بنجاح', 'ok');
+                } catch (err) { showMsg('pw-msg', err.message); }
+            });
         });
-
-        boot();
     })();
     </script>
 </body>

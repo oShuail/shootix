@@ -96,15 +96,31 @@ h1,h2,h3,h4,h5,h6{font-weight:700;line-height:1.2;color:var(--clr-cream)}
 .nav-cta .btn:hover{background-color:var(--clr-cream);color:var(--clr-bg);border-color:var(--clr-cream)}
 .navbar.scrolled .nav-cta .btn{background-color:var(--clr-cream);color:var(--clr-bg);border-color:var(--clr-cream)}
 .navbar.scrolled .nav-cta .btn:hover{background-color:transparent;color:var(--clr-cream)}
-.mobile-actions{display:none;align-items:center;gap:16px}
-.mobile-menu-btn{font-size:1.5rem;color:var(--clr-cream);cursor:pointer}
+.mobile-actions{display:none;align-items:center;gap:10px}
+/* Sized explicitly rather than by its icon glyph: the button keeps a full
+   44px tap target even if the icon font is slow or fails to load, so the
+   menu can never become unopenable on a phone. */
+.mobile-menu-btn{
+    font-size:1.4rem;color:var(--clr-cream);cursor:pointer;
+    display:flex;align-items:center;justify-content:center;
+    width:44px;height:44px;margin-inline-end:-10px;
+    -webkit-tap-highlight-color:transparent;transition:color var(--tr-fast);
+}
+.mobile-menu-btn:active{color:var(--clr-accent)}
 .mobile-actions .lang-switch{font-family:var(--font-latin);font-weight:500;font-size:0.85rem;letter-spacing:0.1em;color:var(--clr-cream)}
 .lang-switch i{margin-inline-end:4px;font-size:0.9em}
 
 /* ==================== HERO ==================== */
 .hero{position:relative;height:100vh;min-height:640px;display:flex;align-items:center;justify-content:center;overflow:hidden}
-.video-background{position:absolute;inset:0;z-index:1}
+.video-background{position:absolute;inset:0;z-index:1;overflow:hidden}
 .video-background video{width:100%;height:100%;object-fit:cover}
+/* Hero still — the studio's own work, drifting slowly so the frame breathes
+   without the weight (or the mobile autoplay problems) of a background video. */
+.hero-still{width:100%;height:100%;object-fit:cover;will-change:transform;animation:hero-drift 26s ease-in-out infinite alternate}
+@keyframes hero-drift{
+    from{transform:scale(1.04) translate3d(0,0,0)}
+    to{transform:scale(1.13) translate3d(0,-1.5%,0)}
+}
 .video-overlay{position:absolute;inset:0;background:linear-gradient(180deg,rgba(10,20,40,0.55) 0%,rgba(10,20,40,0.75) 60%,rgba(10,20,40,0.95) 100%),linear-gradient(135deg,rgba(26,43,76,0.5) 0%,rgba(10,20,40,0.7) 100%)}
 .hero-content{position:relative;z-index:2;text-align:center;width:92%;max-width:960px;padding-top:80px}
 .hero-kicker{font-family:var(--font-latin);font-size:0.82rem;letter-spacing:0.45em;text-transform:uppercase;color:var(--clr-accent);margin-bottom:2rem;display:inline-block;padding-bottom:0.75rem;border-bottom:1px solid var(--clr-border-str)}
@@ -252,10 +268,24 @@ h1,h2,h3,h4,h5,h6{font-weight:700;line-height:1.2;color:var(--clr-cream)}
 }
 @media screen and (max-width:900px){
     .navbar{background-color:rgba(10,20,40,0.95);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);padding:14px 0!important;border-bottom:1px solid var(--clr-border)}
+    /* The open menu is one flowing column: nav links and the CTA wrap onto
+       their own rows under the logo. No absolute positioning and no magic
+       pixel offset, so the panel stays correct whatever the link count,
+       font size or language. */
+    .nav-container{flex-wrap:wrap;row-gap:0}
     .nav-links,.nav-cta{display:none}
     .mobile-actions{display:flex}
-    .navbar.active .nav-links{display:flex;flex-direction:column;position:absolute;top:100%;left:0;width:100%;background-color:var(--clr-bg);padding:30px 20px;text-align:center;border-top:1px solid var(--clr-border);gap:22px}
-    .navbar.active .nav-cta{display:block;padding:0 20px 28px;background-color:var(--clr-bg);position:absolute;top:calc(100% + 225px);left:0;width:100%;text-align:center}
+    .navbar.active{background-color:var(--clr-bg);border-bottom-color:var(--clr-border);max-height:100dvh;overflow-y:auto}
+    .navbar.active .nav-links{
+        display:flex;flex-direction:column;flex-basis:100%;width:100%;
+        order:3;gap:4px;padding:22px 0 8px;margin-top:14px;text-align:center;
+        border-top:1px solid var(--clr-border);
+    }
+    .navbar.active .nav-links a{padding:13px 0;font-size:0.95rem}
+    .navbar.active .nav-links a::after{inset-inline-start:50%;transform:translateX(-50%);inset-inline-end:auto}
+    html[dir="rtl"] .navbar.active .nav-links a::after{transform:translateX(50%)}
+    .navbar.active .nav-cta{display:block;flex-basis:100%;width:100%;order:4;padding-bottom:22px;text-align:center}
+    .navbar.active .nav-cta .btn{display:block;width:100%}
     .timeline-item,.timeline-item.left,.timeline-item.right{width:100%;margin-inline-start:0;padding-inline-start:50px;padding-inline-end:0;text-align:start}
     .timeline-item.left .service-icon{margin-inline-start:0}
     .timeline-line{left:0;transform:none}
@@ -414,7 +444,9 @@ body::after{
 @keyframes marquee-run{from{transform:translateX(0)}to{transform:translateX(-50%)}}
 @keyframes star-spin{from{transform:rotate(0)}to{transform:rotate(360deg)}}
 @media (prefers-reduced-motion:reduce){
-    .marquee-track,.hero-ghost,body::after,.marquee-item .star{animation:none}
+    .marquee-track,.hero-ghost,body::after,.marquee-item .star,.hero-still{animation:none}
+    *,*::before,*::after{transition-duration:0.01ms!important}
+    html{scroll-behavior:auto}
 }
 
 /* --- portfolio cards: title reveal + gold line --- */
@@ -450,3 +482,11 @@ body::after{
     padding-bottom:2px;border-bottom:1px solid transparent;
 }
 .footer-links a:hover{color:var(--clr-accent);border-bottom-color:var(--clr-accent)}
+
+/* ==================== ADMIN-MANAGED IMAGES ====================
+   Uploaded through the admin panel and injected at runtime.
+   They fade in on decode so the portfolio never flashes a
+   half-loaded frame while scrolling on a phone. */
+.managed-img{opacity:0;transition:opacity .5s ease}
+.managed-img.loaded{opacity:1}
+@media (prefers-reduced-motion:reduce){.managed-img{opacity:1;transition:none}}
