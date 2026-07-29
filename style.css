@@ -365,6 +365,25 @@ html[dir="ltr"] .image-glow{background:linear-gradient(to left,rgba(10,20,40,0.2
 }
 
 html[dir="rtl"] .section-eyebrow{direction:rtl}
+/* These classes are styled for tracked-out uppercase Latin micro-labels
+   (font-latin + wide letter-spacing). Arabic text dropped into the same
+   classes breaks cursive letter-joining under that spacing, rendering
+   every letter isolated with visible gaps. Reset both on RTL pages. */
+html[dir="rtl"] .section-eyebrow,
+html[dir="rtl"] .btn,
+html[dir="rtl"] .nav-links a,
+html[dir="rtl"] .client-logo,
+html[dir="rtl"] .client-role,
+html[dir="rtl"] .form-group label,
+html[dir="rtl"] .service-badge,
+html[dir="rtl"] .footer-heading,
+html[dir="rtl"] .footer-bottom,
+html[dir="rtl"] .footer-links a,
+html[dir="rtl"] .project-meta,
+html[dir="rtl"] .project-info-label{
+    font-family:var(--font-arabic);
+    letter-spacing:normal;
+}
 /* Arabic service cards read right-to-left in BOTH timeline columns. The
    zigzag still alternates sides, but the copy inside a card never flips
    to left-aligned just because the card sits on the left. */
