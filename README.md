@@ -112,7 +112,7 @@ the last remaining admin, so the studio can never be locked out of its own panel
 
 ## 🖼 Portfolio images
 
-Admin panel → **صور الموقع**. Drag in an image (up to 15 MB), give it an
+Admin panel → **صور الموقع**. Drag in an image (no size limit), give it an
 Arabic + English title, pick a section, optionally mark it **featured** so it
 leads that section. The image appears immediately in the homepage portfolio and
 the matching project page.

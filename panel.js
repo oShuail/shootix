@@ -247,7 +247,7 @@
     async function uploadImage({ file, category, title, titleEn, featured, onProgress }) {
         const { uploadUrl, path } = await api('/api/gallery/sign-upload', {
             method: 'POST',
-            body: JSON.stringify({ category, filename: file.name, size: file.size })
+            body: JSON.stringify({ category, filename: file.name })
         });
         await putFile(uploadUrl, file, onProgress);
         const { image } = await api('/api/gallery', {

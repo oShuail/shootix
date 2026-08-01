@@ -25,7 +25,6 @@ const ROOT = path.join(__dirname, '..', '..');
 const CATEGORIES = ['cars', 'food', 'realestate', 'events', 'products', 'fashion'];
 const RECEIPT_STATUSES = ['paid', 'partial', 'unpaid'];
 const VAT_RATE = 0.15;
-const MAX_IMAGE_BYTES = 15 * 1024 * 1024;
 // Vercel caps a serverless request body at ~4.5 MB, so anything larger must go
 // straight to Supabase Storage from the browser via a signed upload URL.
 const MAX_INLINE_IMAGE_BYTES = 3 * 1024 * 1024;
@@ -387,11 +386,6 @@ app.get('/api/gallery', route(async (req, res) => {
 app.post('/api/gallery/sign-upload', requireAdmin, route(async (req, res) => {
     const category = str(req.body?.category, 20);
     if (!CATEGORIES.includes(category)) return res.status(400).json({ error: 'قسم غير معروف' });
-
-    const size = Number(req.body?.size) || 0;
-    if (size > MAX_IMAGE_BYTES) {
-        return res.status(400).json({ error: 'حجم الصورة أكبر من ١٥ ميجابايت' });
-    }
 
     const ext = (str(req.body?.filename, 200).split('.').pop() || 'jpg').toLowerCase();
     const safeExt = ['jpg', 'jpeg', 'png', 'webp', 'gif'].includes(ext) ? (ext === 'jpeg' ? 'jpg' : ext) : 'jpg';
