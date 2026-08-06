@@ -259,57 +259,129 @@
 
     /* ----------------------------------------------------------
        Printable receipt  (browser print → "Save as PDF")
+
+       Everything that changes per receipt comes from the form the
+       staff filled in; everything below is the studio's own fixed
+       identity — the only place to edit the logo, licence or bank
+       details is this one object.
        ---------------------------------------------------------- */
+    const RECEIPT_BRAND = {
+        logo: 'assets/photo-output.PNG',
+        name: 'SHOTIX',
+        tagline: 'شوتيكس للإنتاج البصري — Visual Production Studio',
+        email: 'shootix.sa@gmail.com',
+        phone: '+966 53 761 4446',
+        site: 'shotix.space',
+        license: 'FL-120734087',
+        bank: 'مصرف الراجحي',
+        iban: 'SA51 8000 0281 6080 1363 6360',
+        beneficiary: 'عمر سعد صالح بن شعيل'
+    };
+
+    const STATUS_EN = { paid: 'PAID', partial: 'PARTIAL', unpaid: 'UNPAID' };
+
+    /** Receipts spell the currency out; the panel tables keep the short form. */
+    const riyal = (n) =>
+        Number(n || 0).toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 }) + ' ريال';
+
+    /** 2026-07-15 → 15-07-2026, the way the printed receipt reads. */
+    const rcDate = (iso) => {
+        const m = /^(\d{4})-(\d{2})-(\d{2})$/.exec(String(iso || ''));
+        return m ? `${m[3]}-${m[2]}-${m[1]}` : String(iso || '');
+    };
+
     function receiptHtml(r) {
+        const b = RECEIPT_BRAND;
+
         const rows = (r.items || []).map((i) => `
             <tr>
                 <td>${esc(i.description)}</td>
-                <td dir="ltr">${i.qty}</td>
-                <td dir="ltr">${money(i.price)}</td>
-                <td dir="ltr">${money(i.qty * i.price)}</td>
+                <td class="qty" dir="ltr">${Number(i.qty) || 0}</td>
+                <td class="num"><span dir="ltr">${riyal(i.price)}</span></td>
+                <td class="num"><span dir="ltr">${riyal(i.qty * i.price)}</span></td>
             </tr>`).join('');
 
+        // Empty fields are dropped so the strip never shows blank boxes.
         const cell = (label, value, dir) => value
             ? `<div><div class="lbl">${label}</div><div class="val"${dir ? ` dir="${dir}"` : ''}>${esc(value)}</div></div>`
             : '';
 
+        const info = (label, value, mono) =>
+            `<div><div class="lbl">${label}</div><div class="val${mono ? ' mono' : ''}"${mono ? ' dir="ltr"' : ''}>${esc(value)}</div></div>`;
+
+        const total = (label, value, cls = '') =>
+            `<div class="row ${cls}"><span>${label}</span><span dir="ltr">${value}</span></div>`;
+
+        const st = STATUS[r.status] || STATUS.paid;
+        const issued = r.createdAt ? new Date(r.createdAt).toLocaleString('en-GB') : '';
+
         return `
             <div class="receipt-doc" dir="rtl">
-                <div class="rc-head">
-                    <div>
-                        <div class="rc-brand-name">SHOTIX</div>
-                        <div class="rc-brand-sub">شوتيكس للإنتاج البصري — Visual Production Studio</div>
-                        <div class="rc-brand-sub" dir="ltr">shootix.sa@gmail.com · +966 53 761 4446 · shotix.space</div>
+                <header class="rc-head">
+                    <div class="rc-brand">
+                        <img class="rc-logo" src="${b.logo}" alt="" width="78" height="78">
+                        <div>
+                            <div class="rc-brand-name">${esc(b.name)}</div>
+                            <div class="rc-brand-sub">${esc(b.tagline)}</div>
+                            <div class="rc-brand-sub" dir="ltr">${esc(b.email)} · ${esc(b.phone)}</div>
+                            <div class="rc-brand-sub" dir="ltr">Freelance License: ${esc(b.license)}</div>
+                        </div>
                     </div>
                     <div class="rc-doc-type">
-                        <div class="big">إيصال / RECEIPT</div>
+                        <div class="big">إيصال /<span>RECEIPT</span></div>
                         <div class="num" dir="ltr">${esc(r.number)}</div>
                     </div>
-                </div>
+                </header>
+
                 <div class="rc-meta">
+                    ${cell('طريقة الدفع / Payment', r.paymentMethod)}
+                    ${cell('التاريخ / Date', rcDate(r.date), 'ltr')}
                     ${cell('العميل / Client', r.clientName)}
+                    ${cell('المشروع / Project', r.project)}
                     ${cell('الجوال / Phone', r.clientPhone, 'ltr')}
                     ${cell('البريد / Email', r.clientEmail, 'ltr')}
-                    ${cell('المشروع / Project', r.project)}
-                    ${cell('التاريخ / Date', r.date, 'ltr')}
-                    ${cell('طريقة الدفع / Payment', r.paymentMethod)}
                 </div>
+
                 <table class="rc-table">
-                    <thead><tr><th>الوصف / Description</th><th>الكمية</th><th>السعر</th><th>الإجمالي</th></tr></thead>
+                    <thead>
+                        <tr>
+                            <th>الوصف / Description</th>
+                            <th class="qty">الكمية</th>
+                            <th>السعر</th>
+                            <th>الإجمالي</th>
+                        </tr>
+                    </thead>
                     <tbody>${rows}</tbody>
                 </table>
-                <div class="rc-totals">
-                    <div class="row"><span>المجموع / Subtotal</span><span dir="ltr">${money(r.subtotal)}</span></div>
-                    ${r.discount > 0 ? `<div class="row"><span>الخصم / Discount</span><span dir="ltr">- ${money(r.discount)}</span></div>` : ''}
-                    ${r.vatEnabled ? `<div class="row"><span>الضريبة / VAT 15%</span><span dir="ltr">${money(r.vat)}</span></div>` : ''}
-                    <div class="row grand"><span>الإجمالي / Total</span><span dir="ltr">${money(r.total)}</span></div>
+
+                <div class="rc-summary">
+                    <div class="rc-stamp ${st.cls}">${st.label} / ${STATUS_EN[r.status] || STATUS_EN.paid}</div>
+                    <div class="rc-totals">
+                        ${total('المجموع / Subtotal', riyal(r.subtotal))}
+                        ${r.discount > 0 ? total('الخصم / Discount', '- ' + riyal(r.discount)) : ''}
+                        ${r.vatEnabled ? total('الضريبة / VAT 15%', riyal(r.vat)) : ''}
+                        ${total('الإجمالي / Total', riyal(r.total), 'grand')}
+                    </div>
                 </div>
+
                 ${r.notes ? `<div class="rc-notes"><div class="lbl">ملاحظات / Notes</div>${esc(r.notes)}</div>` : ''}
-                <div class="rc-foot">
-                    <span>أصدره / Issued by: ${esc(r.createdBy)}</span>
-                    <span dir="ltr">${new Date(r.createdAt).toLocaleString('en-GB')}</span>
-                    <span>شكراً لتعاملكم معنا — Thank you for your business</span>
-                </div>
+
+                <section class="rc-pay">
+                    <div class="rc-pay-title">معلومات الدفع / PAYMENT INFORMATION</div>
+                    <div class="rc-pay-grid">
+                        ${info('البنك / Bank', b.bank)}
+                        ${info('اسم المستفيد / Beneficiary', b.beneficiary)}
+                        ${info('الآيبان / IBAN', b.iban, true)}
+                    </div>
+                </section>
+
+                <footer class="rc-foot">
+                    <div class="line">
+                        <span>أصدره / Issued by: ${esc(r.createdBy)}${issued ? ` · <span dir="ltr">${esc(issued)}</span>` : ''}</span>
+                        <span class="site" dir="ltr">${esc(b.site)}</span>
+                    </div>
+                    <div class="thanks">شكراً لتعاملكم معنا — Thank you for your business</div>
+                </footer>
             </div>`;
     }
 
@@ -324,8 +396,19 @@
 
         const previousTitle = document.title;
         document.title = r.number;          // becomes the suggested PDF filename
-        window.print();
-        setTimeout(() => { document.title = previousTitle; }, 500);
+
+        // Print only once the logo has arrived — a half-drawn header
+        // would be baked into the PDF. The timeout keeps a slow or
+        // missing image from blocking the print dialog forever.
+        const images = Array.from(area.querySelectorAll('img'));
+        const loaded = Promise.all(images.map((img) => (img.complete
+            ? Promise.resolve()
+            : new Promise((done) => { img.onload = done; img.onerror = done; }))));
+
+        Promise.race([loaded, new Promise((done) => setTimeout(done, 1500))]).then(() => {
+            window.print();
+            setTimeout(() => { document.title = previousTitle; }, 500);
+        });
     }
 
     /* ----------------------------------------------------------
@@ -359,7 +442,7 @@
         $, esc, money, STATUS,
         api, showMsg, toast, dialog, confirmAction, withBusy,
         initTabs, initAuth,
-        uploadImage, printReceipt, receiptHtml,
+        uploadImage, printReceipt, receiptHtml, RECEIPT_BRAND,
         checkBackend
     };
 })();
