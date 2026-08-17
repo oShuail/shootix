@@ -123,8 +123,15 @@
 <!-- ============================= HERO ============================= -->
 <section class="hero">
   <div class="hero__bg">
-    <!-- IMAGE SLOT · 1700×1150 — factory exterior or production line -->
+    <!-- IMAGE SLOT · 1700×1150 — base layer, shows instantly and stays if there is no video -->
     <img src="../assets/img/ph/hero.jpg" alt="Blown film production line at RAWAE AL INTAJ Plastic Factory" fetchpriority="high" width="1700" height="1150">
+
+    <!-- VIDEO SLOT · 1920×1080 — drop the file into assets/video/ and it goes live.
+         The still above stays visible until the clip actually starts playing: no flash, no black frame. -->
+    <video class="hero__video" muted loop playsinline preload="none" aria-hidden="true" tabindex="-1">
+      <source src="../assets/video/hero.webm" type="video/webm">
+      <source src="../assets/video/hero.mp4" type="video/mp4">
+    </video>
   </div>
 
   <div class="container hero__inner">

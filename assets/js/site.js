@@ -35,6 +35,38 @@
   }
 
   /* ------------------------------------------------------------------
+     Hero film (optional)
+     The <video> ships with preload="none" and no sources loaded until we
+     ask for them, so a site with no video file costs nothing. It is only
+     revealed on the first 'playing' event — every failure mode (missing
+     file, blocked autoplay, reduced motion, save-data) just leaves the
+     still image in place.
+     ------------------------------------------------------------------ */
+  var heroVideo = $('.hero__video');
+  if (heroVideo) {
+    var saveData = (navigator.connection || {}).saveData === true;
+
+    if (reduced || saveData) {
+      heroVideo.remove();
+    } else {
+      heroVideo.addEventListener('playing', function () {
+        heroVideo.classList.add('is-playing');
+      }, { once: true });
+
+      heroVideo.addEventListener('error', function () {
+        heroVideo.remove();
+      }, { once: true });
+
+      heroVideo.preload = 'auto';
+      heroVideo.load();
+      var attempt = heroVideo.play();
+      if (attempt && attempt.catch) {
+        attempt.catch(function () { /* autoplay refused — the still stands in */ });
+      }
+    }
+  }
+
+  /* ------------------------------------------------------------------
      Scroll progress + sticky header + floating actions
      ------------------------------------------------------------------ */
   var header   = $('.header');

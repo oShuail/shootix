@@ -123,8 +123,15 @@
 <!-- ============================= HERO ============================= -->
 <section class="hero">
   <div class="hero__bg">
-    <!-- IMAGE SLOT · 1700×1150 — واجهة المصنع أو خط الإنتاج -->
+    <!-- IMAGE SLOT · 1700×1150 — الصورة الأساسية، تظهر فورًا وتبقى إن لم يوجد فيديو -->
     <img src="assets/img/ph/hero.jpg" alt="خط إنتاج أفلام البلاستيك داخل مصنع روائع الإنتاج" fetchpriority="high" width="1700" height="1150">
+
+    <!-- VIDEO SLOT · 1920×1080 — ضع الملف في assets/video/ ويعمل تلقائيًا.
+         تبقى الصورة أعلاه ظاهرة حتى تبدأ اللقطة فعليًا بالتشغيل، فلا وميض ولا شاشة سوداء. -->
+    <video class="hero__video" muted loop playsinline preload="none" aria-hidden="true" tabindex="-1">
+      <source src="assets/video/hero.webm" type="video/webm">
+      <source src="assets/video/hero.mp4" type="video/mp4">
+    </video>
   </div>
 
   <div class="container hero__inner">

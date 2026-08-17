@@ -423,6 +423,21 @@ body.nav-open { overflow: hidden; }
   animation: hero-in 2.4s var(--ease) forwards;
 }
 @keyframes hero-in { to { transform: scale(1); } }
+
+/* Optional hero film. Sits over the still and only fades in once it is
+   genuinely playing — if the file is absent, blocked by an autoplay policy
+   or the visitor prefers reduced motion, the still simply stays. */
+.hero__video {
+  position: absolute;
+  inset: 0;
+  inline-size: 100%;
+  block-size: 100%;
+  object-fit: cover;
+  opacity: 0;
+  transition: opacity 1.4s var(--ease);
+  pointer-events: none;
+}
+.hero__video.is-playing { opacity: 1; }
 .hero::before {
   content: "";
   position: absolute; inset: 0; z-index: -1;
