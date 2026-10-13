@@ -190,17 +190,39 @@ h1,h2,h3,h4,h5,h6{font-weight:700;line-height:1.2;color:var(--clr-cream)}
 .about-text p{color:var(--clr-cream-soft);margin-bottom:1.2rem;font-size:1rem;line-height:1.85;font-weight:300}
 .about-text strong{color:var(--clr-cream);font-weight:600}
 
-/* Client logo strip. Placeholder slots today; the img rules below take over
-   untouched the moment real logos are dropped in. */
-.client-strip{margin-top:2.6rem;padding-top:1.8rem;border-top:1px solid var(--clr-border)}
-.client-logos{display:flex;flex-wrap:wrap;gap:12px;align-items:center}
-.client-logo{
-    display:flex;align-items:center;justify-content:center;
-    min-width:150px;height:72px;padding:0 16px;
-    font-family:var(--font-latin);font-size:0.68rem;letter-spacing:0.12em;
-    color:var(--clr-cream-dim);white-space:nowrap;
+/* Partner marquee. Two identical lists sit side by side and both slide by
+   exactly one list's width plus the gap, so the moment the first has fully
+   left the screen the copy stands where it started and the loop restarts
+   invisibly. Each list is at least as wide as the strip (min-width:100%),
+   so wide screens never show an empty run at the trailing edge. Every logo
+   is a same-size circular badge, so one width/height rule sizes them all.
+   z-index 3 lifts it over the bleeding about photo and its scrim. */
+.client-strip{position:relative;z-index:3;margin-top:72px}
+.client-marquee{
+    --logo:92px;--gap:56px;--speed:40s;
+    display:flex;gap:var(--gap);overflow:hidden;padding-block:8px;
 }
-.client-logos img{height:60px;width:auto;padding:0;border:0;background:none}
+.client-track{
+    display:flex;align-items:center;justify-content:space-around;gap:var(--gap);
+    flex-shrink:0;min-width:100%;
+    animation:client-marquee var(--speed) linear infinite;
+}
+.client-logo{flex:0 0 auto;width:var(--logo);height:var(--logo)}
+.client-logo img{
+    width:100%;height:100%;border-radius:50%;
+    box-shadow:0 0 0 1px var(--clr-border-str),var(--shadow-sm);
+    transition:transform var(--tr-normal);
+}
+@media (hover:hover){
+    .client-marquee:hover .client-track{animation-play-state:paused}
+    .client-logo:hover img{transform:scale(1.06)}
+}
+@keyframes client-marquee{to{transform:translateX(calc(-100% - var(--gap)))}}
+/* RTL lays the lists out right-to-left, so the copy trails on the LEFT and
+   the strip has to travel rightward instead — which is also the direction
+   Arabic reads in. */
+html[dir="rtl"] .client-track{animation-name:client-marquee-rtl}
+@keyframes client-marquee-rtl{to{transform:translateX(calc(100% + var(--gap)))}}
 /* The about photo is no longer a card in its column — it bleeds across the
    whole section and runs behind the copy. The column stays in the grid
    (position:static) purely to reserve the space that sets the section height;
@@ -399,6 +421,8 @@ html[dir="ltr"] .image-glow{background:linear-gradient(to left,rgba(10,20,40,0.2
     .hero-buttons .btn{flex:1 1 auto;min-width:170px}
     .process-grid{grid-template-columns:1fr}
     .process-step{padding:36px 28px;min-height:auto}
+    .client-strip{margin-top:48px}
+    .client-marquee{--logo:68px;--gap:32px;--speed:28s}
 }
 
 html[dir="rtl"] .section-eyebrow{direction:rtl}
@@ -409,7 +433,6 @@ html[dir="rtl"] .section-eyebrow{direction:rtl}
 html[dir="rtl"] .section-eyebrow,
 html[dir="rtl"] .btn,
 html[dir="rtl"] .nav-links a,
-html[dir="rtl"] .client-logo,
 html[dir="rtl"] .client-role,
 html[dir="rtl"] .form-group label,
 html[dir="rtl"] .service-badge,
@@ -510,6 +533,10 @@ html[dir="ltr"] {--font-display: 'Montserrat', sans-serif}
     .hero-still{animation:none}
     *,*::before,*::after{transition-duration:0.01ms!important}
     html{scroll-behavior:auto}
+    /* No scrolling strip: drop the copy and let the one real list wrap. */
+    .client-marquee{padding-inline:5%}
+    .client-track{animation:none;flex-wrap:wrap;justify-content:center;row-gap:20px;min-width:0;width:100%}
+    .client-track[aria-hidden="true"]{display:none}
 }
 
 /* --- portfolio cards: title reveal + gold line --- */
