@@ -20,6 +20,99 @@ document.addEventListener('DOMContentLoaded', () => {
     window.addEventListener('scroll', onScroll, { passive: true });
 
     // ==========================================
+    // Partner marquee: auto-scrolls, but visitors can swipe / drag /
+    // trackpad-scroll it freely. See the .client-marquee notes in style.css.
+    // ==========================================
+    const marquee = document.querySelector('.client-marquee');
+    const tracks = marquee ? marquee.querySelectorAll('.client-track') : [];
+    const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (marquee && tracks.length === 2 && !reduceMotion) {
+        const SPEED = 34;          // px per second while idle
+        const RESUME_AFTER = 1800; // ms of no interaction before it moves again
+        // Work in a "logical" offset p that always grows in the reading
+        // direction; in RTL the browser's scrollLeft runs negative instead.
+        const dir = getComputedStyle(marquee).direction === 'rtl' ? -1 : 1;
+        let period = 0, p = 0, lastSet = 0, velocity = 0;
+        let hovering = false, dragging = false, lastInteraction = 0, inView = true;
+
+        const measure = () => {
+            period = Math.abs(tracks[1].offsetLeft - tracks[0].offsetLeft);
+        };
+        // Keep p inside (0, period]: both ends show exactly the same frame.
+        const wrap = () => {
+            if (!period) return;
+            while (p > period) p -= period;
+            while (p <= 0) p += period;
+        };
+        const apply = () => {
+            wrap();
+            marquee.scrollLeft = p * dir;
+            lastSet = marquee.scrollLeft;
+        };
+        const touched = () => { lastInteraction = performance.now(); };
+
+        // Native scrolling (touch swipe, trackpad, shift+wheel, keyboard).
+        marquee.addEventListener('scroll', () => {
+            if (Math.abs(marquee.scrollLeft - lastSet) < 1) return; // our own write
+            p = marquee.scrollLeft * dir;
+            touched();
+            const before = p;
+            wrap();
+            if (p !== before) apply();
+            else lastSet = marquee.scrollLeft;
+        }, { passive: true });
+        ['wheel', 'touchstart', 'keydown'].forEach((type) =>
+            marquee.addEventListener(type, touched, { passive: true }));
+
+        // Mouse drag (touch already scrolls natively).
+        let lastX = 0;
+        marquee.addEventListener('pointerdown', (e) => {
+            if (e.pointerType !== 'mouse' || e.button !== 0) return;
+            dragging = true; lastX = e.clientX; touched();
+            marquee.setPointerCapture(e.pointerId);
+            marquee.classList.add('is-dragging');
+        });
+        marquee.addEventListener('pointermove', (e) => {
+            if (!dragging) return;
+            p -= (e.clientX - lastX) * dir;
+            lastX = e.clientX;
+            apply(); touched();
+        });
+        const endDrag = () => {
+            if (!dragging) return;
+            dragging = false; touched();
+            marquee.classList.remove('is-dragging');
+        };
+        marquee.addEventListener('pointerup', endDrag);
+        marquee.addEventListener('pointercancel', endDrag);
+        marquee.addEventListener('pointerenter', (e) => { if (e.pointerType === 'mouse') hovering = true; });
+        marquee.addEventListener('pointerleave', (e) => { if (e.pointerType === 'mouse') hovering = false; });
+
+        if ('IntersectionObserver' in window) {
+            new IntersectionObserver(([entry]) => { inView = entry.isIntersecting; }).observe(marquee);
+        }
+        window.addEventListener('resize', () => { measure(); apply(); });
+        window.addEventListener('load', () => { measure(); apply(); });
+
+        measure();
+        apply();
+        let prev = performance.now();
+        const tick = (now) => {
+            const dt = Math.min(now - prev, 100) / 1000;
+            prev = now;
+            const idle = !hovering && !dragging && now - lastInteraction > RESUME_AFTER;
+            // Ease in and out rather than snapping between stopped and moving.
+            velocity += ((idle ? SPEED : 0) - velocity) * Math.min(1, dt * 3);
+            if (inView && velocity > 0.5) {
+                p += velocity * dt;
+                apply();
+            }
+            requestAnimationFrame(tick);
+        };
+        requestAnimationFrame(tick);
+    }
+
+    // ==========================================
     // Mobile menu
     // ==========================================
     const mobileMenuBtn = document.querySelector('.mobile-menu-btn');
